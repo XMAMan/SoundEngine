@@ -1,0 +1,67 @@
+﻿<Window x:Class="SoundEngineTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SoundEngineTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Volume:" Margin="10 0 0 0"/>
+                <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="lied3.music:"/>
+                <local:AudioFileSnippedView DataContext="{Binding BackGroundMusic}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[0]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts0}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[1]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts1}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[2]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts2}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[3]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts3}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[4]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts4}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[5]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts5}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="TieferBass.synt:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding TieferBass}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="DasIstEinTest.wma:"/>
+                <local:AudioFileSnippedView DataContext="{Binding DasIstEinTest}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Hallo.synt:"/>
+                <local:FrequenceToneAudioFileSnippedView DataContext="{Binding Hallo}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

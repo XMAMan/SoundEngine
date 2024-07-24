@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CmdTools": {
+      "commandName": "Project",
+      "commandLineArgs": "CountLineOfCodes ..\\..\\..\\..\\"
+    }
+  }
+}

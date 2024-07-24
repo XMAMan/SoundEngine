@@ -1,0 +1,24 @@
+cd ../Source/
+cd .vs && rmdir /S /Q . 2>nul & cd ..
+cd CmdTools/bin && rmdir /S /Q . 2>nul & cd ../..
+cd CmdTools/obj && rmdir /S /Q . 2>nul & cd ../..
+cd MidiParser/bin && rmdir /S /Q . 2>nul & cd ../..
+cd MidiParser/obj && rmdir /S /Q . 2>nul & cd ../..
+cd MidiPlayer/bin && rmdir /S /Q . 2>nul & cd ../..
+cd MidiPlayer/obj && rmdir /S /Q . 2>nul & cd ../..
+cd MidiPlotter/bin && rmdir /S /Q . 2>nul & cd ../..
+cd MidiPlotter/obj && rmdir /S /Q . 2>nul & cd ../..
+cd MusicMachine/bin && rmdir /S /Q . 2>nul & cd ../..
+cd MusicMachine/obj && rmdir /S /Q . 2>nul & cd ../..
+cd NAudioWaveMaker/bin && rmdir /S /Q . 2>nul & cd ../..
+cd NAudioWaveMaker/obj && rmdir /S /Q . 2>nul & cd ../..
+cd SignalAnalyser/bin && rmdir /S /Q . 2>nul & cd ../..
+cd SignalAnalyser/obj && rmdir /S /Q . 2>nul & cd ../..
+cd SignalAnalyserTest/bin && rmdir /S /Q . 2>nul & cd ../..
+cd SignalAnalyserTest/obj && rmdir /S /Q . 2>nul & cd ../..
+cd SoundEngine/bin && rmdir /S /Q . 2>nul & cd ../..
+cd SoundEngine/obj && rmdir /S /Q . 2>nul & cd ../..
+cd SoundEngineTest/bin && rmdir /S /Q . 2>nul & cd ../..
+cd SoundEngineTest/obj && rmdir /S /Q . 2>nul & cd ../..
+cd WaveMaker/bin && rmdir /S /Q . 2>nul & cd ../..
+cd WaveMaker/obj && rmdir /S /Q . 2>nul & cd ../..

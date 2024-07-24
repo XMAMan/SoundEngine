@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-16"?>
+<SynthesizerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UseFrequencyLfo>false</UseFrequencyLfo>
+  <FrequencyLfoFrequenc>6.72413635</FrequencyLfoFrequenc>
+  <FrequencyLfoAmplitude>0.075862065</FrequencyLfoAmplitude>
+  <UseFrequenceRamp>true</UseFrequenceRamp>
+  <FrequencyRampFactor>-0.3</FrequencyRampFactor>
+  <RampStepFactor>0</RampStepFactor>
+  <OsziType>Triangle</OsziType>
+  <UseAccordEffekt>false</UseAccordEffekt>
+  <PusleWidth>0.120689645</PusleWidth>
+  <OsziCount>5</OsziCount>
+  <Pitch>0.241931036</Pitch>
+  <UseAmplitudeLfo>false</UseAmplitudeLfo>
+  <AmplitudeLfoFrequenc>8.448276</AmplitudeLfoFrequenc>
+  <AmplitudeLfoPulseWidth>0.9</AmplitudeLfoPulseWidth>
+  <AudioFileName>Load Audio-File</AudioFileName>
+  <LeftAudioFilePosition>0</LeftAudioFilePosition>
+  <RightAudioFilePosition>0</RightAudioFilePosition>
+  <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+  <AudioFileGain>7</AudioFileGain>
+  <AudioFilePitch>1</AudioFilePitch>
+  <IsLowPassEnabled>false</IsLowPassEnabled>
+  <CutOffFrequence>0.1724138</CutOffFrequence>
+  <Resonance>0.200000048</Resonance>
+  <AttackTimeInMs>50</AttackTimeInMs>
+  <DecayTimeInMs>70</DecayTimeInMs>
+  <SustainVolume>0.9</SustainVolume>
+  <ReleaseTimeInMs>250</ReleaseTimeInMs>
+  <UseDelayEffekt>false</UseDelayEffekt>
+  <UseHallEffekt>false</UseHallEffekt>
+</SynthesizerData>

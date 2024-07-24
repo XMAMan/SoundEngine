@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-16"?>
+<SynthesizerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UseFrequencyLfo>false</UseFrequencyLfo>
+  <FrequencyLfoFrequenc>13.6206894</FrequencyLfoFrequenc>
+  <FrequencyLfoAmplitude>0.8</FrequencyLfoAmplitude>
+  <UseFrequenceRamp>false</UseFrequenceRamp>
+  <FrequencyRampFactor>-0.851724148</FrequencyRampFactor>
+  <RampStepFactor>0</RampStepFactor>
+  <UsePulsewidthLfo>false</UsePulsewidthLfo>
+  <PulsewidthLfoFrequence>1.55172455</PulsewidthLfoFrequence>
+  <PulsewidthLfoAmplitude>0.6827586</PulsewidthLfoAmplitude>
+  <OsziType>Rectangle</OsziType>
+  <UseAccordEffekt>false</UseAccordEffekt>
+  <PusleWidth>0.18965517</PusleWidth>
+  <OsziCount>1</OsziCount>
+  <Pitch>3</Pitch>
+  <SubOszVolume>0</SubOszVolume>
+  <UseAmplitudeLfo>false</UseAmplitudeLfo>
+  <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
+  <AmplitudeLfoAmplitude>1</AmplitudeLfoAmplitude>
+  <AmplitudeLfoPulseWidth>1</AmplitudeLfoPulseWidth>
+  <AudioFileName>Load Audio-File</AudioFileName>
+  <LeftAudioFilePosition>0</LeftAudioFilePosition>
+  <RightAudioFilePosition>0</RightAudioFilePosition>
+  <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+  <AudioFileGain>7</AudioFileGain>
+  <AudioFilePitch>1</AudioFilePitch>
+  <IsLowPassEnabled>false</IsLowPassEnabled>
+  <CutOffFrequence>0.3103448</CutOffFrequence>
+  <Resonance>0.200000048</Resonance>
+  <AttackTimeInMs>0</AttackTimeInMs>
+  <DecayTimeInMs>90.90909</DecayTimeInMs>
+  <SustainVolume>0</SustainVolume>
+  <ReleaseTimeInMs>268.181824</ReleaseTimeInMs>
+  <UseDelayEffekt>false</UseDelayEffekt>
+  <UseHallEffekt>false</UseHallEffekt>
+</SynthesizerData>

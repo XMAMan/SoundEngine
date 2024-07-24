@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-16"?>
+<MultiSequenzerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MidiFileFileName>lied7.mid</MidiFileFileName>
+  <LengthInMillisecondsForNewCreatedNotes>50</LengthInMillisecondsForNewCreatedNotes>
+  <SnapToGrid>true</SnapToGrid>
+  <SampleCount>44100</SampleCount>
+  <MinToneIndex>24</MinToneIndex>
+  <MaxToneIndex>72</MaxToneIndex>
+  <SynthesizerData>
+    <SequenzerData>
+      <InstrumentName>AcousticGrand</InstrumentName>
+      <Volume>0.5</Volume>
+      <IsEnabled>true</IsEnabled>
+      <TestToneFrequence>440</TestToneFrequence>
+      <SynthesizerData>
+        <UseFrequencyLfo>false</UseFrequencyLfo>
+        <FrequencyLfoFrequenc>5</FrequencyLfoFrequenc>
+        <FrequencyLfoAmplitude>0.8</FrequencyLfoAmplitude>
+        <UseFrequenceRamp>false</UseFrequenceRamp>
+        <FrequencyRampFactor>-0.3</FrequencyRampFactor>
+        <RampStepFactor>0</RampStepFactor>
+        <UsePulsewidthLfo>false</UsePulsewidthLfo>
+        <PulsewidthLfoFrequence>5</PulsewidthLfoFrequence>
+        <PulsewidthLfoAmplitude>0.2</PulsewidthLfoAmplitude>
+        <OsziType>Rectangle</OsziType>
+        <UseAccordEffekt>false</UseAccordEffekt>
+        <PusleWidth>0.5</PusleWidth>
+        <OsziCount>2</OsziCount>
+        <Pitch>3</Pitch>
+        <SubOszVolume>0</SubOszVolume>
+        <UseAmplitudeLfo>false</UseAmplitudeLfo>
+        <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
+        <AmplitudeLfoAmplitude>1</AmplitudeLfoAmplitude>
+        <AmplitudeLfoPulseWidth>1</AmplitudeLfoPulseWidth>
+        <AudioFileName>Load Audio-File</AudioFileName>
+        <LeftAudioFilePosition>0</LeftAudioFilePosition>
+        <RightAudioFilePosition>0</RightAudioFilePosition>
+        <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+        <AudioFileGain>7</AudioFileGain>
+        <AudioFilePitch>1</AudioFilePitch>
+        <IsLowPassEnabled>false</IsLowPassEnabled>
+        <CutOffFrequence>1</CutOffFrequence>
+        <Resonance>0.200000048</Resonance>
+        <AttackTimeInMs>0</AttackTimeInMs>
+        <DecayTimeInMs>94.242424</DecayTimeInMs>
+        <SustainVolume>0.9</SustainVolume>
+        <ReleaseTimeInMs>250</ReleaseTimeInMs>
+        <UseDelayEffekt>false</UseDelayEffekt>
+        <UseHallEffekt>false</UseHallEffekt>
+      </SynthesizerData>
+    </SequenzerData>
+  </SynthesizerData>
+</MultiSequenzerData>
