@@ -36,7 +36,7 @@
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
         <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
-        <AudioFileGain>5.63247871</AudioFileGain>
+        <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
         <CutOffFrequence>1</CutOffFrequence>
@@ -47,6 +47,10 @@
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
         <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>5</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -78,7 +82,7 @@
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
         <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
-        <AudioFileGain>7</AudioFileGain>
+        <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
         <CutOffFrequence>0.517241359</CutOffFrequence>
@@ -89,6 +93,10 @@
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
         <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -120,7 +128,7 @@
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>4000</RightAudioFilePosition>
         <UseDataFromAudioFileInsteadFromOszi>true</UseDataFromAudioFileInsteadFromOszi>
-        <AudioFileGain>3.23931623</AudioFileGain>
+        <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
         <CutOffFrequence>1</CutOffFrequence>
@@ -131,6 +139,10 @@
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>true</UseDelayEffekt>
         <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -162,7 +174,7 @@
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
         <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
-        <AudioFileGain>7</AudioFileGain>
+        <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
         <CutOffFrequence>1</CutOffFrequence>
@@ -173,6 +185,10 @@
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
         <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -204,7 +220,7 @@
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
         <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
-        <AudioFileGain>7</AudioFileGain>
+        <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
         <CutOffFrequence>1</CutOffFrequence>
@@ -215,6 +231,10 @@
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
         <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -246,7 +266,7 @@
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
         <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
-        <AudioFileGain>7</AudioFileGain>
+        <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
         <CutOffFrequence>0.413793117</CutOffFrequence>
@@ -257,6 +277,102 @@
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
         <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
+      </SynthesizerData>
+    </SequenzerData>
+    <SequenzerData>
+      <InstrumentName>Clav</InstrumentName>
+      <Volume>0.5</Volume>
+      <IsEnabled>true</IsEnabled>
+      <TestToneFrequence>159.38205</TestToneFrequence>
+      <SynthesizerData>
+        <UseFrequencyLfo>false</UseFrequencyLfo>
+        <FrequencyLfoFrequenc>5</FrequencyLfoFrequenc>
+        <FrequencyLfoAmplitude>0.8</FrequencyLfoAmplitude>
+        <UseFrequenceRamp>true</UseFrequenceRamp>
+        <FrequencyRampFactor>-2.506896</FrequencyRampFactor>
+        <RampStepFactor>0</RampStepFactor>
+        <UsePulsewidthLfo>false</UsePulsewidthLfo>
+        <PulsewidthLfoFrequence>5</PulsewidthLfoFrequence>
+        <PulsewidthLfoAmplitude>0.2</PulsewidthLfoAmplitude>
+        <OsziType>Rectangle</OsziType>
+        <UseAccordEffekt>false</UseAccordEffekt>
+        <PusleWidth>0.775862038</PusleWidth>
+        <OsziCount>1</OsziCount>
+        <Pitch>3</Pitch>
+        <SubOszVolume>0</SubOszVolume>
+        <UseAmplitudeLfo>false</UseAmplitudeLfo>
+        <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
+        <AmplitudeLfoAmplitude>1</AmplitudeLfoAmplitude>
+        <AmplitudeLfoPulseWidth>1</AmplitudeLfoPulseWidth>
+        <AudioFileName>Load Audio-File</AudioFileName>
+        <LeftAudioFilePosition>0</LeftAudioFilePosition>
+        <RightAudioFilePosition>0</RightAudioFilePosition>
+        <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+        <AudioFileGain>100</AudioFileGain>
+        <AudioFilePitch>1</AudioFilePitch>
+        <IsLowPassEnabled>true</IsLowPassEnabled>
+        <CutOffFrequence>0.310344845</CutOffFrequence>
+        <Resonance>0.200000048</Resonance>
+        <AttackTimeInMs>0</AttackTimeInMs>
+        <DecayTimeInMs>124.545456</DecayTimeInMs>
+        <SustainVolume>0.0181818176</SustainVolume>
+        <ReleaseTimeInMs>250</ReleaseTimeInMs>
+        <UseDelayEffekt>false</UseDelayEffekt>
+        <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
+      </SynthesizerData>
+    </SequenzerData>
+    <SequenzerData>
+      <InstrumentName>Celesta</InstrumentName>
+      <Volume>0.5</Volume>
+      <IsEnabled>true</IsEnabled>
+      <TestToneFrequence>799.191</TestToneFrequence>
+      <SynthesizerData>
+        <UseFrequencyLfo>false</UseFrequencyLfo>
+        <FrequencyLfoFrequenc>48.2758636</FrequencyLfoFrequenc>
+        <FrequencyLfoAmplitude>0.8</FrequencyLfoAmplitude>
+        <UseFrequenceRamp>true</UseFrequenceRamp>
+        <FrequencyRampFactor>1.37931025</FrequencyRampFactor>
+        <RampStepFactor>0</RampStepFactor>
+        <UsePulsewidthLfo>false</UsePulsewidthLfo>
+        <PulsewidthLfoFrequence>5.00000238</PulsewidthLfoFrequence>
+        <PulsewidthLfoAmplitude>0.7862069</PulsewidthLfoAmplitude>
+        <OsziType>Sinus</OsziType>
+        <UseAccordEffekt>false</UseAccordEffekt>
+        <PusleWidth>0.4655172</PusleWidth>
+        <OsziCount>7</OsziCount>
+        <Pitch>3.517138</Pitch>
+        <SubOszVolume>0</SubOszVolume>
+        <UseAmplitudeLfo>false</UseAmplitudeLfo>
+        <AmplitudeLfoFrequenc>50</AmplitudeLfoFrequenc>
+        <AmplitudeLfoAmplitude>1</AmplitudeLfoAmplitude>
+        <AmplitudeLfoPulseWidth>1</AmplitudeLfoPulseWidth>
+        <AudioFileName>Load Audio-File</AudioFileName>
+        <LeftAudioFilePosition>0</LeftAudioFilePosition>
+        <RightAudioFilePosition>0</RightAudioFilePosition>
+        <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+        <AudioFileGain>100</AudioFileGain>
+        <AudioFilePitch>1</AudioFilePitch>
+        <IsLowPassEnabled>false</IsLowPassEnabled>
+        <CutOffFrequence>1</CutOffFrequence>
+        <Resonance>0.200000048</Resonance>
+        <AttackTimeInMs>0</AttackTimeInMs>
+        <DecayTimeInMs>72.72727</DecayTimeInMs>
+        <SustainVolume>0</SustainVolume>
+        <ReleaseTimeInMs>250</ReleaseTimeInMs>
+        <UseDelayEffekt>false</UseDelayEffekt>
+        <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
   </SynthesizerData>
