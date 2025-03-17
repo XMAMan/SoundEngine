@@ -41,6 +41,8 @@ namespace WaveMaker.KeyboardComponents
         public bool UseHallEffekt { get; set; } = false;
         public bool UseGainEffekt { get; set; } = false;
         public float Gain { get; set; } = 7;
+        public bool UseVolumeLfo { get; set; } = false;
+        public float VolumeLfoFrequency { get; set; } = 5;
     }
 
     //Ein Synthesizer ist eine Menge von OscilatorWithLfo, dessen Frequenz und Amplitude über ein LFO gesteuert wird. Die per LFO gesteuerte Frequenz geht 
@@ -60,7 +62,7 @@ namespace WaveMaker.KeyboardComponents
         public DelayEffect DelayEffect { get; private set; }        
         public HallEffect HallEffect { get; private set; }
         public GainEffect GainEffect { get; private set; }
-        
+        public VolumeLfo VolumeLfo { get; private set; }
 
         private IPianoStopKeyHandler[] stopKeyHandler; //Sagen, wie lange nach dem Release-Key-Signal noch der Ton weiter geht 
 
@@ -78,6 +80,7 @@ namespace WaveMaker.KeyboardComponents
             this.DelayEffect = new DelayEffect(this.AdsrEnvelope, sampleRate);
             this.HallEffect = new HallEffect(this.DelayEffect, sampleRate);
             this.GainEffect = new GainEffect(this.HallEffect);
+            this.VolumeLfo = new VolumeLfo(this.GainEffect, sampleRate);
 
             this.stopKeyHandler = new IPianoStopKeyHandler[]
             {
@@ -129,6 +132,8 @@ namespace WaveMaker.KeyboardComponents
             this.UseHallEffekt = data.UseHallEffekt;
             this.UseGainEffekt = data.UseGainEffekt;
             this.GainEffect.Gain = data.Gain;
+            this.UseVolumeLfo = data.UseVolumeLfo;
+            this.VolumeLfo.Frequency = data.VolumeLfoFrequency;
         }
 
         public SynthesizerData GetAllSettings()
@@ -170,6 +175,8 @@ namespace WaveMaker.KeyboardComponents
                 UseHallEffekt = this.UseHallEffekt,
                 UseGainEffekt = this.GainEffect.IsEnabled,
                 Gain = this.GainEffect.Gain,
+                UseVolumeLfo = this.VolumeLfo.IsEnabled,
+                VolumeLfoFrequency = this.VolumeLfo.Frequency
             };
         }
 
@@ -180,7 +187,7 @@ namespace WaveMaker.KeyboardComponents
 
         public float GetSample(KeySampleData data)
         {
-            return this.GainEffect.GetSample(data);
+            return this.VolumeLfo.GetSample(data);
         }
 
         
@@ -231,6 +238,8 @@ namespace WaveMaker.KeyboardComponents
         public bool UseHallEffekt { get { return this.HallEffect.IsEnabled; } set { this.HallEffect.IsEnabled = value; } }
         public bool UseGainEffekt { get { return this.GainEffect.IsEnabled; } set { this.GainEffect.IsEnabled = value; } }
         public float Gain { get { return this.GainEffect.Gain; } set { this.GainEffect.Gain = value; } }
+        public bool UseVolumeLfo { get { return this.VolumeLfo.IsEnabled; } set { this.VolumeLfo.IsEnabled = value; } }
+        public float VolumeLfoFrequency { get { return this.VolumeLfo.Frequency; } set { this.VolumeLfo.Frequency = value; } }
     }
 }
 

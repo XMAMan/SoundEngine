@@ -20,10 +20,12 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Gain"/>
                     <CheckBox Margin="0 5" IsChecked="{Binding UseGainEffekt}"/>
+                    <Slider Width="50" Minimum="1" Maximum="20" Value="{Binding Gain}" Margin="5 3 0 0"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <Label Content="Gain" />
-                    <Slider Width="50" Minimum="1" Maximum="20" Value="{Binding Gain}" Margin="0 3 0 0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="VolumeLfo"/>
+                    <CheckBox Margin="0 5" IsChecked="{Binding UseVolumeLfo}"/>
+                    <Slider Width="50" Minimum="1" Maximum="100" Value="{Binding VolumeLfoFrequency}" Margin="5 3 0 0"/>
                 </StackPanel>
             </StackPanel>
         </Border>

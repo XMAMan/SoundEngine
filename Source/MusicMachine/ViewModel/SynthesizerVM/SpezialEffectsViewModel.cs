@@ -10,6 +10,7 @@ namespace MusicMachine.ViewModel.SynthesizerVM
         {
             this.model = model;
             this.Gain = 7;
+            this.VolumeLfoFrequency = 20;
         }
 
         public bool UseDelayEffekt
@@ -36,12 +37,26 @@ namespace MusicMachine.ViewModel.SynthesizerVM
             set { this.model.Gain = value; this.RaisePropertyChanged(nameof(Gain)); }
         }
 
+        public bool UseVolumeLfo
+        {
+            get { return this.model.UseVolumeLfo; }
+            set { this.model.UseVolumeLfo = value; this.RaisePropertyChanged(nameof(UseVolumeLfo)); }
+        }
+
+        public float VolumeLfoFrequency
+        {
+            get { return this.model.VolumeLfoFrequency; }
+            set { this.model.VolumeLfoFrequency = value; this.RaisePropertyChanged(nameof(VolumeLfoFrequency)); }
+        }
+
         public void SetAllSettings(SynthesizerData data)
         {
             this.UseDelayEffekt = data.UseDelayEffekt;
             this.UseHallEffekt = data.UseHallEffekt;
             this.UseGainEffekt = data.UseGainEffekt;
             this.Gain = data.Gain;
+            this.UseVolumeLfo = data.UseVolumeLfo;
+            this.VolumeLfoFrequency = data.VolumeLfoFrequency;
         }
     }
 }

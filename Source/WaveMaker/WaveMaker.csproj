@@ -63,6 +63,7 @@
     <Compile Include="SingleSampleProvider\Piano\PianoComponents\Switch.cs" />
     <Compile Include="SingleSampleProvider\Piano\PianoComponents\Synthesizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SingleSampleProvider\Piano\PianoComponents\VolumeLfo.cs" />
     <Compile Include="SingleSampleProvider\Sequenzer\MultiSequenzer.cs" />
     <Compile Include="SingleSampleProvider\Sequenzer\PianoSequenzer.cs" />
     <Compile Include="SingleSampleProvider\Sequenzer\SequenzerKey.cs" />
