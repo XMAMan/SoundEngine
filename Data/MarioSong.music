@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-16"?>
 <MultiSequenzerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <MidiFileFileName>lied6.mid</MidiFileFileName>
+  <MidiFileFileName>MarioSong.mid</MidiFileFileName>
   <LengthInMillisecondsForNewCreatedNotes>250</LengthInMillisecondsForNewCreatedNotes>
   <SnapToGrid>true</SnapToGrid>
   <SampleCount>1626023</SampleCount>
