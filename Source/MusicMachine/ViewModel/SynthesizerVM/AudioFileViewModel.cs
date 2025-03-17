@@ -21,7 +21,6 @@ namespace MusicMachine.ViewModel.SynthesizerVM
             this.audioFileReader = audioFileReader;
             this.FileLengthInMilliseconds = this.model.AudioFile.GetFileLengthInMilliseconds();
             UpdateAudioImage();
-            this.Gain = 7;
 
             this.LoadAudioFileCommand = ReactiveCommand.Create(() => // Create a command that calls command A.
             {
@@ -32,7 +31,7 @@ namespace MusicMachine.ViewModel.SynthesizerVM
                 }*/
 
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "wma (*.wma)|*.wma|mp3 (*.mp3)|*.mp3|Wave Format(*.wav)|*.wav|All files (*.*)|*.*";
+                openFileDialog.Filter = "MusicFiles|*.wma;*.mp3;*.wav|wma (*.wma)|*.wma|mp3 (*.mp3)|*.mp3|Wave Format(*.wav)|*.wav|All files (*.*)|*.*";
                 openFileDialog.InitialDirectory = System.IO.Path.GetFullPath(Environment.CurrentDirectory + FileNameHelper.DataDirectory);
                 if (openFileDialog.ShowDialog() == true)
                 {
@@ -108,11 +107,7 @@ namespace MusicMachine.ViewModel.SynthesizerVM
             get { return this.model.UseDataFromAudioFileInsteadFromOszi; }
             set { this.model.UseDataFromAudioFileInsteadFromOszi = value; this.RaisePropertyChanged(nameof(UseDataFromAudioFile)); }
         }
-        public float Gain
-        {
-            get { return this.model.AudioFileGain; }
-            set { this.model.AudioFileGain = value; this.RaisePropertyChanged(nameof(Gain)); }
-        }
+       
         public float Pitch
         {
             get { return this.model.AudioFilePitch; }
@@ -134,7 +129,6 @@ namespace MusicMachine.ViewModel.SynthesizerVM
             this.LeftPositionInMilliseconds = data.LeftAudioFilePosition;
             this.RightPositionInMilliseconds = data.RightAudioFilePosition;
             this.UseDataFromAudioFile = data.UseDataFromAudioFileInsteadFromOszi;
-            this.Gain = data.AudioFileGain;
             this.Pitch = data.AudioFilePitch;
             UpdateAudioImage();
         }

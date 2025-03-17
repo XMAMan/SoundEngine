@@ -9,6 +9,7 @@ namespace MusicMachine.ViewModel.SynthesizerVM
         public SpezialEffectsViewModel(Synthesizer model)
         {
             this.model = model;
+            this.Gain = 7;
         }
 
         public bool UseDelayEffekt
@@ -22,10 +23,25 @@ namespace MusicMachine.ViewModel.SynthesizerVM
             get { return this.model.UseHallEffekt; }
             set { this.model.UseHallEffekt = value; this.RaisePropertyChanged(nameof(UseHallEffekt)); }
         }
-        
+
+        public bool UseGainEffekt
+        {
+            get { return this.model.UseGainEffekt; }
+            set { this.model.UseGainEffekt = value; this.RaisePropertyChanged(nameof(UseGainEffekt)); }
+        }
+
+        public float Gain
+        {
+            get { return this.model.Gain; }
+            set { this.model.Gain = value; this.RaisePropertyChanged(nameof(Gain)); }
+        }
+
         public void SetAllSettings(SynthesizerData data)
         {
             this.UseDelayEffekt = data.UseDelayEffekt;
+            this.UseHallEffekt = data.UseHallEffekt;
+            this.UseGainEffekt = data.UseGainEffekt;
+            this.Gain = data.Gain;
         }
     }
 }

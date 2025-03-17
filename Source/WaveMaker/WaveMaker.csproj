@@ -47,6 +47,7 @@
     <Compile Include="SingleSampleProvider\ISingleSampleProvider.cs" />
     <Compile Include="IAudioFileHandler.cs" />
     <Compile Include="IWaveMaker.cs" />
+    <Compile Include="SingleSampleProvider\Piano\PianoComponents\GainEffect.cs" />
     <Compile Include="SingleSampleProvider\Piano\Piano.cs" />
     <Compile Include="SingleSampleProvider\Piano\PianoComponents\AdsrEnvelope.cs" />
     <Compile Include="SingleSampleProvider\Piano\PianoComponents\AudioFile.cs" />

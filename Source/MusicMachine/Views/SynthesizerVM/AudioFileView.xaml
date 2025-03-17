@@ -55,10 +55,6 @@
             </local:AudioFileCanvas>
 
             <StackPanel Orientation="Horizontal" >
-                <Label Content="Gain" />
-                <Slider Width="50" Minimum="0" Maximum="20" Value="{Binding Gain}" Margin="0 3 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" >
                 <Label Content="Pitch" />
                 <Slider Width="50" Minimum="0" Maximum="2" Value="{Binding Pitch}" Margin="0 3 0 0"/>
             </StackPanel>

@@ -15,7 +15,6 @@ namespace SoundEngine.SoundSnippeds
             this.audioFile = new AudioFile(sampmleRate);
             this.audioFile.SampleData = samples;
             this.audioFile.RightPositionInMilliseconds = this.audioFile.GetFileLengthInMilliseconds();
-            this.audioFile.Gain = 7; //Lautstärke Extra
         }
 
         public int SampleRate { get; private set; }

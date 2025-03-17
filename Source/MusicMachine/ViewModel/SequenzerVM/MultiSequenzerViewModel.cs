@@ -203,6 +203,7 @@ namespace MusicMachine.ViewModel.SequenzerVM
                         this.Sequenzers.Add(new SequenzerViewModel(sequenzerModel, this.audioFilehandler));
                     }
                     this.SelectedSequenzer = this.Sequenzers[0];
+                    this.SelectedSequenzer.SynthesizerViewModel.SetAllSettings(data.SynthesizerData[0].SynthesizerData, Path.GetDirectoryName(fileName));
                     SetZoom();
 
                     this.CurrentPosition = this.model.CurrentPosition = 0;

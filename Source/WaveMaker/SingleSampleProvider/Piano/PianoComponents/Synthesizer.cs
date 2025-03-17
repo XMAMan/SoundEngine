@@ -39,6 +39,8 @@ namespace WaveMaker.KeyboardComponents
         public float ReleaseTimeInMs { get; set; } = 250;
         public bool UseDelayEffekt { get; set; } = false;
         public bool UseHallEffekt { get; set; } = false;
+        public bool UseGainEffekt { get; set; } = false;
+        public float Gain { get; set; } = 7;
     }
 
     //Ein Synthesizer ist eine Menge von OscilatorWithLfo, dessen Frequenz und Amplitude über ein LFO gesteuert wird. Die per LFO gesteuerte Frequenz geht 
@@ -57,7 +59,7 @@ namespace WaveMaker.KeyboardComponents
         public AdsrEnvelope AdsrEnvelope { get; private set; }
         public DelayEffect DelayEffect { get; private set; }        
         public HallEffect HallEffect { get; private set; }
-
+        public GainEffect GainEffect { get; private set; }
         
 
         private IPianoStopKeyHandler[] stopKeyHandler; //Sagen, wie lange nach dem Release-Key-Signal noch der Ton weiter geht 
@@ -75,6 +77,7 @@ namespace WaveMaker.KeyboardComponents
             this.AdsrEnvelope = new AdsrEnvelope(this.LowPass, sampleRate);
             this.DelayEffect = new DelayEffect(this.AdsrEnvelope, sampleRate);
             this.HallEffect = new HallEffect(this.DelayEffect, sampleRate);
+            this.GainEffect = new GainEffect(this.HallEffect);
 
             this.stopKeyHandler = new IPianoStopKeyHandler[]
             {
@@ -113,8 +116,7 @@ namespace WaveMaker.KeyboardComponents
             }
             this.LeftAudioFilePosition = data.LeftAudioFilePosition;
             this.RightAudioFilePosition = data.RightAudioFilePosition;
-            this.UseDataFromAudioFileInsteadFromOszi = data.UseDataFromAudioFileInsteadFromOszi;
-            this.AudioFileGain = data.AudioFileGain;
+            this.UseDataFromAudioFileInsteadFromOszi = data.UseDataFromAudioFileInsteadFromOszi;            
             this.AudioFilePitch = data.AudioFilePitch;
             this.IsLowPassEnabled = data.IsLowPassEnabled;
             this.CutOffFrequence = data.CutOffFrequence;
@@ -125,6 +127,8 @@ namespace WaveMaker.KeyboardComponents
             this.ReleaseTimeInMs = data.ReleaseTimeInMs;
             this.UseDelayEffekt = data.UseDelayEffekt;
             this.UseHallEffekt = data.UseHallEffekt;
+            this.UseGainEffekt = data.UseGainEffekt;
+            this.GainEffect.Gain = data.Gain;
         }
 
         public SynthesizerData GetAllSettings()
@@ -153,8 +157,7 @@ namespace WaveMaker.KeyboardComponents
                 AudioFileName = this.AudioFileName,
                 LeftAudioFilePosition = this.LeftAudioFilePosition,
                 RightAudioFilePosition = this.RightAudioFilePosition,
-                UseDataFromAudioFileInsteadFromOszi = this.UseDataFromAudioFileInsteadFromOszi,
-                AudioFileGain = this.AudioFileGain,
+                UseDataFromAudioFileInsteadFromOszi = this.UseDataFromAudioFileInsteadFromOszi,               
                 AudioFilePitch = this.AudioFilePitch,
                 IsLowPassEnabled = this.IsLowPassEnabled,
                 CutOffFrequence = this.CutOffFrequence,
@@ -165,6 +168,8 @@ namespace WaveMaker.KeyboardComponents
                 ReleaseTimeInMs = this.ReleaseTimeInMs,
                 UseDelayEffekt = this.UseDelayEffekt,
                 UseHallEffekt = this.UseHallEffekt,
+                UseGainEffekt = this.GainEffect.IsEnabled,
+                Gain = this.GainEffect.Gain,
             };
         }
 
@@ -175,7 +180,7 @@ namespace WaveMaker.KeyboardComponents
 
         public float GetSample(KeySampleData data)
         {
-            return this.HallEffect.GetSample(data);
+            return this.GainEffect.GetSample(data);
         }
 
         
@@ -209,7 +214,6 @@ namespace WaveMaker.KeyboardComponents
         public float LeftAudioFilePosition { get { return this.AudioFile.LeftPositionInMilliseconds; } set { this.AudioFile.LeftPositionInMilliseconds = value; } }
         public float RightAudioFilePosition { get { return this.AudioFile.RightPositionInMilliseconds; } set { this.AudioFile.RightPositionInMilliseconds = value; } }
         public bool UseDataFromAudioFileInsteadFromOszi { get { return this.OsziAudioFileSwitch.SwitchValue == Switch.SwitchValues.B; } set { this.OsziAudioFileSwitch.SwitchValue = value ? Switch.SwitchValues.B : Switch.SwitchValues.A; } }
-        public float AudioFileGain { get { return this.AudioFile.Gain; } set { this.AudioFile.Gain = value; } }
         public float AudioFilePitch { get { return this.AudioFile.Pitch; } set { this.AudioFile.Pitch = value; } }
 
         public bool IsLowPassEnabled { get { return this.LowPass.IsEnabled; } set { this.LowPass.IsEnabled = value; } }
@@ -225,5 +229,9 @@ namespace WaveMaker.KeyboardComponents
 
         public bool UseDelayEffekt { get { return this.DelayEffect.IsEnabled; } set { this.DelayEffect.IsEnabled = value; } }
         public bool UseHallEffekt { get { return this.HallEffect.IsEnabled; } set { this.HallEffect.IsEnabled = value; } }
+        public bool UseGainEffekt { get { return this.GainEffect.IsEnabled; } set { this.GainEffect.IsEnabled = value; } }
+        public float Gain { get { return this.GainEffect.Gain; } set { this.GainEffect.Gain = value; } }
     }
 }
+
+

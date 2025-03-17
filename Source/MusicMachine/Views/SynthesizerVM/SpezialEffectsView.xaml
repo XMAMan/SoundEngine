@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="94">
+        <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="110">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Delay"/>
@@ -16,6 +16,14 @@
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Hall"/>
                     <CheckBox Margin="0 5" IsChecked="{Binding UseHallEffekt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Gain"/>
+                    <CheckBox Margin="0 5" IsChecked="{Binding UseGainEffekt}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <Label Content="Gain" />
+                    <Slider Width="50" Minimum="1" Maximum="20" Value="{Binding Gain}" Margin="0 3 0 0"/>
                 </StackPanel>
             </StackPanel>
         </Border>
