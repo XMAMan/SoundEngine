@@ -1,13 +1,6 @@
 ﻿using SoundEngine.SoundSnippeds;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WaveMaker;
-using WaveMaker.Helper;
-using WaveMaker.KeyboardComponents;
-using WaveMaker.Sequenzer;
 
 namespace SoundEngine
 {

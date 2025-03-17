@@ -1,18 +1,12 @@
 ﻿using Microsoft.Win32;
 using MusicMachine.Model;
-using MusicMachine.ViewModel;
 using MusicMachine.ViewModel.SequenzerVM;
-using MusicMachine.ViewModel.SynthesizerVM;
 using MusicMachine.Views.SequenzerVM.SequenzerCanvasElements;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static MusicMachine.Views.SequenzerVM.SequenzerCanvasElements.RectangleNotes;
 
 namespace MusicMachine.Views.SequenzerVM

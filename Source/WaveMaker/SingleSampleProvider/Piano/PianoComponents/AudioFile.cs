@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WaveMaker.BlockSampleEffects;
 
 namespace WaveMaker.KeyboardComponents
@@ -35,6 +31,7 @@ namespace WaveMaker.KeyboardComponents
             this.modifiedSamples = shifter.GetModifiSamples(this.SampleData);
         }
 
+        //Hiermit kann der Anfang des Audiofiles weggeschnitten werden
         private int leftIndex = 0;
         private float leftPositionInMilliseconds;
         public float LeftPositionInMilliseconds
@@ -43,6 +40,7 @@ namespace WaveMaker.KeyboardComponents
             set { this.leftPositionInMilliseconds = value; this.leftIndex = (int)(value / 1000 * this.SampleRate); }
         }
 
+        //Hiermit kann das Ende des AudioFiles weggeschnitten werden
         private int rightIndex = 0;
         private float rightPositionInMilliseconds;
         public float RightPositionInMilliseconds

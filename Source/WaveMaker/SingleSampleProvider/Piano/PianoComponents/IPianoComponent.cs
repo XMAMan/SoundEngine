@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WaveMaker.KeyboardComponents
+﻿namespace WaveMaker.KeyboardComponents
 {
     //Wird mit Drücken einer Keyboard-Taste erzeugt und bleibt so lange, bis Taste losgelassen wurde und Hüllkurve KeyIsFinished gesetzt hat
     public class KeySampleData

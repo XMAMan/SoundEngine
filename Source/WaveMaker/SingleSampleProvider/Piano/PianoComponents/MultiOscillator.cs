@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WaveMaker.KeyboardComponents
+﻿namespace WaveMaker.KeyboardComponents
 {
     //Mehrere Oszis mit ganz kleiner versetzer Frequenz
     public class MultiOscillator : IPianoComponent

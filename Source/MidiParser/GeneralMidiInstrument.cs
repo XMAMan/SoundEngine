@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MidiParser
+﻿namespace MidiParser
 {
     /// <summary>General MIDI Instrument Patch Map.</summary>
     public enum GeneralMidiInstrument : byte

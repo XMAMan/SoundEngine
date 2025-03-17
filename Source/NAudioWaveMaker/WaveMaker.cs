@@ -1,9 +1,5 @@
 ﻿using NAudio.Wave;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WaveMaker;
 
 //https://csharp.hotexamples.com/de/examples/NAudio.Wave/AudioFileReader/-/php-audiofilereader-class-examples.html -> NAudio-Beispiele

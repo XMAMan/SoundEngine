@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SignalAnalyser
+﻿namespace SignalAnalyser
 {
     //Ein Signal sind die Abtastwerte einer einzelnen Periode von einer periodischen Funktion. (Dargetsellt als float-Array)
     //Ein FrequenzeSpaceSignal gibt auf der X-Achse die Frequenz und auf der Y-Achse die Amplitude eines Signals an, was in seine Sinus/Cosinus-Funktionen zerlegt wurde

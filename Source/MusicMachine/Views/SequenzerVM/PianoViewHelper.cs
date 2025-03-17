@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MusicMachine.Views.SequenzerVM
+﻿namespace MusicMachine.Views.SequenzerVM
 {
     //Berechnet die Pixel-Höhe/Y-Position einer Taste abhängig vom toneIndex
     static class PianoViewHelper

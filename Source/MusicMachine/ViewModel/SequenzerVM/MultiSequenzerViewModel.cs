@@ -3,7 +3,6 @@ using DynamicData.Binding;
 using MidiParser;
 using MusicMachine.Model;
 using MusicMachine.ViewModel.NewSequenzerDialog;
-using MusicMachine.ViewModel.SynthesizerVM;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -13,12 +12,9 @@ using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using WaveMaker;
 using WaveMaker.Helper;
-using WaveMaker.KeyboardComponents;
 using WaveMaker.Sequenzer;
 
 namespace MusicMachine.ViewModel.SequenzerVM
