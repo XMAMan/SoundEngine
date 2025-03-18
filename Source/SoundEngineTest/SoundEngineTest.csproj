@@ -59,9 +59,6 @@
     <Compile Include="AudioFileSnippedView.xaml.cs">
       <DependentUpon>AudioFileSnippedView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FrequenceToneAudioFileSnippedView.xaml.cs">
-      <DependentUpon>FrequenceToneAudioFileSnippedView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="FrequenceToneSnippedView.xaml.cs">
       <DependentUpon>FrequenceToneSnippedView.xaml</DependentUpon>
     </Compile>
@@ -70,10 +67,6 @@
     </Compile>
     <Compile Include="ViewModel.cs" />
     <Page Include="AudioFileSnippedView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="FrequenceToneAudioFileSnippedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -136,6 +129,10 @@
     <ProjectReference Include="..\SoundEngine\SoundEngine.csproj">
       <Project>{9dc995d0-439c-4be8-8bfa-df0a79590ecf}</Project>
       <Name>SoundEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WaveMaker\WaveMaker.csproj">
+      <Project>{96CFDAFF-ACB0-4FE5-93A6-8FA1FC5F2DF7}</Project>
+      <Name>WaveMaker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

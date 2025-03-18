@@ -84,29 +84,31 @@ namespace WaveMaker.Sequenzer
         public int SampleRate { get { return this.piano.SampleRate; } }
 
 
-        public void SetSamplePosition(int samplePosition)
+        public void SetSamplePosition(double samplePosition)
         {
             var nextKeysToStart = Notes.SetSampleIndex(samplePosition);
             foreach (var key in nextKeysToStart)
             {
-                PlayTone(key, this.sampleIndex);
+                PlayTone(key, (int)this.sampleIndex);
             }
         }
 
-        private int sampleIndex = 0;
-        public float GetNextSample(bool startNewKeys)
+        
+        private double sampleIndex = 0; //ist vom Typ double und nicht int, um die Tastenanschlagsgeschwindigkeit ändern zu können
+        public float GetNextSample(bool startNewKeys, float keyStrokeSpeed = 1)
         {
             //this.sampleIndex = Läuft von 0 bis Unendlich(Entspricht der Zeit). Wird hier benötigt, um die Stop-Key-Zeit zu hinterlegen. Das Stoppen geht auch dann, wenn IsPlaying false ist
             //this.Notes.SampleIndex = Läuft von 0 bis Midi-File-Ende (Entspricht den blauen Balken)
-            this.sampleIndex++;
+            //this.piano.keys.sampleData.SampleIndex = Läuft von 0 bis KeyUp-Index (Entspricht der Länge des Tastendrucks)
+            this.sampleIndex += keyStrokeSpeed;
 
             //Spiele neue Töne an
             if (startNewKeys) //startNewKeys == IsPlaying
             {
-                var nextKeysToStart = this.Notes.StartNextKeys();
+                var nextKeysToStart = this.Notes.StartNextKeys(keyStrokeSpeed);
                 foreach (var key in nextKeysToStart)
                 {
-                    PlayTone(key, this.sampleIndex);
+                    PlayTone(key, (int)this.sampleIndex);
                 }
             }
 
@@ -146,7 +148,7 @@ namespace WaveMaker.Sequenzer
 
         public void PlayTone(SequenzerKey key)
         {
-            PlayTone(key, this.sampleIndex);
+            PlayTone(key, (int)this.sampleIndex);
         }
 
         public void ResetPlayPosition()

@@ -16,6 +16,7 @@ namespace WaveMaker.Sequenzer
         public int MinToneIndex { get; set; }
         public int MaxToneIndex { get; set; }
         public List<SequenzerData> SynthesizerData { get; set; }
+        public float KeyStrokeSpeed { get; set; } = 1;
     }
 
     interface IMultiSequenzer
@@ -54,6 +55,7 @@ namespace WaveMaker.Sequenzer
                 SampleCount = this.MaxAllowedSize.MaxSamplePosition,
                 MinToneIndex = this.MaxAllowedSize.MinToneIndex,
                 MaxToneIndex = this.MaxAllowedSize.MaxToneIndex,
+                KeyStrokeSpeed = this.KeyStrokeSpeed,
                 SynthesizerData = this.GetAllSynthesizerData()
             };
         }
@@ -86,6 +88,8 @@ namespace WaveMaker.Sequenzer
                     emptySequenzer.SetAllSettings(emptySequenzerData, audioFileReader, searchFolder);
                 }
             }
+
+            this.KeyStrokeSpeed = data.KeyStrokeSpeed;
         }
 
         public SequenzerSize MaxAllowedSize { get; set; }
@@ -97,7 +101,7 @@ namespace WaveMaker.Sequenzer
         public float Volume { get; set; } = 0.01f;
 
         public int SampleCount { get { return this.sequenzerWithLongestLength != null ? this.sequenzerWithLongestLength.Notes.MaxSamplePosition : 0; } }
-        public int CurrentPosition //Geht von 0 bis SampleCount
+        public double CurrentPosition //Geht von 0 bis SampleCount
         { 
             get 
             { 
@@ -113,6 +117,8 @@ namespace WaveMaker.Sequenzer
         } 
         public bool AutoLoop { get; set; } = false;
         public bool IsFinish { get { return this.sequenzerWithLongestLength != null ? this.sequenzerWithLongestLength.Notes.IsFinish : false; } } //Ist das Lied durchgespielt?
+
+        public float KeyStrokeSpeed { get; set; } = 1; //1 = Spiele in normaler Geschwindigkeit, 2 = Doppelt so schnell, 0.5 = Halbe Geschwindigkeit
 
         public PianoSequenzer[] AddMidiFile(MidiFile midiFile)
         {
@@ -208,7 +214,7 @@ namespace WaveMaker.Sequenzer
             float sum = 0;
             foreach (var sequenzer in this.Sequenzers.ToList())
             {
-                sum += sequenzer.GetNextSample(this.IsRunning);
+                sum += sequenzer.GetNextSample(this.IsRunning, this.KeyStrokeSpeed);
             }
 
             //8-Bit-Effekt (Das Veringern der Bitrate oder Samplingrate nennt man Bit-Crushing und ist ein möglicher Verzerrungseffekt) -> Siehe: https://blog.landr.com/de/audio-effekte-eine-anleitung-die-dir-dabei-hilft-deinen-sound-zu-formen/#distortion

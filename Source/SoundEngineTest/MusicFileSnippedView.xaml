@@ -18,6 +18,12 @@
 
             <Label Content="AutoLoop"/>
             <CheckBox IsChecked="{Binding AutoLoop}" Margin="0 5 5 0"/>
+
+            <Label Content="KeyStrokeSpeed:" Margin="10 0 0 0"/>
+            <Slider Minimum="0.25" Maximum="5" Value="{Binding KeyStrokeSpeed}" Width="50" Margin="0 3"/>
+
+            <Label Content="Last Endtriggertime:"/>
+            <TextBox Text="{Binding EndTriggerTime}"/>
         </StackPanel>
     </Grid>
 </UserControl>

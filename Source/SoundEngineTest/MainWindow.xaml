@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundEngineTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1600">
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -60,7 +60,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <Label Content="Hallo.synt:"/>
-                <local:FrequenceToneAudioFileSnippedView DataContext="{Binding Hallo}"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding Hallo}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

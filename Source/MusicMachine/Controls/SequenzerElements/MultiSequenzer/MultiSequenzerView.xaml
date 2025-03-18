@@ -9,7 +9,8 @@
              xmlns:local="clr-namespace:MusicMachine.Controls.SequenzerElements.Sequenzer"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
              xmlns:synthesizer="clr-namespace:MusicMachine.Controls.SynthesizerElements.Main"
-                          mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
              x:Name="MultiSequenzerView1"
              d:DesignHeight="450" d:DesignWidth="1000">
     <DockPanel>
@@ -64,8 +65,17 @@
                 <Label Content="AutoLoop"/>
                 <CheckBox IsChecked="{Binding AutoLoop}" Margin="-3 5"/>
 
+                <Label Content="KeyStrokeSpeed:" Margin="10 0 0 0"/>
+                <Slider Minimum="0.25" Maximum="5" Value="{Binding KeyStrokeSpeed}" Width="50" Margin="0 3"/>
+
                 <Label Content="X-Zoom:" Margin="10 0 0 0"/>
-                <Slider Minimum="0" Maximum="50000" Value="{Binding SequencerPixelWidth}" Width="150" Margin="0 3"/>
+                <Slider Minimum="0" Maximum="50000" Value="{Binding SequencerPixelWidth}" Width="150" Margin="0 3" ToolTip="Doubleclick for reset the KeyStrokeSpeed">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding MouseDoubleClickOnKeyStrokeSpeedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Slider>
 
                 <Label Content="Y-Zoom:" Margin="10 0 0 0"/>
                 <Slider Minimum="110" Maximum="600" Value="{Binding SequencerPixelHeight}" Width="150" Margin="0 3" x:Name="YZoom"/>

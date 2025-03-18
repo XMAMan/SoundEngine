@@ -246,6 +246,11 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                     this.audioFilehandler.ExportAudioStreamToFile(this.model.GetAllSamples(), this.model.SampleRate, fileName);
                 }
             });
+
+            this.MouseDoubleClickOnKeyStrokeSpeedCommand = ReactiveCommand.Create(() =>
+            {
+                this.KeyStrokeSpeed = 1;
+            });
         }
 
         public ObservableCollection<SequenzerViewModel> Sequenzers { get; set; } = new ObservableCollection<SequenzerViewModel>();
@@ -269,6 +274,13 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             set { this.model.Volume = value; }
         }
 
+        public float KeyStrokeSpeed
+        {
+            get { return this.model.KeyStrokeSpeed; }
+            set { this.model.KeyStrokeSpeed = value; }
+        }
+        
+
         [Reactive] public float LengthInMillisecondsForNewCreatedNotes { get; set; } = 250; //So lang sind neu erstellte Noten
         [ObservableAsProperty] public int MinSampleLengthForNewNotes { get; private set; }
         [Reactive] public bool SnapToGrid { get; set; } = true; //Sollen neu eingefügte Noten am Gitter ausgerichtet werden?
@@ -276,9 +288,9 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
         [Reactive] public SequenzerSize SequenzerSize { get; private set; }
         [Reactive] public string CurrentProjectName { get; set; } = "Music Machine";
 
-        [Reactive] public int CurrentPosition { get; set; } = 0; //Geht von 0 bis SampleCount
+        [Reactive] public double CurrentPosition { get; set; } = 0; //Geht von 0 bis SampleCount
 
-        
+        public ReactiveCommand<Unit, Unit> MouseDoubleClickOnKeyStrokeSpeedCommand { get; private set; }
 
         [Reactive] public int FrequenceForTestTone { get; set; } = 65; 
 

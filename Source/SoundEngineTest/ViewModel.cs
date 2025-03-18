@@ -4,6 +4,7 @@ using SoundEngine;
 using SoundEngine.SoundSnippeds;
 using System;
 using System.Reactive;
+using WaveMaker.KeyboardComponents;
 
 namespace SoundEngineTest
 {
@@ -41,10 +42,10 @@ namespace SoundEngineTest
         }
     }
 
-    public class MusicFileSnippedViewModel : ReactiveObject
+    public class SoundWithEndTrigger : ReactiveObject
     {
-        private IMusicFileSnipped snipp;
-        public MusicFileSnippedViewModel(IMusicFileSnipped snipp)
+        private ISoundSnippedWithEndTrigger snipp;
+        public SoundWithEndTrigger(ISoundSnippedWithEndTrigger snipp)
         {
             this.snipp = snipp;
             this.snipp.IsRunningChanged = (isRunning) => { this.IsRunning = isRunning; };
@@ -61,6 +62,8 @@ namespace SoundEngineTest
             {
                 this.snipp.Reset();
             });
+
+            this.snipp.EndTrigger = () => { this.EndTriggerTime = DateTime.Now.ToString(); };
         }
         [Reactive] public bool IsRunning { get; private set; } = false;
         public ReactiveCommand<Unit, Unit> Play { get; private set; }
@@ -68,11 +71,22 @@ namespace SoundEngineTest
         public float Volume { get { return this.snipp.Volume; } set { this.snipp.Volume = value; } }
         public ReactiveCommand<Unit, Unit> Reset { get; private set; }
         public bool AutoLoop { get { return this.snipp.AutoLoop; } set { this.snipp.AutoLoop = value; } }
-
-        
+        [Reactive] public string EndTriggerTime { get; set; } = "";
     }
 
-    public class AudioFileSnippedViewModel : MusicFileSnippedViewModel
+    public class MusicFileSnippedViewModel : SoundWithEndTrigger
+    {
+        private IMusicFileSnipped snipp;
+        public MusicFileSnippedViewModel(IMusicFileSnipped snip)
+            :base(snip)
+        {
+            this.snipp = snip;
+        }
+        public float KeyStrokeSpeed { get { return this.snipp.KeyStrokeSpeed; } set { this.snipp.KeyStrokeSpeed = value; } }
+
+    }
+
+    public class AudioFileSnippedViewModel : SoundWithEndTrigger
     {
         private IAudioFileSnipped snipp;
         
@@ -84,6 +98,13 @@ namespace SoundEngineTest
 
         public float Pitch { get { return this.snipp.Pitch; } set { this.snipp.Pitch = value; } }
         public float Speed { get { return this.snipp.Speed; } set { this.snipp.Speed = value; } }
+        public bool UseDelayEffekt { get { return this.snipp.UseDelayEffekt; } set { this.snipp.UseDelayEffekt = value; } }
+        public bool UseHallEffekt { get { return this.snipp.UseHallEffekt; } set { this.snipp.UseHallEffekt = value; } }
+        public bool UseGainEffekt { get { return this.snipp.UseGainEffekt; } set { this.snipp.UseGainEffekt = value; } }
+        public float Gain { get { return this.snipp.Gain; } set { this.snipp.Gain = value; } }
+        public bool UseVolumeLfo { get { return this.snipp.UseVolumeLfo; } set { this.snipp.UseVolumeLfo = value; } }
+        public float VolumeLfoFrequency { get { return this.snipp.VolumeLfoFrequency; } set { this.snipp.VolumeLfoFrequency = value; } }
+
     }
 
     public class FrequenceToneSnippedViewModel : ReactiveObject
@@ -109,15 +130,8 @@ namespace SoundEngineTest
         public ReactiveCommand<Unit, Unit> Stop { get; private set; }
         public float Volume { get { return this.snipp.Volume; } set { this.snipp.Volume = value; } }
         public float Frequency { get { return this.snipp.Frequency; } set { this.snipp.Frequency = value; } }
-        
+        public Synthesizer Synthesizer { get => this.snipp.Synthesizer; }
     }
-
-    //public class FrequenceToneFromAudioFileSnippedViewModel : FrequenceToneSnippedViewModel
-    //{
-    //    public FrequenceToneFromAudioFileSnippedViewModel(IFrequenceToneSnipped snipp)
-    //        :base(snipp)
-    //    { }
-    //}
 
     public class SoundTable : IDisposable
     {

@@ -18,7 +18,7 @@ namespace SoundEngine.SoundSnippeds
         public int SampleRate { get { return this.sequenzer.SampleRate; } }
         public float GetNextSample()
         {
-            float f = this.sequenzer.GetNextSample(false) * this.Volume;
+            float f = this.sequenzer.GetNextSample(false, 1) * this.Volume;
             return f;
         }
 

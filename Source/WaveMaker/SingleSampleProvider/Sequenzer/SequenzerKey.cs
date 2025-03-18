@@ -9,7 +9,7 @@ namespace WaveMaker.Sequenzer
     public class SequenzerKeys
     {
         public SequenzerKey[] Notes { get; private set; }
-        public int SampleIndex { get; private set; } = 0; //Aktuelle Spielposition. Geht von 0 bis MaxIndex
+        public double SampleIndex { get; private set; } = 0; //Aktuelle Spielposition. Geht von 0 bis MaxIndex
         public int MinToneIndex { get; private set; } = 0; //Aktuell kleinster ToneIndex
         public int MaxToneIndex { get; private set; } = 0; //Aktuell größter ToneIndex
         public int MaxSamplePosition { get; private set; } = 0; //Aktuell größte Sampleposition
@@ -43,7 +43,7 @@ namespace WaveMaker.Sequenzer
             this.MinToneIndex = this.Notes.Select(x => x.NoteNumber).DefaultIfEmpty().Min();
             this.MaxToneIndex = this.Notes.Select(x => x.NoteNumber).DefaultIfEmpty().Max() + 2;
             this.MaxSamplePosition = this.Notes.Select(x => x.StartByteIndex + x.Length).DefaultIfEmpty().Max();
-            int pos = this.SampleIndex;
+            int pos = (int)this.SampleIndex;
             Reset();
             SetSampleIndex(pos);
         }
@@ -117,11 +117,11 @@ namespace WaveMaker.Sequenzer
             this.IsFinish = false;
         }
 
-        public SequenzerKey[] StartNextKeys()
+        public SequenzerKey[] StartNextKeys(float keyStrokeSpeed)
         {
             if (this.IsFinish) return new SequenzerKey[0];
-            this.SampleIndex++;
-            //this.SampleIndex += 10;
+            this.SampleIndex += keyStrokeSpeed;
+
             if (this.SampleIndex >= this.MaxSamplePosition) this.IsFinish = true;
             if (this.noMoreKeysToStart) return new SequenzerKey[0];
 
@@ -141,7 +141,7 @@ namespace WaveMaker.Sequenzer
         }
 
         //maxSampleIndex = Kommt vom MultiSequenzer. Ist der größe MaxIndex-Wert von allen Sequenzern 
-        public SequenzerKey[] SetSampleIndex(int sampleIndex)
+        public SequenzerKey[] SetSampleIndex(double sampleIndex)
         {
             if (this.Notes.Length == 0) return new SequenzerKey[0];
 
@@ -186,7 +186,7 @@ namespace WaveMaker.Sequenzer
         }
 
         //Suche den Index für den gilt: this.Notes[index - 1].StartByteIndex < sampleIndex && this.Notes[index].StartByteIndex >= sampleIndex
-        private int SearchToneIndex(int sampleIndex)
+        private int SearchToneIndex(double sampleIndex)
         {
             for (int index = 1; index < this.Notes.Length;index++)
             {

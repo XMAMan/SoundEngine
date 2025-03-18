@@ -16,7 +16,16 @@ namespace SoundEngine.SoundSnippeds
         public float GetNextSample()
         {
             this.IsRunning = this.multiSequenzer.IsRunning && this.multiSequenzer.IsFinish == false;
-            return this.multiSequenzer.GetNextSample();
+            float sample = this.multiSequenzer.GetNextSample();
+
+            bool isRunningNext = this.multiSequenzer.IsRunning && this.multiSequenzer.IsFinish == false;
+
+            if (this.EndTrigger != null && this.IsRunning && isRunningNext == false)
+            {
+                this.EndTrigger();
+            }
+
+            return sample;
         }
         //public bool IsRunning { get { return this.multiSequenzer.IsRunning; } set { this.multiSequenzer.IsRunning = value; } }
 
@@ -35,6 +44,7 @@ namespace SoundEngine.SoundSnippeds
             }
         }
         public Action<bool> IsRunningChanged { get; set; } = null;
+        public Action EndTrigger { get; set; } = null;
 
         public void Play()
         {
@@ -51,5 +61,6 @@ namespace SoundEngine.SoundSnippeds
         }
         public float Volume { get { return this.multiSequenzer.Volume; } set { this.multiSequenzer.Volume = value; } }
         public bool AutoLoop { get { return this.multiSequenzer.AutoLoop; } set { this.multiSequenzer.AutoLoop = value; } }
+        public float KeyStrokeSpeed { get { return this.multiSequenzer.KeyStrokeSpeed; } set { this.multiSequenzer.KeyStrokeSpeed = value; } }
     }
 }
