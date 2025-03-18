@@ -39,6 +39,11 @@ namespace MusicMachine.ViewModel.SynthesizerVM
                     LoadAudioFile(FileNameHelper.GetPathRelativeToCurrentDirectory(openFileDialog.FileName));
                 }
             });
+
+            this.MouseLeftDoubleClickCommand = ReactiveCommand.Create(() =>
+            {
+                this.Pitch = 1;
+            });
         }
 
         private void LoadAudioFile(string fileName)
@@ -110,6 +115,8 @@ namespace MusicMachine.ViewModel.SynthesizerVM
 
         public ReactiveCommand<Unit, Unit> LoadAudioFileCommand { get; private set; }
         //public Interaction<string, string> OpenFileDialog { get; private set; } = new Interaction<string, string>(); //Input: Filter (openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";); Output: Dateiname von der Datei die geöffnet werden soll
+
+        public ReactiveCommand<Unit, Unit> MouseLeftDoubleClickCommand { get; private set; }
 
         public void SetAllSettings(SynthesizerData data, string searchDirectoryForAudioFiles)
         {

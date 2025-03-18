@@ -56,7 +56,13 @@
 
             <StackPanel Orientation="Horizontal" >
                 <Label Content="Pitch" />
-                <Slider Width="50" Minimum="0" Maximum="2" Value="{Binding Pitch}" Margin="0 3 0 0"/>
+                <Slider Width="50" Minimum="0" Maximum="2" Value="{Binding Pitch}" Margin="0 3 0 0">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding MouseLeftDoubleClickCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Slider>
             </StackPanel>          
         </StackPanel>
         
