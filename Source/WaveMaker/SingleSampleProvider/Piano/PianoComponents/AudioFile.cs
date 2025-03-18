@@ -1,5 +1,4 @@
-﻿using System;
-using WaveMaker.BlockSampleEffects;
+﻿using WaveMaker.BlockSampleEffects;
 
 namespace WaveMaker.KeyboardComponents
 {

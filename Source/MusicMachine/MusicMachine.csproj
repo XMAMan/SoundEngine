@@ -146,107 +146,108 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\FileNameHelper.cs" />
-    <Compile Include="Model\GraphicHelper.cs" />
-    <Compile Include="Model\InteractionActions.cs" />
-    <Compile Include="Model\MyReactiveExtensions.cs" />
+    <Compile Include="Controls\SynthesizerElements\AudioFileControl\Class1.cs" />
+    <Compile Include="Helper\FileNameHelper.cs" />
+    <Compile Include="Helper\GraphicHelper.cs" />
+    <Compile Include="Helper\InteractionActions.cs" />
+    <Compile Include="Helper\MyReactiveExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NewSequenzerDialog\NewSequenzerDialogViewModel.cs" />
-    <Compile Include="ViewModel\SequenzerVM\MultiSequenzerViewModel.cs" />
-    <Compile Include="ViewModel\SequenzerVM\PianoViewModel.cs" />
-    <Compile Include="ViewModel\SynthesizerVM\AdsrEnvelopeViewModel.cs" />
-    <Compile Include="ViewModel\SynthesizerVM\AudioFileViewModel.cs" />
-    <Compile Include="ViewModel\SynthesizerVM\FilterViewModel.cs" />
-    <Compile Include="ViewModel\SynthesizerVM\OscillatorViewModel.cs" />
-    <Compile Include="ViewModel\SequenzerVM\SequenzerNoteViewModel.cs" />
-    <Compile Include="ViewModel\SequenzerVM\SequenzerViewModel.cs" />
-    <Compile Include="ViewModel\SynthesizerVM\SpezialEffectsViewModel.cs" />
-    <Compile Include="ViewModel\SynthesizerVM\SynthesizerViewModel.cs" />
-    <Compile Include="Views\NewSequenzerDialog\NewSequenzerDialogView.xaml.cs">
+    <Compile Include="Controls\MainControl\MainViewModel.cs" />
+    <Compile Include="Controls\NewSequenzerDialog\NewSequenzerDialogViewModel.cs" />
+    <Compile Include="Controls\SequenzerElements\MultiSequenzer\MultiSequenzerViewModel.cs" />
+    <Compile Include="Controls\SequenzerElements\Piano\PianoViewModel.cs" />
+    <Compile Include="Controls\SynthesizerElements\AdsrEnvelope\AdsrEnvelopeViewModel.cs" />
+    <Compile Include="Controls\SynthesizerElements\AudioFileControl\AudioFileViewModel.cs" />
+    <Compile Include="Controls\SynthesizerElements\Filter\FilterViewModel.cs" />
+    <Compile Include="Controls\SynthesizerElements\Oscillator\OscillatorViewModel.cs" />
+    <Compile Include="Controls\SequenzerElements\Piano\SequenzerNoteViewModel.cs" />
+    <Compile Include="Controls\SequenzerElements\Sequenzer\SequenzerViewModel.cs" />
+    <Compile Include="Controls\SynthesizerElements\SpezialEffects\SpezialEffectsViewModel.cs" />
+    <Compile Include="Controls\SynthesizerElements\Main\SynthesizerViewModel.cs" />
+    <Compile Include="Controls\NewSequenzerDialog\NewSequenzerDialogView.xaml.cs">
       <DependentUpon>NewSequenzerDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SequenzerVM\SequenzerCanvasElements\BackgroundRectangleCreator.cs" />
-    <Compile Include="Views\SequenzerVM\SequenzerCanvasElements\MouseToneRectangle.cs" />
-    <Compile Include="Views\SequenzerVM\SequenzerCanvasElements\NoteSelector.cs" />
-    <Compile Include="Views\SequenzerVM\SequenzerCanvasElements\PlayLine.cs" />
-    <Compile Include="Views\SequenzerVM\SequenzerCanvasElements\RectangleNotes.cs" />
-    <Compile Include="Views\SynthesizerVM\AdsrEnvelopeView.xaml.cs">
+    <Compile Include="Controls\SequenzerElements\Sequenzer\View\BackgroundRectangleCreator.cs" />
+    <Compile Include="Controls\SequenzerElements\Sequenzer\View\MouseToneRectangle.cs" />
+    <Compile Include="Controls\SequenzerElements\Sequenzer\View\NoteSelector.cs" />
+    <Compile Include="Controls\SequenzerElements\Sequenzer\View\PlayLine.cs" />
+    <Compile Include="Controls\SequenzerElements\Sequenzer\View\RectangleNotes.cs" />
+    <Compile Include="Controls\SynthesizerElements\AdsrEnvelope\AdsrEnvelopeView.xaml.cs">
       <DependentUpon>AdsrEnvelopeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SynthesizerVM\AudioFileCanvas.cs" />
-    <Compile Include="Views\SynthesizerVM\AudioFileView.xaml.cs">
+    <Compile Include="Controls\SynthesizerElements\AudioFileControl\AudioFileCanvas.cs" />
+    <Compile Include="Controls\SynthesizerElements\AudioFileControl\AudioFileView.xaml.cs">
       <DependentUpon>AudioFileView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SynthesizerVM\FilterView.xaml.cs">
+    <Compile Include="Controls\SynthesizerElements\Filter\FilterView.xaml.cs">
       <DependentUpon>FilterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainView.xaml.cs">
+    <Compile Include="Controls\MainControl\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SequenzerVM\MultiSequenzerView.xaml.cs">
+    <Compile Include="Controls\SequenzerElements\MultiSequenzer\MultiSequenzerView.xaml.cs">
       <DependentUpon>MultiSequenzerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SynthesizerVM\OscillatorView.xaml.cs">
+    <Compile Include="Controls\SynthesizerElements\Oscillator\OscillatorView.xaml.cs">
       <DependentUpon>OscillatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SequenzerVM\PianoCanvas.cs" />
-    <Compile Include="Views\SequenzerVM\PianoViewHelper.cs" />
-    <Compile Include="Views\SequenzerVM\SequenzerCanvasElements\SequenzerCanvas.cs" />
-    <Compile Include="Views\SequenzerVM\SequenzerView.xaml.cs">
+    <Compile Include="Controls\SequenzerElements\Piano\PianoCanvas.cs" />
+    <Compile Include="Controls\SequenzerElements\Piano\PianoViewHelper.cs" />
+    <Compile Include="Controls\SequenzerElements\Sequenzer\View\SequenzerCanvas.cs" />
+    <Compile Include="Controls\SequenzerElements\Sequenzer\View\SequenzerView.xaml.cs">
       <DependentUpon>SequenzerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SynthesizerVM\SpezialEffectsView.xaml.cs">
+    <Compile Include="Controls\SynthesizerElements\SpezialEffects\SpezialEffectsView.xaml.cs">
       <DependentUpon>SpezialEffectsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SynthesizerVM\SynthesizerView.xaml.cs">
+    <Compile Include="Controls\SynthesizerElements\Main\SynthesizerView.xaml.cs">
       <DependentUpon>SynthesizerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\NewSequenzerDialog\NewSequenzerDialogView.xaml">
+    <Page Include="Controls\NewSequenzerDialog\NewSequenzerDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SynthesizerVM\AdsrEnvelopeView.xaml">
+    <Page Include="Controls\SynthesizerElements\AdsrEnvelope\AdsrEnvelopeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SynthesizerVM\AudioFileView.xaml">
+    <Page Include="Controls\SynthesizerElements\AudioFileControl\AudioFileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SynthesizerVM\FilterView.xaml">
+    <Page Include="Controls\SynthesizerElements\Filter\FilterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainView.xaml">
+    <Page Include="Controls\MainControl\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SequenzerVM\MultiSequenzerView.xaml">
+    <Page Include="Controls\SequenzerElements\MultiSequenzer\MultiSequenzerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SynthesizerVM\OscillatorView.xaml">
+    <Page Include="Controls\SynthesizerElements\Oscillator\OscillatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SequenzerVM\SequenzerView.xaml">
+    <Page Include="Controls\SequenzerElements\Sequenzer\View\SequenzerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SynthesizerVM\SpezialEffectsView.xaml">
+    <Page Include="Controls\SynthesizerElements\SpezialEffects\SpezialEffectsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SynthesizerVM\SynthesizerView.xaml">
+    <Page Include="Controls\SynthesizerElements\Main\SynthesizerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,6 +308,7 @@
   <ItemGroup>
     <Resource Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

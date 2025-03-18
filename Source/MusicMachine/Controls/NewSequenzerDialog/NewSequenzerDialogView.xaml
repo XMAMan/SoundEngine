@@ -1,0 +1,34 @@
+﻿<Window x:Class="MusicMachine.Controls.NewSequenzerDialog.NewSequenzerDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:MusicMachine.Controls.NewSequenzerDialog"
+        mc:Ignorable="d"
+        Title="NewSequenzer" Height="150" Width="170">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Min Octave" Grid.Row="0" Grid.Column="0"/>
+        <xctk:IntegerUpDown Minimum="0" Maximum="20" Grid.Column="1" Grid.Row="0" Value="{Binding MinOctave}" />
+
+        <Label Content="Max Octave" Grid.Row="1" Grid.Column="0"/>
+        <xctk:IntegerUpDown Minimum="0" Maximum="20" Grid.Column="1" Grid.Row="1" Value="{Binding MaxOctave}" />
+
+        <Label Content="Length in Seconds" Grid.Row="2" Grid.Column="0"/>
+        <xctk:IntegerUpDown Minimum="1" Maximum="1000" Grid.Column="1" Grid.Row="2" Value="{Binding LengthInSeconds}" />
+
+        <!-- IsDefault="true" -> Binde die Entertaste an das Click von diesen Button-->
+        <Button x:Name="OkButton" Content="OK" Grid.Row="3" Grid.Column="0" IsDefault="true"/>
+    </Grid>
+</Window>
