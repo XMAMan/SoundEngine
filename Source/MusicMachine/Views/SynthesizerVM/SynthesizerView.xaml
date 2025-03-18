@@ -12,13 +12,27 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <local:OscillatorView DataContext="{Binding OsziViewModel}"/>
-                <local:FilterView DataContext="{Binding FilterViewModel}"/>
-                <local:AdsrEnvelopeView DataContext="{Binding AdsrEnvelope}"/>
-                <local:SpezialEffectsView DataContext="{Binding SpezialEffectsViewModel}"/>
+                <Label Content="AudioSource:" />
+                <ComboBox HorizontalAlignment="Left" Margin="2" ItemsSource="{Binding SignalSources}" SelectedItem="{Binding SelectedSignalSource}"/>
             </StackPanel>
-            <local:AudioFileView DataContext="{Binding AudioFileViewModel}" Height="30" HorizontalAlignment="Left"/>
+                        
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <GroupBox Header="Oscillator" Visibility="{Binding OscillatorVisibility}">
+                        <local:OscillatorView DataContext="{Binding OsziViewModel}"/>
+                    </GroupBox>
+                    <GroupBox Header="AudioFile" Visibility="{Binding AudioFileVisibility}">
+                        <local:AudioFileView DataContext="{Binding AudioFileViewModel}" Height="30" HorizontalAlignment="Left"/>
+                    </GroupBox>
+                </StackPanel>
+                <GroupBox Header="Effects" Visibility="Visible">
+                    <StackPanel Orientation="Horizontal">
+                        <local:FilterView DataContext="{Binding FilterViewModel}"/>
+                        <local:AdsrEnvelopeView DataContext="{Binding AdsrEnvelope}"/>
+                        <local:SpezialEffectsView DataContext="{Binding SpezialEffectsViewModel}"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
         </StackPanel>
-        
     </Grid>
 </rxui:ReactiveUserControl>

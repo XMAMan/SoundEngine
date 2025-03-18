@@ -68,14 +68,19 @@ namespace WaveMaker.KeyboardComponents
 
         public Synthesizer(int sampleRate)
         {
+            //Source 1: Oscilator
             this.Oscilator = new OscilatorWithLfo(sampleRate);
             this.MultiOscillator = new MultiOscillator(this.Oscilator);
             this.OscWithSubOscMixer = new Mixer(this.MultiOscillator, new SubOscilator(sampleRate) { OsziType = SignalType.SawTooth }) { VolumeB = 0 };
+            
+            //Source 2: AudioFile
             this.AudioFile = new AudioFile(sampleRate);
+
+            //Switch between Oscilator and AudioFile
             this.OsziAudioFileSwitch = new Switch(this.OscWithSubOscMixer, this.AudioFile);
-            //this.LowPass = new Filter(this.MultiOscillator, FilterType.LowPass, sampleRate); //Nehme Daten vom Oszi
-            //this.LowPass = new Filter(this.AudioFile, FilterType.LowPass, sampleRate);         //Nehme Daten aus AudioFile
-            this.LowPass = new Filter(this.OsziAudioFileSwitch, FilterType.LowPass, sampleRate);//Nehme Daten aus Weiche
+
+            //Effects
+            this.LowPass = new Filter(this.OsziAudioFileSwitch, FilterType.LowPass, sampleRate);
             this.AdsrEnvelope = new AdsrEnvelope(this.LowPass, sampleRate);
             this.DelayEffect = new DelayEffect(this.AdsrEnvelope, sampleRate);
             this.HallEffect = new HallEffect(this.DelayEffect, sampleRate);

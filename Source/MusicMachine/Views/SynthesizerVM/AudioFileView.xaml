@@ -57,12 +57,7 @@
             <StackPanel Orientation="Horizontal" >
                 <Label Content="Pitch" />
                 <Slider Width="50" Minimum="0" Maximum="2" Value="{Binding Pitch}" Margin="0 3 0 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Enabled"/>
-                <CheckBox Margin="5" IsChecked="{Binding UseDataFromAudioFile}"/>
-            </StackPanel>
-            
+            </StackPanel>          
         </StackPanel>
         
     </Border>

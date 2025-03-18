@@ -102,12 +102,6 @@ namespace MusicMachine.ViewModel.SynthesizerVM
             set { this.model.RightAudioFilePosition = value; this.RaisePropertyChanged(nameof(RightPositionInMilliseconds)); }
         }
 
-        public bool UseDataFromAudioFile
-        {
-            get { return this.model.UseDataFromAudioFileInsteadFromOszi; }
-            set { this.model.UseDataFromAudioFileInsteadFromOszi = value; this.RaisePropertyChanged(nameof(UseDataFromAudioFile)); }
-        }
-       
         public float Pitch
         {
             get { return this.model.AudioFilePitch; }
@@ -128,7 +122,6 @@ namespace MusicMachine.ViewModel.SynthesizerVM
             this.FileLengthInMilliseconds = this.model.AudioFile.GetFileLengthInMilliseconds();
             this.LeftPositionInMilliseconds = data.LeftAudioFilePosition;
             this.RightPositionInMilliseconds = data.RightAudioFilePosition;
-            this.UseDataFromAudioFile = data.UseDataFromAudioFileInsteadFromOszi;
             this.Pitch = data.AudioFilePitch;
             UpdateAudioImage();
         }
