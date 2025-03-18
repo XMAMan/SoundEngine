@@ -68,5 +68,8 @@ namespace SoundEngine.SoundSnippeds
         }
         public float Volume { get; set; } = 1;
         public bool AutoLoop { get; set; } = false;
+
+        public float Pitch { get { return this.audioFile.Pitch; } set { this.audioFile.Pitch = value; } }
+        public float Speed { get { return this.audioFile.Speed; } set { this.audioFile.Speed = value; } }
     }
 }

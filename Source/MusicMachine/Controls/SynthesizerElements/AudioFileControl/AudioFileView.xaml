@@ -12,7 +12,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border BorderBrush="CornflowerBlue" BorderThickness="1">
         <StackPanel Orientation="Horizontal">
-            <local:AudioFileCanvas Background="Yellow" 
+            <local:AudioFileCanvas Background="Yellow"
                                Width="{Binding ViewboxWidth}" Height="{Binding ViewboxHeight}"
                                LeftPositionInMilliseconds="{Binding LeftPositionInMilliseconds}"
                                RightPositionInMilliseconds="{Binding RightPositionInMilliseconds}"
@@ -56,10 +56,19 @@
 
             <StackPanel Orientation="Horizontal" >
                 <Label Content="Pitch" />
-                <Slider Width="50" Minimum="0" Maximum="2" Value="{Binding Pitch}" Margin="0 3 0 0">
+                <Slider Width="50" Minimum="0" Maximum="2" Value="{Binding Pitch}" Margin="0 3 0 0" ToolTip="Doubleclick for reset the pitch">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
-                            <i:InvokeCommandAction Command="{Binding MouseLeftDoubleClickCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding MouseDoubleClickOnPitchCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Slider>
+
+                <Label Content="Speed" />
+                <Slider Width="50" Minimum="0.25" Maximum="3" Value="{Binding Speed}" Margin="0 3 0 0" ToolTip="Doubleclick for reset the speed">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding MouseDoubleClickOnSpeedCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Slider>

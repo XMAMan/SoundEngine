@@ -7,6 +7,7 @@ using System.Windows.Shapes;
 
 namespace MusicMachine.Controls.SynthesizerElements.AudioFileControl
 {
+    //Hilft beim Einladen einer Audiodatei und definiert die Start- und Endposition
     public class AudioFileCanvas : Canvas
     {
         private Line lineLeft;

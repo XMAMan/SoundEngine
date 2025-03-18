@@ -23,11 +23,21 @@ namespace WaveMaker.KeyboardComponents
             set { this.pitch = value; UpdateModifiedSamples(); }
         }
 
+        private float speed = 1;
+        public float Speed
+        {
+            get { return this.speed; }
+            set { this.speed = value; UpdateModifiedSamples(); }
+        }
+
         private void UpdateModifiedSamples()
         {
             if (this.SampleData == null) return;
-            PitchShifter shifter = new PitchShifter(this.SampleRate) { Pitch = this.Pitch };
+            PitchShifter shifter = new PitchShifter(this.SampleRate) { Pitch = this.Pitch };            
             this.modifiedSamples = shifter.GetModifiSamples(this.SampleData);
+
+            SpeedChanger speedChanger = new SpeedChanger() { Speed = this.Speed };
+            this.modifiedSamples = speedChanger.GetModifiSamples(this.modifiedSamples);
         }
 
         //Hiermit kann der Anfang des Audiofiles weggeschnitten werden

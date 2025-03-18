@@ -146,7 +146,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\SynthesizerElements\AudioFileControl\Class1.cs" />
     <Compile Include="Helper\FileNameHelper.cs" />
     <Compile Include="Helper\GraphicHelper.cs" />
     <Compile Include="Helper\InteractionActions.cs" />

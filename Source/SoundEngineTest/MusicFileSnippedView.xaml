@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SoundEngineTest.FrequenceToneAudioFileSnippedView"
+﻿<UserControl x:Class="SoundEngineTest.MusicFileSnippedView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,6 +14,10 @@
             <Button Content="Stop" Command="{Binding Stop}" Margin="5"/>
             <Label Content="Volume:" Margin="10 0 0 0"/>
             <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
+            <Button Content="Reset" Command="{Binding Reset}" Margin="5"/>
+
+            <Label Content="AutoLoop"/>
+            <CheckBox IsChecked="{Binding AutoLoop}" Margin="0 5 5 0"/>
         </StackPanel>
     </Grid>
 </UserControl>

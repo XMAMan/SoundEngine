@@ -47,7 +47,7 @@ namespace SoundEngine
         }
 
         //.music-Dateien (Beispiel: Intro-Musik die aus mehreren Instrumenten besteht) -> Die Wiedergabe läßt alle Einzelsequenzer gleichzeitig abspielen
-        public IAudioFileSnipped AddMusicFile(string musicFile)
+        public IMusicFileSnipped AddMusicFile(string musicFile)
         {
             return this.sampleProviderCollection.AddMusicFile(musicFile);
         }

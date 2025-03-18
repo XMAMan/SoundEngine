@@ -30,6 +30,7 @@ namespace WaveMaker.KeyboardComponents
         public bool UseDataFromAudioFileInsteadFromOszi { get; set; } = false;
         public float AudioFileGain { get; set; } = 100;
         public float AudioFilePitch { get; set; } = 1;
+        public float AudioFileSpeed { get; set; } = 1;
         public bool IsLowPassEnabled { get; set; } = false;
         public float LowPassCutOffFrequence { get; set; } = 1;
         public float LowPassResonance { get; set; } = 0.2f;
@@ -131,6 +132,7 @@ namespace WaveMaker.KeyboardComponents
             this.RightAudioFilePosition = data.RightAudioFilePosition;
             this.UseDataFromAudioFileInsteadFromOszi = data.UseDataFromAudioFileInsteadFromOszi;            
             this.AudioFilePitch = data.AudioFilePitch;
+            this.AudioFileSpeed = data.AudioFileSpeed;
             this.IsLowPassEnabled = data.IsLowPassEnabled;
             this.LowPassCutOffFrequence = data.LowPassCutOffFrequence;
             this.LowPassResonance = data.LowPassResonance;
@@ -177,6 +179,7 @@ namespace WaveMaker.KeyboardComponents
                 RightAudioFilePosition = this.RightAudioFilePosition,
                 UseDataFromAudioFileInsteadFromOszi = this.UseDataFromAudioFileInsteadFromOszi,               
                 AudioFilePitch = this.AudioFilePitch,
+                AudioFileSpeed = this.AudioFileSpeed,
                 IsLowPassEnabled = this.IsLowPassEnabled,
                 LowPassCutOffFrequence = this.LowPassCutOffFrequence,
                 LowPassResonance = this.LowPassResonance,
@@ -238,6 +241,7 @@ namespace WaveMaker.KeyboardComponents
         public float RightAudioFilePosition { get { return this.AudioFile.RightPositionInMilliseconds; } set { this.AudioFile.RightPositionInMilliseconds = value; } }
         public bool UseDataFromAudioFileInsteadFromOszi { get { return this.OsziAudioFileSwitch.SwitchValue == Switch.SwitchValues.B; } set { this.OsziAudioFileSwitch.SwitchValue = value ? Switch.SwitchValues.B : Switch.SwitchValues.A; } }
         public float AudioFilePitch { get { return this.AudioFile.Pitch; } set { this.AudioFile.Pitch = value; } }
+        public float AudioFileSpeed { get { return this.AudioFile.Speed; } set { this.AudioFile.Speed = value; } }
 
         public bool IsLowPassEnabled { get { return this.LowPass.IsEnabled; } set { this.LowPass.IsEnabled = value; } }
         public float LowPassCutOffFrequence { get { return this.LowPass.CutOffFrequence; } set { this.LowPass.CutOffFrequence = value; } }

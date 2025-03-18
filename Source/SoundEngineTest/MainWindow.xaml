@@ -15,7 +15,7 @@
             
             <StackPanel Orientation="Horizontal">
                 <Label Content="lied3.music:"/>
-                <local:AudioFileSnippedView DataContext="{Binding BackGroundMusic}"/>
+                <local:MusicFileSnippedView DataContext="{Binding BackGroundMusic}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
@@ -54,8 +54,8 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <Label Content="DasIstEinTest.wma:"/>
-                <local:AudioFileSnippedView DataContext="{Binding DasIstEinTest}"/>
+                <Label Content="Soundsystem.mp3:"/>
+                <local:AudioFileSnippedView DataContext="{Binding Soundsystem}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">

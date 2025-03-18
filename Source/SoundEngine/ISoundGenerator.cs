@@ -9,7 +9,7 @@ namespace SoundEngine
 
         IFrequenceToneSnipped AddFrequencyTone();
         IFrequenceToneSnipped AddFrequencyTone(string syntiFile);
-        IAudioFileSnipped AddMusicFile(string musicFile);
+        IMusicFileSnipped AddMusicFile(string musicFile);
         IAudioFileSnipped AddSoundFile(string audioFile);
         IFrequenceToneSnipped[] AddSynthSoundCollection(string musicFile);
         void Dispose();

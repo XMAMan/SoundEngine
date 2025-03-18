@@ -40,10 +40,15 @@ namespace MusicMachine.Controls.SynthesizerElements.AudioFileControl
                 }
             });
 
-            this.MouseLeftDoubleClickCommand = ReactiveCommand.Create(() =>
+            this.MouseDoubleClickOnPitchCommand = ReactiveCommand.Create(() =>
             {
                 this.Pitch = 1;
             });
+
+            this.MouseDoubleClickOnSpeedCommand = ReactiveCommand.Create(() =>
+            {
+                this.Speed = 1;
+            });            
         }
 
         private void LoadAudioFile(string fileName)
@@ -113,10 +118,17 @@ namespace MusicMachine.Controls.SynthesizerElements.AudioFileControl
             set { this.model.AudioFilePitch = value; this.RaisePropertyChanged(nameof(Pitch)); }
         }
 
+        public float Speed
+        {
+            get { return this.model.AudioFileSpeed; }
+            set { this.model.AudioFileSpeed = value; this.RaisePropertyChanged(nameof(Speed)); }
+        }
+
         public ReactiveCommand<Unit, Unit> LoadAudioFileCommand { get; private set; }
         //public Interaction<string, string> OpenFileDialog { get; private set; } = new Interaction<string, string>(); //Input: Filter (openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";); Output: Dateiname von der Datei die geöffnet werden soll
 
-        public ReactiveCommand<Unit, Unit> MouseLeftDoubleClickCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> MouseDoubleClickOnPitchCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> MouseDoubleClickOnSpeedCommand { get; private set; }
 
         public void SetAllSettings(SynthesizerData data, string searchDirectoryForAudioFiles)
         {

@@ -11,7 +11,7 @@ namespace SoundEngineTest
     {
         private SoundTable table = new SoundTable();
         public float Volume { get { return this.table.Volume; } set { this.table.Volume = value; } }
-        public AudioFileSnippedViewModel BackGroundMusic { get; private set; }
+        public MusicFileSnippedViewModel BackGroundMusic { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts0 { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts1 { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts2 { get; private set; }
@@ -19,8 +19,8 @@ namespace SoundEngineTest
         public FrequenceToneSnippedViewModel SoundEffekts4 { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts5 { get; private set; }
         public FrequenceToneSnippedViewModel TieferBass { get; private set; }
-        public AudioFileSnippedViewModel DasIstEinTest { get; private set; }
-        public FrequenceToneFromAudioFileSnippedViewModel Hallo { get; private set; }
+        public AudioFileSnippedViewModel Soundsystem { get; private set; }
+        public FrequenceToneSnippedViewModel Hallo { get; private set; }
         public ViewModel()
         {
             this.SoundEffekts0 = new FrequenceToneSnippedViewModel(table.SoundEffekts0);
@@ -31,9 +31,9 @@ namespace SoundEngineTest
             this.SoundEffekts5 = new FrequenceToneSnippedViewModel(table.SoundEffekts5);
 
             this.TieferBass = new FrequenceToneSnippedViewModel(table.TieferBass);
-            this.BackGroundMusic = new AudioFileSnippedViewModel(table.BackGroundMusic);
-            this.DasIstEinTest = new AudioFileSnippedViewModel(table.DasIstEinTest);
-            this.Hallo = new FrequenceToneFromAudioFileSnippedViewModel(table.Hallo);
+            this.BackGroundMusic = new MusicFileSnippedViewModel(table.BackGroundMusic);
+            this.Soundsystem = new AudioFileSnippedViewModel(table.Soundsystem);
+            this.Hallo = new FrequenceToneSnippedViewModel(table.Hallo);
         }
         public void Dispose()
         {
@@ -41,13 +41,13 @@ namespace SoundEngineTest
         }
     }
 
-    public class AudioFileSnippedViewModel : ReactiveObject
+    public class MusicFileSnippedViewModel : ReactiveObject
     {
-        private IAudioFileSnipped snipp;
-        public AudioFileSnippedViewModel(IAudioFileSnipped snipp)
+        private IMusicFileSnipped snipp;
+        public MusicFileSnippedViewModel(IMusicFileSnipped snipp)
         {
             this.snipp = snipp;
-            this.snipp.IsRunningChanged = (isRunning)=>{ this.IsRunning = isRunning;  };
+            this.snipp.IsRunningChanged = (isRunning) => { this.IsRunning = isRunning; };
 
             this.Play = ReactiveCommand.Create(() =>
             {
@@ -68,6 +68,22 @@ namespace SoundEngineTest
         public float Volume { get { return this.snipp.Volume; } set { this.snipp.Volume = value; } }
         public ReactiveCommand<Unit, Unit> Reset { get; private set; }
         public bool AutoLoop { get { return this.snipp.AutoLoop; } set { this.snipp.AutoLoop = value; } }
+
+        
+    }
+
+    public class AudioFileSnippedViewModel : MusicFileSnippedViewModel
+    {
+        private IAudioFileSnipped snipp;
+        
+        public AudioFileSnippedViewModel(IAudioFileSnipped snipp)
+            :base(snipp)
+        {
+            this.snipp = snipp;
+        }
+
+        public float Pitch { get { return this.snipp.Pitch; } set { this.snipp.Pitch = value; } }
+        public float Speed { get { return this.snipp.Speed; } set { this.snipp.Speed = value; } }
     }
 
     public class FrequenceToneSnippedViewModel : ReactiveObject
@@ -96,14 +112,12 @@ namespace SoundEngineTest
         
     }
 
-    public class FrequenceToneFromAudioFileSnippedViewModel : FrequenceToneSnippedViewModel
-    {
-        public FrequenceToneFromAudioFileSnippedViewModel(IFrequenceToneSnipped snipp)
-            :base(snipp)
-        { }
-
-        public float Pitch { get { return this.snipp.Pitch; } set { this.snipp.Pitch = value; } }
-    }
+    //public class FrequenceToneFromAudioFileSnippedViewModel : FrequenceToneSnippedViewModel
+    //{
+    //    public FrequenceToneFromAudioFileSnippedViewModel(IFrequenceToneSnipped snipp)
+    //        :base(snipp)
+    //    { }
+    //}
 
     public class SoundTable : IDisposable
     {
@@ -112,7 +126,7 @@ namespace SoundEngineTest
         private SoundGenerator soundGenerator;
 
         public float Volume { get { return this.soundGenerator.Volume; } set { this.soundGenerator.Volume = value; } }
-        public IAudioFileSnipped BackGroundMusic { get; private set; }
+        public IMusicFileSnipped BackGroundMusic { get; private set; }
         public IFrequenceToneSnipped SoundEffekts0 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts1 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts2 { get; private set; }
@@ -120,7 +134,7 @@ namespace SoundEngineTest
         public IFrequenceToneSnipped SoundEffekts4 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts5 { get; private set; }
         public IFrequenceToneSnipped TieferBass { get; private set; }
-        public IAudioFileSnipped DasIstEinTest { get; private set; }
+        public IAudioFileSnipped Soundsystem { get; private set; }
         public IFrequenceToneSnipped Hallo { get; private set; }
         public SoundTable()
         {
@@ -137,7 +151,7 @@ namespace SoundEngineTest
             this.TieferBass = this.soundGenerator.AddFrequencyTone(WorkingDirectory + "TieferBass.synt");
 
             this.BackGroundMusic = this.soundGenerator.AddMusicFile(WorkingDirectory + "lied3.music");
-            this.DasIstEinTest = this.soundGenerator.AddSoundFile(WorkingDirectory + "Soundsystem.mp3");
+            this.Soundsystem = this.soundGenerator.AddSoundFile(WorkingDirectory + "Soundsystem.mp3");
             this.Hallo = this.soundGenerator.AddFrequencyTone(WorkingDirectory + "Hallo.synt");
         }
 

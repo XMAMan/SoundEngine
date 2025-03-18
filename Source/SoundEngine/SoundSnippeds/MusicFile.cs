@@ -5,7 +5,7 @@ using WaveMaker.Sequenzer;
 namespace SoundEngine.SoundSnippeds
 {
     //.music-Dateien
-    class MusicFile : ISingleSampleProvider, ISoundSnipped, IAudioFileSnipped
+    class MusicFile : ISingleSampleProvider, ISoundSnipped, IMusicFileSnipped
     {
         private MultiSequenzer multiSequenzer;
         internal MusicFile(MultiSequenzer multiSequenzer)
