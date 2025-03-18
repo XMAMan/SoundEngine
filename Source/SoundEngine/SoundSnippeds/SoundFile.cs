@@ -9,8 +9,8 @@ namespace SoundEngine.SoundSnippeds
     {
         private AudioFile audioFile;
         private Synthesizer synthesizer;
-        //private int sampleIndex = 0;
         private KeySampleData keySampleData = new KeySampleData(float.NaN);
+
         internal SoundFile(int sampmleRate, float[] samples)
         {
             this.SampleRate = sampmleRate;
@@ -40,9 +40,7 @@ namespace SoundEngine.SoundSnippeds
         {
             if (this.IsRunning == false) return 0;
 
-            //this.sampleIndex++;
             this.keySampleData.SampleIndex++;
-            //if (this.sampleIndex >= this.audioFile.SampleData.Length)
             if (this.keySampleData.SampleIndex >= this.audioFile.SampleData.Length)
             {
                 if (this.AutoLoop)
@@ -57,7 +55,6 @@ namespace SoundEngine.SoundSnippeds
                 if (this.EndTrigger != null) this.EndTrigger();
             }
 
-            //return this.audioFile.GetSample(this.sampleIndex) * this.Volume;
             return this.synthesizer.GetSample(this.keySampleData) * this.Volume;
         }
         private bool isRunning = false;
@@ -88,7 +85,6 @@ namespace SoundEngine.SoundSnippeds
         }
         public void Reset() //Springe zum Anfang zurück
         {
-            //this.sampleIndex = 0;
             this.keySampleData.SampleIndex = 0;
         }
         public float Volume { get; set; } = 1;
