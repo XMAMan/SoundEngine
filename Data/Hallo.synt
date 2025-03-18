@@ -21,8 +21,8 @@
   <AudioFileGain>7</AudioFileGain>
   <AudioFilePitch>1</AudioFilePitch>
   <IsLowPassEnabled>false</IsLowPassEnabled>
-  <CutOffFrequence>1</CutOffFrequence>
-  <Resonance>0.200000048</Resonance>
+  <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+  <LowPassResonance>0.200000048</LowPassResonance>
   <AttackTimeInMs>50</AttackTimeInMs>
   <DecayTimeInMs>70</DecayTimeInMs>
   <SustainVolume>0.9</SustainVolume>

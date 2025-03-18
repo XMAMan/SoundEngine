@@ -27,8 +27,8 @@
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>1</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.6272727</SustainVolume>
@@ -55,8 +55,8 @@
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>0.4827586</CutOffFrequence>
-        <Resonance>0.303448319</Resonance>
+        <LowPassCutOffFrequence>0.4827586</LowPassCutOffFrequence>
+        <LowPassResonance>0.303448319</LowPassResonance>
         <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
@@ -83,8 +83,8 @@
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>1</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>

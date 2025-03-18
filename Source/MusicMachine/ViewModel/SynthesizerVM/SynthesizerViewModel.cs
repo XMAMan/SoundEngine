@@ -69,6 +69,7 @@ namespace MusicMachine.ViewModel.SynthesizerVM
         }
         public void SetAllSettings(SynthesizerData data, string searchDirectoryForAudioFiles)
         {
+            this.SelectedSignalSource = data.UseDataFromAudioFileInsteadFromOszi ? SignalSource.AudioFile : SignalSource.Oscillator;
             this.OsziViewModel.SetAllSettings(data);
             this.AudioFileViewModel.SetAllSettings(data, searchDirectoryForAudioFiles);
             this.FilterViewModel.SetAllSettings(data);

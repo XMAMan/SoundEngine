@@ -39,8 +39,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>1</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
         <DecayTimeInMs>689.1818</DecayTimeInMs>
         <SustainVolume>0.181818187</SustainVolume>
@@ -85,8 +85,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>0.517241359</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>0.517241359</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
         <DecayTimeInMs>36.363636</DecayTimeInMs>
         <SustainVolume>0.24545452</SustainVolume>
@@ -131,8 +131,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>1</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
@@ -177,8 +177,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>1</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
@@ -223,8 +223,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>1</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
@@ -269,8 +269,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>0.413793117</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>0.413793117</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
@@ -315,8 +315,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>true</IsLowPassEnabled>
-        <CutOffFrequence>0.310344845</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>0.310344845</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
         <DecayTimeInMs>124.545456</DecayTimeInMs>
         <SustainVolume>0.0181818176</SustainVolume>
@@ -361,8 +361,8 @@
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>1</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
         <DecayTimeInMs>72.72727</DecayTimeInMs>
         <SustainVolume>0</SustainVolume>

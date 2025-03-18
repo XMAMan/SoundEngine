@@ -31,8 +31,11 @@ namespace WaveMaker.KeyboardComponents
         public float AudioFileGain { get; set; } = 100;
         public float AudioFilePitch { get; set; } = 1;
         public bool IsLowPassEnabled { get; set; } = false;
-        public float CutOffFrequence { get; set; } = 1;
-        public float Resonance { get; set; } = 0.2f;
+        public float LowPassCutOffFrequence { get; set; } = 1;
+        public float LowPassResonance { get; set; } = 0.2f;
+        public bool IsHighPassEnabled { get; set; } = false;
+        public float HighPassCutOffFrequence { get; set; } = 0;
+        public float HighPassResonance { get; set; } = 0.2f;
         public float AttackTimeInMs { get; set; } = 50;
         public float DecayTimeInMs { get; set; } = 70;
         public float SustainVolume { get; set; } = 0.9f;
@@ -58,6 +61,7 @@ namespace WaveMaker.KeyboardComponents
         public Switch OsziAudioFileSwitch { get; private set; }
        
         public Filter LowPass { get; private set; }
+        public Filter HighPass { get; private set; }
         public AdsrEnvelope AdsrEnvelope { get; private set; }
         public DelayEffect DelayEffect { get; private set; }        
         public HallEffect HallEffect { get; private set; }
@@ -80,8 +84,9 @@ namespace WaveMaker.KeyboardComponents
             this.OsziAudioFileSwitch = new Switch(this.OscWithSubOscMixer, this.AudioFile);
 
             //Effects
-            this.LowPass = new Filter(this.OsziAudioFileSwitch, FilterType.LowPass, sampleRate);
-            this.AdsrEnvelope = new AdsrEnvelope(this.LowPass, sampleRate);
+            this.LowPass = new Filter(this.OsziAudioFileSwitch, FilterType.LowPass, sampleRate) { CutOffFrequence = 0.5f };
+            this.HighPass = new Filter(this.LowPass, FilterType.HighPass, sampleRate) { CutOffFrequence = 0.5f };
+            this.AdsrEnvelope = new AdsrEnvelope(this.HighPass, sampleRate);
             this.DelayEffect = new DelayEffect(this.AdsrEnvelope, sampleRate);
             this.HallEffect = new HallEffect(this.DelayEffect, sampleRate);
             this.GainEffect = new GainEffect(this.HallEffect);
@@ -127,8 +132,11 @@ namespace WaveMaker.KeyboardComponents
             this.UseDataFromAudioFileInsteadFromOszi = data.UseDataFromAudioFileInsteadFromOszi;            
             this.AudioFilePitch = data.AudioFilePitch;
             this.IsLowPassEnabled = data.IsLowPassEnabled;
-            this.CutOffFrequence = data.CutOffFrequence;
-            this.Resonance = data.Resonance;
+            this.LowPassCutOffFrequence = data.LowPassCutOffFrequence;
+            this.LowPassResonance = data.LowPassResonance;
+            this.IsHighPassEnabled = data.IsHighPassEnabled;
+            this.HighPassCutOffFrequence = data.HighPassCutOffFrequence;
+            this.HighPassResonance = data.HighPassResonance;
             this.AttackTimeInMs = data.AttackTimeInMs;
             this.DecayTimeInMs = data.DecayTimeInMs;
             this.SustainVolume = data.SustainVolume;
@@ -170,8 +178,11 @@ namespace WaveMaker.KeyboardComponents
                 UseDataFromAudioFileInsteadFromOszi = this.UseDataFromAudioFileInsteadFromOszi,               
                 AudioFilePitch = this.AudioFilePitch,
                 IsLowPassEnabled = this.IsLowPassEnabled,
-                CutOffFrequence = this.CutOffFrequence,
-                Resonance = this.Resonance,
+                LowPassCutOffFrequence = this.LowPassCutOffFrequence,
+                LowPassResonance = this.LowPassResonance,
+                IsHighPassEnabled = this.IsHighPassEnabled,
+                HighPassCutOffFrequence = this.HighPassCutOffFrequence,
+                HighPassResonance = this.HighPassResonance,
                 AttackTimeInMs = this.AttackTimeInMs,
                 DecayTimeInMs = this.DecayTimeInMs,
                 SustainVolume = this.SustainVolume,
@@ -229,9 +240,12 @@ namespace WaveMaker.KeyboardComponents
         public float AudioFilePitch { get { return this.AudioFile.Pitch; } set { this.AudioFile.Pitch = value; } }
 
         public bool IsLowPassEnabled { get { return this.LowPass.IsEnabled; } set { this.LowPass.IsEnabled = value; } }
-        public float CutOffFrequence { get { return this.LowPass.CutOffFrequence; } set { this.LowPass.CutOffFrequence = value; } }
-        public float Resonance { get { return this.LowPass.Resonance; } set { this.LowPass.Resonance = value; } }
-        
+        public float LowPassCutOffFrequence { get { return this.LowPass.CutOffFrequence; } set { this.LowPass.CutOffFrequence = value; } }
+        public float LowPassResonance { get { return this.LowPass.Resonance; } set { this.LowPass.Resonance = value; } }
+        public bool IsHighPassEnabled { get { return this.HighPass.IsEnabled; } set { this.HighPass.IsEnabled = value; } }
+        public float HighPassCutOffFrequence { get { return this.HighPass.CutOffFrequence; } set { this.HighPass.CutOffFrequence = value; } }
+        public float HighPassResonance { get { return this.HighPass.Resonance; } set { this.HighPass.Resonance = value; } }
+
 
         public float AttackTimeInMs { get { return this.AdsrEnvelope.AttackTimeInMs; } set { this.AdsrEnvelope.AttackTimeInMs = value; } }
         public float DecayTimeInMs { get { return this.AdsrEnvelope.DecayTimeInMs; } set { this.AdsrEnvelope.DecayTimeInMs = value; } }

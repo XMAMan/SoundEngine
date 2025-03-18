@@ -8,7 +8,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MusicMachine.Views.SequenzerVM"
         mc:Ignorable="d"
-        Title="{Binding MultiSequenzerViewModel.CurrentProjectName}" Height="600" Width="1080" Icon="pack://application:,,,/MusicMachine;component/Resources/Note.png">
+        Title="{Binding MultiSequenzerViewModel.CurrentProjectName}" Height="600" Width="1155" Icon="pack://application:,,,/MusicMachine;component/Resources/Note.png">
     <Grid>
         <local:MultiSequenzerView DataContext="{Binding MultiSequenzerViewModel}"/>
     </Grid>

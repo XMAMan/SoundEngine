@@ -7,24 +7,47 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left">
-            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="LowPass"/>
-                    <CheckBox Margin="0 5" IsChecked="{Binding IsLowPassEnabled}"/>
-                </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="LowPass"/>
+                        <CheckBox Margin="0 5" IsChecked="{Binding IsLowPassEnabled}"/>
+                    </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel>
-                        <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding CutOffFrequence}"/>
-                        <Label Content="CUT"/>
-                    </StackPanel>
-                    <StackPanel>
-                        <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding Resonance}"/>
-                        <Label Content="RES"/>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding LowPassCutOffFrequence}"/>
+                            <Label Content="CUT"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding LowPassResonance}"/>
+                            <Label Content="RES"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
-        </Border>
+            </Border>
+
+            <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="HighPass"/>
+                        <CheckBox Margin="0 5" IsChecked="{Binding IsHighPassEnabled}"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding HighPassCutOffFrequence}"/>
+                            <Label Content="CUT"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding HighPassResonance}"/>
+                            <Label Content="RES"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -34,8 +34,8 @@
         <AudioFileGain>7</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>0.310344815</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>0.310344815</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
         <DecayTimeInMs>33.636364</DecayTimeInMs>
         <SustainVolume>0.281818181</SustainVolume>
@@ -71,8 +71,8 @@
         <AudioFileGain>7</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <CutOffFrequence>0.37931034</CutOffFrequence>
-        <Resonance>0.200000048</Resonance>
+        <LowPassCutOffFrequence>0.37931034</LowPassCutOffFrequence>
+        <LowPassResonance>0.200000048</LowPassResonance>
         <AttackTimeInMs>377.272736</AttackTimeInMs>
         <DecayTimeInMs>197.27272</DecayTimeInMs>
         <SustainVolume>0.75454545</SustainVolume>

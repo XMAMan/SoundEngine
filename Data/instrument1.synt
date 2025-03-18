@@ -16,8 +16,8 @@
   <UseAmplitudeLfo>true</UseAmplitudeLfo>
   <AmplitudeLfoFrequenc>30.8620682</AmplitudeLfoFrequenc>
   <IsLowPassEnabled>true</IsLowPassEnabled>
-  <CutOffFrequence>0.413793147</CutOffFrequence>
-  <Resonance>1</Resonance>
+  <LowPassCutOffFrequence>0.413793147</LowPassCutOffFrequence>
+  <LowPassResonance>1</LowPassResonance>
   <AttackTimeInMs>504.545441</AttackTimeInMs>
   <DecayTimeInMs>814.4545</DecayTimeInMs>
   <SustainVolume>0.409090877</SustainVolume>
