@@ -210,6 +210,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                     this.CurrentPosition = this.model.CurrentPosition = 0;
 
                     this.CurrentProjectName = Path.GetFileNameWithoutExtension(fileName);
+                    this.KeyStrokeSpeed = data.KeyStrokeSpeed;
                 }
             });
 
@@ -277,7 +278,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
         public float KeyStrokeSpeed
         {
             get { return this.model.KeyStrokeSpeed; }
-            set { this.model.KeyStrokeSpeed = value; }
+            set { this.model.KeyStrokeSpeed = value; this.RaisePropertyChanged(nameof(KeyStrokeSpeed)); }
         }
         
 

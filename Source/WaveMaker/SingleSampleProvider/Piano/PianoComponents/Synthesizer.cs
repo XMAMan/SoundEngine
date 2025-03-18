@@ -32,10 +32,10 @@ namespace WaveMaker.KeyboardComponents
         public float AudioFilePitch { get; set; } = 1;
         public float AudioFileSpeed { get; set; } = 1;
         public bool IsLowPassEnabled { get; set; } = false;
-        public float LowPassCutOffFrequence { get; set; } = 1;
+        public float LowPassCutOffFrequence { get; set; } = 0.5f;
         public float LowPassResonance { get; set; } = 0.2f;
         public bool IsHighPassEnabled { get; set; } = false;
-        public float HighPassCutOffFrequence { get; set; } = 0;
+        public float HighPassCutOffFrequence { get; set; } = 0.5f;
         public float HighPassResonance { get; set; } = 0.2f;
         public float AttackTimeInMs { get; set; } = 50;
         public float DecayTimeInMs { get; set; } = 70;
