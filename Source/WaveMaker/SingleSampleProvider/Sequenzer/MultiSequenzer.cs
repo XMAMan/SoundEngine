@@ -92,6 +92,15 @@ namespace WaveMaker.Sequenzer
             this.KeyStrokeSpeed = data.KeyStrokeSpeed;
         }
 
+        public void ClearAllSequenzers()
+        {
+            this.Sequenzers.Clear();
+            this.sequenzerWithLongestLength = null;
+            this.IsRunning = false;
+            this.AutoLoop = false;
+            this.KeyStrokeSpeed = 1;            
+        }
+
         public SequenzerSize MaxAllowedSize { get; set; }
         public SequenzerSize CurrentNoteSize { get; private set; }
 

@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Windows;
 using System.Windows.Input;
 using WaveMaker;
 using WaveMaker.Helper;
@@ -83,6 +84,12 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                 {
                     this.SelectedSequenzer = sequenzer;
                 });
+
+            //Ändere die Sichtbarkeit von allen Elementen außer dem Menü, wenn sich die Anzahl der Sequenzer ändert
+            this.Sequenzers.ToObservableChangeSet().Subscribe(x =>
+            {
+                this.MainVisibility = this.Sequenzers.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
+            });
 
             //Konvertierer zwischen LengthInMillisecondsForNewCreatedNotes und MinSampleLengthForNewNotes
             this.WhenAnyValue(x => x.LengthInMillisecondsForNewCreatedNotes)
@@ -167,21 +174,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                 string fileName = await this.SaveFileDialog.Handle("Music Machine (*.music)|*.music|All files (*.*)|*.*");
                 if (fileName != null)
                 {
-                    var data = this.model.GetAllSettings();
-                    data.LengthInMillisecondsForNewCreatedNotes = this.LengthInMillisecondsForNewCreatedNotes;
-                    data.SnapToGrid = this.SnapToGrid;
-                    //data.MidiFileFileName = FileNameHelper.GetPathRelativeToCurrentDirectory(fileName);
-                    data.MidiFileFileName = this.model.ContainsAnyNotes() ? Path.GetFileNameWithoutExtension(fileName) + ".mid" : "";
-                    XmlHelper.WriteToXmlFile(data, fileName);
-
-                    //Speichere die mid-Datei mit den Noten nur, wenn es auch Daten enthält
-                    if (data.MidiFileFileName != "")
-                    {
-                        var midiFile = this.model.GetNotesAsMidiFile();
-                        midiFile.WriteToFile(Path.GetDirectoryName(fileName) + "\\" + data.MidiFileFileName);
-                    }                    
-
-                    this.CurrentProjectName = Path.GetFileNameWithoutExtension(fileName);
+                    SaveMusicFile(fileName);
                 }
             });
 
@@ -191,26 +184,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                 string fileName = await this.OpenFileDialog.Handle("Music Machine (*.music)|*.music|All files (*.*)|*.*");
                 if (fileName != null)
                 {
-                    var data = XmlHelper.LoadFromXmlFile<MultiSequenzerData>(fileName);
-                    this.model.SetAllSettings(data, Path.GetDirectoryName(fileName), this.audioFilehandler);
-                    
-                    this.LengthInMillisecondsForNewCreatedNotes = data.LengthInMillisecondsForNewCreatedNotes;
-                    this.SnapToGrid = data.SnapToGrid;
-
-                    this.Sequenzers.Clear();
-
-                    foreach (var sequenzerModel in this.model.GetAllSequenzers())
-                    {
-                        this.Sequenzers.Add(new SequenzerViewModel(sequenzerModel, this.audioFilehandler));
-                    }
-                    this.SelectedSequenzer = this.Sequenzers[0];
-                    this.SelectedSequenzer.SynthesizerViewModel.SetAllSettings(data.SynthesizerData[0].SynthesizerData, Path.GetDirectoryName(fileName));
-                    SetZoom();
-
-                    this.CurrentPosition = this.model.CurrentPosition = 0;
-
-                    this.CurrentProjectName = Path.GetFileNameWithoutExtension(fileName);
-                    this.KeyStrokeSpeed = data.KeyStrokeSpeed;
+                    LoadMusicFile(fileName);
                 }
             });
 
@@ -248,11 +222,61 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                 }
             });
 
+            //Create new session
+            this.CreateNewSessionCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                try
+                {
+                    ClearAllSequenzers();
+
+                    var result = await this.NewSequenzerDialog.Handle(Unit.Default);
+                    if (result != null)
+                    {
+                        AddEmptySequenzer(new SequenzerSize(result.MinOctave * 12, result.MaxOctave * 12, result.LengthInSeconds * this.model.SampleRate)); //Der leerer Sequenzer ist 25 Sekunden lang
+                    }
+                }catch (Exception ex)
+                {
+                   string error = ex.ToString();
+                }                
+            });
+
+            //Load mp3/midi/music-File
+            this.LoadSessionCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                string fileName = await this.OpenFileDialog.Handle("Music Machine (*.music)|*.music|Midi files (*.mid)|*.mid|mp3/wav|*.mp3;*.wav|All files (*.*)|*.*");
+                if (fileName != null)
+                {                   
+                    if (fileName.EndsWith(".music"))
+                    {
+                        LoadMusicFile(fileName);
+                    }
+
+                    if (fileName.EndsWith(".mid"))
+                    {
+                        ClearAllSequenzers();
+                        AddMidiFile(MidiParser.MidiFile.FromFile(fileName));
+                    }
+
+                    if (fileName.EndsWith(".mp3") || fileName.EndsWith(".wav"))
+                    {
+                        ClearAllSequenzers();
+                        AddEmptySequenzer(new SequenzerSize(0, 1, 25 * this.model.SampleRate)); //Der leerer Sequenzer ist 25 Sekunden lang
+
+                        var sequenzer = this.Sequenzers[0];
+                        sequenzer.SynthesizerViewModel.AudioFileViewModel.LoadAudioFile(fileName);
+                        sequenzer.SynthesizerViewModel.SelectedSignalSource = SynthesizerElements.Main.SynthesizerViewModel.SignalSource.AudioFile;
+                    }
+                }
+            });
+
             this.MouseDoubleClickOnKeyStrokeSpeedCommand = ReactiveCommand.Create(() =>
             {
                 this.KeyStrokeSpeed = 1;
             });
         }
+        
+
+        [Reactive] public Visibility MainVisibility { get; set; } = Visibility.Collapsed;
 
         public ObservableCollection<SequenzerViewModel> Sequenzers { get; set; } = new ObservableCollection<SequenzerViewModel>();
         [Reactive] public SequenzerViewModel SelectedSequenzer { get; set; } = null;
@@ -314,6 +338,49 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             AddSequenzer(new SequenzerViewModel(sequenzerModel, this.audioFilehandler));
         }
 
+        private void LoadMusicFile(string musicFile)
+        {
+            var data = XmlHelper.LoadFromXmlFile<MultiSequenzerData>(musicFile);
+            this.model.SetAllSettings(data, Path.GetDirectoryName(musicFile), this.audioFilehandler);
+
+            this.LengthInMillisecondsForNewCreatedNotes = data.LengthInMillisecondsForNewCreatedNotes;
+            this.SnapToGrid = data.SnapToGrid;
+
+            this.Sequenzers.Clear();
+
+            foreach (var sequenzerModel in this.model.GetAllSequenzers())
+            {
+                this.Sequenzers.Add(new SequenzerViewModel(sequenzerModel, this.audioFilehandler));
+            }
+            this.SelectedSequenzer = this.Sequenzers[0];
+            this.SelectedSequenzer.SynthesizerViewModel.SetAllSettings(data.SynthesizerData[0].SynthesizerData, Path.GetDirectoryName(musicFile));
+            SetZoom();
+
+            this.CurrentPosition = this.model.CurrentPosition = 0;
+
+            this.CurrentProjectName = Path.GetFileNameWithoutExtension(musicFile);
+            this.KeyStrokeSpeed = data.KeyStrokeSpeed;
+        }
+
+        private void SaveMusicFile(string musicFile)
+        {
+            var data = this.model.GetAllSettings();
+            data.LengthInMillisecondsForNewCreatedNotes = this.LengthInMillisecondsForNewCreatedNotes;
+            data.SnapToGrid = this.SnapToGrid;
+            //data.MidiFileFileName = FileNameHelper.GetPathRelativeToCurrentDirectory(fileName);
+            data.MidiFileFileName = this.model.ContainsAnyNotes() ? Path.GetFileNameWithoutExtension(musicFile) + ".mid" : "";
+            XmlHelper.WriteToXmlFile(data, musicFile);
+
+            //Speichere die mid-Datei mit den Noten nur, wenn es auch Daten enthält
+            if (data.MidiFileFileName != "")
+            {
+                var midiFile = this.model.GetNotesAsMidiFile();
+                midiFile.WriteToFile(Path.GetDirectoryName(musicFile) + "\\" + data.MidiFileFileName);
+            }
+
+            this.CurrentProjectName = Path.GetFileNameWithoutExtension(musicFile);
+        }
+
         private void AddSequenzer(SequenzerViewModel newItem)
         {
             AddSequenzers(new SequenzerViewModel[] { newItem });
@@ -325,7 +392,6 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
 
             if (this.SelectedSequenzer == null) this.SelectedSequenzer = this.Sequenzers[0];
             SetZoom();
-
         }
 
         private void SetZoom()
@@ -394,6 +460,21 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
         public Interaction<string, string> SaveFileDialog { get; private set; } = new Interaction<string, string>(); //Input: Filter (openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";); Output: Dateiname von der Datei, die erzeugt werden soll
         public ReactiveCommand<Unit, Unit> PlayTestToneMouseDown { get; private set; }
         public ReactiveCommand<Unit, Unit> PlayTestToneMouseUp { get; private set; }
+        public ReactiveCommand<Unit, Unit> CreateNewSessionCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> LoadSessionCommand { get; private set; }
         public Interaction<Unit, NewSequenzerDialogViewModel.DialogResult> NewSequenzerDialog { get; private set; } = new Interaction<Unit, NewSequenzerDialogViewModel.DialogResult>();
+
+        private void ClearAllSequenzers()
+        {
+            this.model.ClearAllSequenzers();
+            this.Sequenzers.Clear();
+            this.SelectedSequenzer = null;
+            this.LengthInMillisecondsForNewCreatedNotes = 250;
+            this.SnapToGrid = true;
+            this.Zoom = false;
+            this.CurrentProjectName = "Music Machine";
+            this.KeyStrokeSpeed = 1;
+            this.CurrentPosition = 0;
+        }
     }
 }

@@ -12,7 +12,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              x:Name="MultiSequenzerView1"
-             d:DesignHeight="450" d:DesignWidth="1000">
+             d:DesignHeight="450" d:DesignWidth="1200">
     <DockPanel>
         <DockPanel.Background>
             <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
@@ -21,8 +21,13 @@
             </LinearGradientBrush>
         </DockPanel.Background>
         <StackPanel DockPanel.Dock="Top">
+            <Menu>
+                <MenuItem Header="Create new session" Command="{Binding CreateNewSessionCommand}"/>
+                <MenuItem Header="Load mp3/midi/music-File" Command="{Binding LoadSessionCommand}"/>
+            </Menu>
+
             <!-- Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=ActualHeight}"-->
-            <DockPanel>
+            <DockPanel Visibility="{Binding MainVisibility}">
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                     <Border BorderBrush="Orange" BorderThickness="4" CornerRadius="8" Margin="5">
                         <synthesizer:SynthesizerView DataContext="{Binding SelectedSequenzer.SynthesizerViewModel}" Margin="2"/>
@@ -53,9 +58,9 @@
                     </StackPanel>
                 </Border>
             </DockPanel>
-            
-            
-            <StackPanel Orientation="Horizontal">
+
+
+            <StackPanel Orientation="Horizontal" Visibility="{Binding MainVisibility}">
                 <Label Content="IsPlaying"/>
                 <CheckBox IsChecked="{Binding IsPlaying}" Margin="-3 5"/>
 
@@ -92,7 +97,7 @@
             
         </StackPanel>
 
-        <Border BorderBrush="Orange" BorderThickness="4" CornerRadius="8" Margin="5">
+        <Border BorderBrush="Orange" BorderThickness="4" CornerRadius="8" Margin="5" Visibility="{Binding MainVisibility}">
             <ListView ItemsSource="{Binding Sequenzers}" SelectedItem="{Binding SelectedSequenzer}" Background="Transparent" SelectionMode="Single">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">

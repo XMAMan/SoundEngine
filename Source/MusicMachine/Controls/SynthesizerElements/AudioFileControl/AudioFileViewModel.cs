@@ -51,7 +51,7 @@ namespace MusicMachine.Controls.SynthesizerElements.AudioFileControl
             });            
         }
 
-        private void LoadAudioFile(string fileName)
+        public void LoadAudioFile(string fileName)
         {
             this.model.AudioFileName = Path.GetFileName(fileName);
             this.model.AudioFileData = this.audioFileReader.GetSamplesFromAudioFile(fileName, model.AudioFile.SampleRate);
