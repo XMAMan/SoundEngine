@@ -73,8 +73,9 @@ namespace MusicMachine.Controls.MainControl
 
             this.audioPlayer = new NAudioWaveMaker.AudioPlayer(multiSequenzer);
             this.audioPlayer.StartPlaying();
+            this.audioPlayer.SelectedDevice = this.audioPlayer.GetAvailableDevices()[0]; //Nutze das erste gefundene Audio-Device zur Ausgabe
 
-            this.MultiSequenzerViewModel = new MultiSequenzerViewModel(multiSequenzer, new NAudioWaveMaker.AudioFileHandler());
+            this.MultiSequenzerViewModel = new MultiSequenzerViewModel(multiSequenzer, new NAudioWaveMaker.AudioFileHandler(), this.audioPlayer);
         }
 
         public void Dispose()

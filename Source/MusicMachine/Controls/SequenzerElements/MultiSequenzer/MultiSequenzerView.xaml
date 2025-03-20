@@ -22,8 +22,20 @@
         </DockPanel.Background>
         <StackPanel DockPanel.Dock="Top">
             <Menu>
+
                 <MenuItem Header="Create new session" Command="{Binding CreateNewSessionCommand}"/>
                 <MenuItem Header="Load mp3/midi/music-File" Command="{Binding LoadSessionCommand}"/>
+
+                <MenuItem Header="Select Outputdevice" ItemsSource="{Binding OutputDeviceItemList}" >
+                    <MenuItem.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Header" Value="{Binding Path=Name}" />
+                            <Setter Property="IsCheckable" Value="True" />
+                            <Setter Property="IsChecked" Value="{Binding IsSelected}" />
+                            <Setter Property="Command" Value="{Binding Command}" />
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                </MenuItem>
             </Menu>
 
             <!-- Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=ActualHeight}"-->

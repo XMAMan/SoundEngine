@@ -22,6 +22,7 @@ using WaveMaker.Sequenzer;
 
 namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
 {
+    
     public class MultiSequenzerViewModel : ReactiveObject, ITestToneProvider
     {
         private WaveMaker.Sequenzer.MultiSequenzer model;
@@ -29,8 +30,10 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
         private MidiPlayer.MidiPlayer midiPlayer = null;
         private IAudioFileHandler audioFilehandler;
 
-        public MultiSequenzerViewModel(WaveMaker.Sequenzer.MultiSequenzer model, IAudioFileHandler audioFilehandler)
-        {
+        public MultiSequenzerViewModel(WaveMaker.Sequenzer.MultiSequenzer model, IAudioFileHandler audioFilehandler, IAudioPlayer audioPlayer)
+        {            
+            this.OutputDeviceItemList  = CreateMenuListForOutputDevices(audioPlayer);
+
             this.model = model;
             this.audioFilehandler = audioFilehandler;
 
@@ -274,6 +277,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
 
         public ObservableCollection<SequenzerViewModel> Sequenzers { get; set; } = new ObservableCollection<SequenzerViewModel>();
         [Reactive] public SequenzerViewModel SelectedSequenzer { get; set; } = null;
+        public ObservableCollection<BindableMenuItem> OutputDeviceItemList { get; set; }
 
         public bool IsPlaying
         {
@@ -494,5 +498,35 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             }
         }
         #endregion
+
+        private ObservableCollection<BindableMenuItem> CreateMenuListForOutputDevices(IAudioPlayer audioPlayer)
+        {
+            var list = audioPlayer.GetAvailableDevices()
+                .Select(x => new BindableMenuItem() { Name = x, Command = null, IsSelected = x == audioPlayer.SelectedDevice })
+                .ToList();
+
+
+            foreach (var item in list)
+            {
+                item.Command = ReactiveCommand.Create(() =>
+                {
+                    audioPlayer.SelectedDevice = item.Name;
+                    foreach (var otherItem in list)
+                    {
+                        otherItem.IsSelected = otherItem == item;
+                    }
+                });
+            }
+
+            return new ObservableCollection<BindableMenuItem>(list);
+        }
+    }
+
+    //ViewModel für die Menü-Items zur Audio-Deviceauswahl
+    public class BindableMenuItem : ReactiveObject
+    {
+        public string Name { get; set; }
+        [Reactive] public bool IsSelected { get; set; }
+        public ReactiveCommand<Unit, Unit> Command { get; set; }
     }
 }
