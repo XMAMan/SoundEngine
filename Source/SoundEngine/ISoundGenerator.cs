@@ -6,7 +6,8 @@ namespace SoundEngine
     {
         int SampleRate { get; }
         float Volume { get; set; }
-
+        string SelectedOutputDevice { get; set; }
+        string[] GetAvailableOutputDevices();
         IAudioRecorderSnipped AudioRecorderSnipped { get; }
 
         IFrequenceToneSnipped AddFrequencyTone();

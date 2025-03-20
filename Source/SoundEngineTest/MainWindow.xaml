@@ -9,9 +9,16 @@
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="Volume:" Margin="10 0 0 0"/>
-                <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Volume:" Margin="10 0 0 0"/>
+                    <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Outputdevice:" Margin="10 0 0 0"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="2" ItemsSource="{Binding Outputdevice}" SelectedItem="{Binding SelectedOutputdevice}"/>
+                </StackPanel>
             </StackPanel>
+            
             
             <StackPanel Orientation="Horizontal">
                 <Label Content="lied3.music:"/>

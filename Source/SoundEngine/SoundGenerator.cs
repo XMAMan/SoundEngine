@@ -19,11 +19,14 @@ namespace SoundEngine
 
             this.audioPlayer = new NAudioWaveMaker.AudioPlayer(this.sampleProviderCollection);
             this.audioPlayer.StartPlaying();
+            this.audioPlayer.SelectedDevice = this.audioPlayer.GetAvailableDevices()[0]; //Nutze das erste gefundene Audio-Device zur Ausgabe
 
             this.AudioRecorderSnipped = audioRecorderSnipp;
         }
 
         public float Volume { get { return this.sampleProviderCollection.Volume; } set { this.sampleProviderCollection.Volume = value; } }
+        public string SelectedOutputDevice { get { return this.audioPlayer.SelectedDevice; } set { this.audioPlayer.SelectedDevice = value; } }
+        public string[] GetAvailableOutputDevices() { return this.audioPlayer.GetAvailableDevices(); }
 
         public int SampleRate { get { return 44100 / 2; } }
 

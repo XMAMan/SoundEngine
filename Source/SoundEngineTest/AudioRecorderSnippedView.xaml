@@ -22,7 +22,7 @@
 
             <Label Content="VolumeLfo:" Margin="10 0 0 0"/>
             <CheckBox IsChecked="{Binding UseVolumeLfo}" Margin="0 5 5 0"/>
-            <Slider Minimum="1" Maximum="1000" Value="{Binding VolumeLfoFrequency}" Width="50" Margin="0 3"/>
+            <Slider Minimum="1" Maximum="100" Value="{Binding VolumeLfoFrequency}" Width="50" Margin="0 3"/>
 
             <Label Content="DelayEffekt:" Margin="10 0 0 0"/>
             <CheckBox IsChecked="{Binding UseDelayEffekt}" Margin="0 5 5 0"/>

@@ -45,10 +45,31 @@ namespace SoundEngineTest
 
             this.AudioRecorder = new AudioRecorderSnippedViewModel(table.AudioRecorder);
         }
+
+        public IEnumerable<string> Outputdevice
+        {
+            get
+            {
+                return this.table.GetAvailableOutputDevices();
+            }
+        }
+
+        public string SelectedOutputdevice
+        {
+            get { return this.table.SelectedOutputDevice; }
+            set
+            {
+                this.table.SelectedOutputDevice = value;
+                this.RaisePropertyChanged(nameof(SelectedOutputdevice));
+            }
+        }
+
         public void Dispose()
         {
             this.table.Dispose();
         }
+
+
     }
 
     public class SoundWithEndTrigger : ReactiveObject
@@ -204,6 +225,9 @@ namespace SoundEngineTest
         private SoundGenerator soundGenerator;
 
         public float Volume { get { return this.soundGenerator.Volume; } set { this.soundGenerator.Volume = value; } }
+        public string SelectedOutputDevice { get { return this.soundGenerator.SelectedOutputDevice; } set { this.soundGenerator.SelectedOutputDevice = value; } }
+        public string[] GetAvailableOutputDevices() { return this.soundGenerator.GetAvailableOutputDevices(); }
+
         public IMusicFileSnipped BackGroundMusic { get; private set; }
         public IFrequenceToneSnipped SoundEffekts0 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts1 { get; private set; }
