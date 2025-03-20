@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace WaveMaker.KeyboardComponents
+﻿namespace WaveMaker.KeyboardComponents
 {
     //Hall = Mehrfacher Delay-Effekt
     public class HallEffect : IPianoComponent, IPianoStopKeyHandler
@@ -42,16 +40,18 @@ namespace WaveMaker.KeyboardComponents
 
             this.delays = new DelayEffect[this.HallCount];
 
-            this.delays[0] = new DelayEffect(source, sampleRate) { IsEnabled = true, DelayTimeInMs = 100 };
-            for (int i = 1; i < this.delays.Length; i++) this.delays[i] = new DelayEffect(this.delays[i - 1], sampleRate) { IsEnabled = true, DelayTimeInMs = 100 };
+            this.delays[0] = new DelayEffect(source, sampleRate) { IsEnabled = true, DelayTimeInMs = 200 };
+            for (int i = 1; i < this.delays.Length; i++) this.delays[i] = new DelayEffect(this.delays[i - 1], sampleRate) { IsEnabled = true, DelayTimeInMs = 200 + 300 * i, Gain = 0.3f - i * 0.05f };
         }
 
         public float GetSample(KeySampleData data)
         {
-            float inSample = this.source.GetSample(data);
-            if (this.IsEnabled == false) return inSample;
+            if (this.IsEnabled == false) return this.source.GetSample(data);
 
-            return this.delays.Last().GetSample(data);
+            double sum = 0;
+            foreach (var d in this.delays) sum += d.GetSample(data);
+
+            return (float)(sum / this.HallCount);
         }
     }
 }

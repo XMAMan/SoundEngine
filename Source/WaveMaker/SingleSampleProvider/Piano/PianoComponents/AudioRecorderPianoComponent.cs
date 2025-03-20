@@ -7,9 +7,21 @@
         {
             this.AudioRecorder = audioRecorder;
         }
+
+        private int alreadyUsedIndex = -1;
+        private float lastSample = 0;
+
         public float GetSample(KeySampleData data)
         {
-            return this.AudioRecorder.GetNextSample();
+            if (data.SampleIndex != this.alreadyUsedIndex)
+            {
+                this.alreadyUsedIndex = data.SampleIndex;
+                this.lastSample = this.AudioRecorder.GetNextSample();
+                return this.lastSample;
+            }else
+            {
+                return this.lastSample;
+            }            
         }
     }
 }
