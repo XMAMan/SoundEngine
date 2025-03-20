@@ -30,13 +30,11 @@ namespace MusicMachine.Controls.SynthesizerElements.MicrophoneControl
             {
                 if (this.IsRecording)
                 {
-                    StopRecording();
-                    StartStopImage = new BitmapImage(new Uri(MicrophoneViewModel.StartRecord, UriKind.Absolute));
+                    StopRecording();                    
                 }
                 else
                 {
                     StartRecording();
-                    StartStopImage = new BitmapImage(new Uri(MicrophoneViewModel.StopRecord, UriKind.Absolute));
                 }
 
                 //CanExecute: AudioSourceIsSelected muss true sein
@@ -83,7 +81,23 @@ namespace MusicMachine.Controls.SynthesizerElements.MicrophoneControl
         }
 
         [Reactive] public bool AudioSourceIsSelected { get; set; } = false;
-        [Reactive] public bool IsRecording { get; set; } = false;
+
+        private bool isRecording = false;
+        public bool IsRecording
+        {
+            get => this.isRecording;
+            set
+            {
+                this.isRecording = value;
+
+                if (this.isRecording)
+                    StartStopImage = new BitmapImage(new Uri(MicrophoneViewModel.StopRecord, UriKind.Absolute));
+                else
+                    StartStopImage = new BitmapImage(new Uri(MicrophoneViewModel.StartRecord, UriKind.Absolute));
+
+                this.RaisePropertyChanged(nameof(IsRecording));
+            }
+        }
 
         public ReactiveCommand<Unit, Unit> StartStopCommand { get; private set; }
 

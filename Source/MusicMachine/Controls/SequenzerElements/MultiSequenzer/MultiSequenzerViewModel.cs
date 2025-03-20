@@ -426,7 +426,11 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             keyUp
                 .Select(x => KeyToSequenzerIndex(x.Key))
                 .Where(x => x >= 0 && x < this.Sequenzers.Count)
-                .Subscribe(x => this.Sequenzers[x].PlayTestToneMouseUp());
+                .Subscribe(x =>
+                {
+                    this.Sequenzers[x].PlayTestToneMouseUp();
+                    StopMicrophonIfPlaying();
+                });
         }
 
         private static int KeyToSequenzerIndex(Key key)
@@ -489,14 +493,22 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             if (this.SelectedSequenzer != null)
             {
                 this.SelectedSequenzer.PlayTestToneMouseUp();
-
-                if (this.SelectedSequenzer.SynthesizerViewModel.MicrophoneViewModel.IsRecording)
-                {
-                    this.SelectedSequenzer.SynthesizerViewModel.MicrophoneViewModel.StopRecording();
-                }
-                
+                StopMicrophonIfPlaying();
             }
         }
+
+        //Da beim Testton-MouseUp der angespielte Ton gelöscht wird, erfolgt ab den Moment keine Tonwiedergabe. 
+        //Deshalb wird hier die Mikrofon-Aufnahme gestoppt damit immer die Zustände (Microphon läuft == Testton läuft) immer gleich bleiben.
+        //Wenn man das nicht machen würde, dann würde laut dem Wiedergabesymbol die Aufnahme laufen aber man hört nichts, nachdem jemand ein Testton
+        //(per A) oder Button kurz mal benutzt hat. 
+        private void StopMicrophonIfPlaying()
+        {
+            if (this.SelectedSequenzer.SynthesizerViewModel.MicrophoneViewModel.IsRecording)
+            {
+                this.SelectedSequenzer.SynthesizerViewModel.MicrophoneViewModel.StopRecording();
+            }
+        }
+
         #endregion
 
         private ObservableCollection<BindableMenuItem> CreateMenuListForOutputDevices(IAudioPlayer audioPlayer)
