@@ -59,6 +59,9 @@
     <Compile Include="AudioFileSnippedView.xaml.cs">
       <DependentUpon>AudioFileSnippedView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AudioRecorderSnippedView.xaml.cs">
+      <DependentUpon>AudioRecorderSnippedView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FrequenceToneSnippedView.xaml.cs">
       <DependentUpon>FrequenceToneSnippedView.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,10 @@
     </Compile>
     <Compile Include="ViewModel.cs" />
     <Page Include="AudioFileSnippedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AudioRecorderSnippedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,6 +7,8 @@ namespace SoundEngine
         int SampleRate { get; }
         float Volume { get; set; }
 
+        IAudioRecorderSnipped AudioRecorderSnipped { get; }
+
         IFrequenceToneSnipped AddFrequencyTone();
         IFrequenceToneSnipped AddFrequencyTone(string syntiFile);
         IMusicFileSnipped AddMusicFile(string musicFile);

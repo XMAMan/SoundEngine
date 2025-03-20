@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SoundEngineTest.AudioFileSnippedView"
+﻿<UserControl x:Class="SoundEngineTest.AudioRecorderSnippedView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,23 +10,11 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="IsRunning"/>
             <CheckBox IsChecked="{Binding IsRunning, Mode=OneWay}" Margin="0 5 5 0"/>
+            <ComboBox HorizontalAlignment="Left" Margin="2" ItemsSource="{Binding SignalSources}" SelectedItem="{Binding SelectedSignalSource}"/>
             <Button Content="Play" Command="{Binding Play}" Margin="5"/>
             <Button Content="Stop" Command="{Binding Stop}" Margin="5"/>
             <Label Content="Volume:" Margin="10 0 0 0"/>
             <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
-            <Button Content="Reset" Command="{Binding Reset}" Margin="5"/>
-
-            <Label Content="AutoLoop"/>
-            <CheckBox IsChecked="{Binding AutoLoop}" Margin="0 5 5 0"/>
-
-            <Label Content="Pitch:" Margin="10 0 0 0"/>
-            <Slider Minimum="0" Maximum="2" Value="{Binding Pitch}" Width="50" Margin="0 3"/>
-
-            <Label Content="Speed:" Margin="10 0 0 0"/>
-            <Slider Minimum="0.25" Maximum="3" Value="{Binding Speed}" Width="50" Margin="0 3"/>
-
-            <Label Content="Last Endtriggertime:"/>
-            <TextBox Text="{Binding EndTriggerTime}"/>
 
             <Label Content="GainEffekt:" Margin="10 0 0 0"/>
             <CheckBox IsChecked="{Binding UseGainEffekt}" Margin="0 5 5 0"/>

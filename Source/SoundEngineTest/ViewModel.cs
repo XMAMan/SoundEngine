@@ -3,6 +3,8 @@ using ReactiveUI.Fody.Helpers;
 using SoundEngine;
 using SoundEngine.SoundSnippeds;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using WaveMaker.KeyboardComponents;
 
@@ -19,9 +21,12 @@ namespace SoundEngineTest
         public FrequenceToneSnippedViewModel SoundEffekts3 { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts4 { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts5 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffekts6 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffekts7 { get; private set; }
         public FrequenceToneSnippedViewModel TieferBass { get; private set; }
         public AudioFileSnippedViewModel Soundsystem { get; private set; }
         public FrequenceToneSnippedViewModel Hallo { get; private set; }
+        public AudioRecorderSnippedViewModel AudioRecorder { get; private set; }
         public ViewModel()
         {
             this.SoundEffekts0 = new FrequenceToneSnippedViewModel(table.SoundEffekts0);
@@ -30,11 +35,15 @@ namespace SoundEngineTest
             this.SoundEffekts3 = new FrequenceToneSnippedViewModel(table.SoundEffekts3);
             this.SoundEffekts4 = new FrequenceToneSnippedViewModel(table.SoundEffekts4);
             this.SoundEffekts5 = new FrequenceToneSnippedViewModel(table.SoundEffekts5);
+            this.SoundEffekts6 = new FrequenceToneSnippedViewModel(table.SoundEffekts6);
+            this.SoundEffekts7 = new FrequenceToneSnippedViewModel(table.SoundEffekts7);
 
             this.TieferBass = new FrequenceToneSnippedViewModel(table.TieferBass);
             this.BackGroundMusic = new MusicFileSnippedViewModel(table.BackGroundMusic);
             this.Soundsystem = new AudioFileSnippedViewModel(table.Soundsystem);
             this.Hallo = new FrequenceToneSnippedViewModel(table.Hallo);
+
+            this.AudioRecorder = new AudioRecorderSnippedViewModel(table.AudioRecorder);
         }
         public void Dispose()
         {
@@ -133,6 +142,61 @@ namespace SoundEngineTest
         public Synthesizer Synthesizer { get => this.snipp.Synthesizer; }
     }
 
+    public class AudioRecorderSnippedViewModel : ReactiveObject
+    {
+        private IAudioRecorderSnipped snipp;
+        public AudioRecorderSnippedViewModel(IAudioRecorderSnipped snipp)
+        {
+            this.snipp = snipp;
+
+            this.snipp.IsRunningChanged = (isRunning) => { this.IsRunning = isRunning; };
+
+            this.Play = ReactiveCommand.Create(() =>
+            {
+                this.snipp.Play();
+            });
+            this.Stop = ReactiveCommand.Create(() =>
+            {
+                this.snipp.Stop();
+            });
+
+            if (this.SignalSources.Any())
+            {
+                this.SelectedSignalSource = this.SignalSources.First();
+            }
+        }
+
+        public IEnumerable<string> SignalSources
+        {
+            get
+            {
+                return this.snipp.GetAvailableDevices();
+            }
+        }
+
+        public string SelectedSignalSource
+        {
+            get { return this.snipp.SelectedDevice; }
+            set
+            {
+                this.snipp.SelectedDevice = value;
+                this.RaisePropertyChanged(nameof(SelectedSignalSource));
+            }
+        }
+ 
+        [Reactive] public bool IsRunning { get; private set; } = false;
+        public ReactiveCommand<Unit, Unit> Play { get; private set; }
+        public ReactiveCommand<Unit, Unit> Stop { get; private set; }
+        public float Volume { get { return this.snipp.Volume; } set { this.snipp.Volume = value; } }
+
+        public bool UseDelayEffekt { get { return this.snipp.UseDelayEffekt; } set { this.snipp.UseDelayEffekt = value; } }
+        public bool UseHallEffekt { get { return this.snipp.UseHallEffekt; } set { this.snipp.UseHallEffekt = value; } }
+        public bool UseGainEffekt { get { return this.snipp.UseGainEffekt; } set { this.snipp.UseGainEffekt = value; } }
+        public float Gain { get { return this.snipp.Gain; } set { this.snipp.Gain = value; } }
+        public bool UseVolumeLfo { get { return this.snipp.UseVolumeLfo; } set { this.snipp.UseVolumeLfo = value; } }
+        public float VolumeLfoFrequency { get { return this.snipp.VolumeLfoFrequency; } set { this.snipp.VolumeLfoFrequency = value; } }
+    }
+
     public class SoundTable : IDisposable
     {
         private string WorkingDirectory = @"..\..\..\..\Data\";
@@ -147,9 +211,12 @@ namespace SoundEngineTest
         public IFrequenceToneSnipped SoundEffekts3 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts4 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts5 { get; private set; }
+        public IFrequenceToneSnipped SoundEffekts6 { get; private set; }
+        public IFrequenceToneSnipped SoundEffekts7 { get; private set; }
         public IFrequenceToneSnipped TieferBass { get; private set; }
         public IAudioFileSnipped Soundsystem { get; private set; }
         public IFrequenceToneSnipped Hallo { get; private set; }
+        public IAudioRecorderSnipped AudioRecorder { get; private set; }
         public SoundTable()
         {
             this.soundGenerator = new SoundGenerator();
@@ -162,11 +229,15 @@ namespace SoundEngineTest
             this.SoundEffekts3 = syntSounds[3];
             this.SoundEffekts4 = syntSounds[4];
             this.SoundEffekts5 = syntSounds[5];
+            this.SoundEffekts6 = syntSounds[6];
+            this.SoundEffekts7 = syntSounds[7];
             this.TieferBass = this.soundGenerator.AddFrequencyTone(WorkingDirectory + "TieferBass.synt");
 
             this.BackGroundMusic = this.soundGenerator.AddMusicFile(WorkingDirectory + "lied3.music");
             this.Soundsystem = this.soundGenerator.AddSoundFile(WorkingDirectory + "Soundsystem.mp3");
             this.Hallo = this.soundGenerator.AddFrequencyTone(WorkingDirectory + "Hallo.synt");
+
+            this.AudioRecorder = this.soundGenerator.AudioRecorderSnipped;
         }
 
         public void Dispose()

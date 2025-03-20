@@ -3,6 +3,7 @@ using DynamicData.Binding;
 using MidiParser;
 using MusicMachine.Controls.NewSequenzerDialog;
 using MusicMachine.Controls.SequenzerElements.Sequenzer;
+using MusicMachine.Controls.SynthesizerElements.MicrophoneControl;
 using MusicMachine.Helper;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -21,7 +22,7 @@ using WaveMaker.Sequenzer;
 
 namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
 {
-    public class MultiSequenzerViewModel : ReactiveObject
+    public class MultiSequenzerViewModel : ReactiveObject, ITestToneProvider
     {
         private WaveMaker.Sequenzer.MultiSequenzer model;
         private IDisposable timer;
@@ -37,7 +38,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                 .Subscribe(x => 
                 { 
                     //Timer-Action
-                    if (this.IsPlaying) this.CurrentPosition = this.model.CurrentPosition; 
+                    if (this.IsPlaying) this.CurrentPosition = this.model.CurrentPosition;
                 });
 
             //Wenn jemand mit der Maus den blauen Balken verschiebt, soll die neue Position aufs Model übertragen werden
@@ -136,17 +137,11 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             //Test-Tone
             this.PlayTestToneMouseDown = ReactiveCommand.Create(() =>
             {
-                if (this.SelectedSequenzer != null)
-                {
-                    this.SelectedSequenzer.PlayTestToneMouseDown();
-                }
+                StartPlayingTestTone();              
             });
             this.PlayTestToneMouseUp = ReactiveCommand.Create(() =>
             {
-                if (this.SelectedSequenzer != null)
-                {
-                    this.SelectedSequenzer.PlayTestToneMouseUp();
-                }
+                StopPlayingTestTone();
             });
 
 
@@ -243,7 +238,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             //Load mp3/midi/music-File
             this.LoadSessionCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                string fileName = await this.OpenFileDialog.Handle("Music Machine (*.music)|*.music|Midi files (*.mid)|*.mid|mp3/wav|*.mp3;*.wav|All files (*.*)|*.*");
+                string fileName = await this.OpenFileDialog.Handle("Music Machine (*.music)|*.music|Midi files (*.mid)|*.mid|mp3/wav/wma|*.mp3;*.wav;*.wma|All files (*.*)|*.*");
                 if (fileName != null)
                 {                   
                     if (fileName.EndsWith(".music"))
@@ -257,14 +252,14 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                         AddMidiFile(MidiParser.MidiFile.FromFile(fileName));
                     }
 
-                    if (fileName.EndsWith(".mp3") || fileName.EndsWith(".wav"))
+                    if (fileName.EndsWith(".mp3") || fileName.EndsWith(".wav") || fileName.EndsWith(".wma"))
                     {
                         ClearAllSequenzers();
                         AddEmptySequenzer(new SequenzerSize(0, 1, 25 * this.model.SampleRate)); //Der leerer Sequenzer ist 25 Sekunden lang
 
                         var sequenzer = this.Sequenzers[0];
                         sequenzer.SynthesizerViewModel.AudioFileViewModel.LoadAudioFile(fileName);
-                        sequenzer.SynthesizerViewModel.SelectedSignalSource = SynthesizerElements.Main.SynthesizerViewModel.SignalSource.AudioFile;
+                        sequenzer.SynthesizerViewModel.SelectedSignalSource = SignalSource.AudioFile;
                     }
                 }
             });
@@ -274,7 +269,6 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                 this.KeyStrokeSpeed = 1;
             });
         }
-        
 
         [Reactive] public Visibility MainVisibility { get; set; } = Visibility.Collapsed;
 
@@ -330,12 +324,12 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
         public void AddMidiFile(MidiFile file)
         {
             var sequenzerModels = model.AddMidiFile(file);
-            AddSequenzers(sequenzerModels.Select(x => new SequenzerViewModel(x, this.audioFilehandler)));
+            AddSequenzers(sequenzerModels.Select(x => new SequenzerViewModel(x, this.audioFilehandler, this)));
         }
         public void AddEmptySequenzer(SequenzerSize size)
         {
             var sequenzerModel = this.model.AddEmptySequenzer(size);
-            AddSequenzer(new SequenzerViewModel(sequenzerModel, this.audioFilehandler));
+            AddSequenzer(new SequenzerViewModel(sequenzerModel, this.audioFilehandler, this));
         }
 
         private void LoadMusicFile(string musicFile)
@@ -350,7 +344,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
 
             foreach (var sequenzerModel in this.model.GetAllSequenzers())
             {
-                this.Sequenzers.Add(new SequenzerViewModel(sequenzerModel, this.audioFilehandler));
+                this.Sequenzers.Add(new SequenzerViewModel(sequenzerModel, this.audioFilehandler, this));
             }
             this.SelectedSequenzer = this.Sequenzers[0];
             this.SelectedSequenzer.SynthesizerViewModel.SetAllSettings(data.SynthesizerData[0].SynthesizerData, Path.GetDirectoryName(musicFile));
@@ -476,5 +470,29 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             this.KeyStrokeSpeed = 1;
             this.CurrentPosition = 0;
         }
+
+        #region ITestToneProvider
+        public void StartPlayingTestTone()
+        {
+            if (this.SelectedSequenzer != null)
+            {
+                this.SelectedSequenzer.PlayTestToneMouseDown();                
+            }
+        }
+
+        public void StopPlayingTestTone()
+        {
+            if (this.SelectedSequenzer != null)
+            {
+                this.SelectedSequenzer.PlayTestToneMouseUp();
+
+                if (this.SelectedSequenzer.SynthesizerViewModel.MicrophoneViewModel.IsRecording)
+                {
+                    this.SelectedSequenzer.SynthesizerViewModel.MicrophoneViewModel.StopRecording();
+                }
+                
+            }
+        }
+        #endregion
     }
 }

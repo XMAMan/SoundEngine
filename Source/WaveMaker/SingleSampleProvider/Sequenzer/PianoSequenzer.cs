@@ -61,9 +61,9 @@ namespace WaveMaker.Sequenzer
 
         private List<RunningKey> allRunningTones = new List<RunningKey>();
 
-        internal PianoSequenzer(MidiInstrument instrument, int sampleRate, IMultiSequenzer multiSequenzer)
+        internal PianoSequenzer(MidiInstrument instrument, int sampleRate, IMultiSequenzer multiSequenzer, IAudioRecorder audioRecorder)
         {
-            this.piano = new Piano(sampleRate);
+            this.piano = new Piano(sampleRate, audioRecorder);
             this.Notes = new SequenzerKeys(instrument.Notes, piano.SampleRate);
             this.InstrumentName = instrument.InstrumentName;
             this.multiSequenzer = multiSequenzer;
@@ -71,9 +71,9 @@ namespace WaveMaker.Sequenzer
             this.CurrentNoteSize = new SequenzerSize(this.Notes.MinToneIndex, this.Notes.MaxToneIndex, this.Notes.MaxSamplePosition);
         }
 
-        internal PianoSequenzer(GeneralMidiInstrument instrumentName, SequenzerSize maxAllowedSize, int sampleRate, IMultiSequenzer multiSequenzer)
+        internal PianoSequenzer(GeneralMidiInstrument instrumentName, SequenzerSize maxAllowedSize, int sampleRate, IMultiSequenzer multiSequenzer, IAudioRecorder audioRecorder)
         {
-            this.piano = new Piano(sampleRate);
+            this.piano = new Piano(sampleRate, audioRecorder);
             this.Notes = new SequenzerKeys(maxAllowedSize.MaxSamplePosition, piano.SampleRate);
             this.InstrumentName = instrumentName;
             this.multiSequenzer = multiSequenzer;

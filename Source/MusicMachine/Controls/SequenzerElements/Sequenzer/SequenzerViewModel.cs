@@ -3,6 +3,7 @@ using DynamicData.Binding;
 using MidiParser;
 using MusicMachine.Controls.SequenzerElements.Piano;
 using MusicMachine.Controls.SynthesizerElements.Main;
+using MusicMachine.Controls.SynthesizerElements.MicrophoneControl;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -28,11 +29,11 @@ namespace MusicMachine.Controls.SequenzerElements.Sequenzer
 
         private int testTonekeyIndex = -1;
 
-        public SequenzerViewModel(PianoSequenzer model, IAudioFileReader audioFileReader)
+        public SequenzerViewModel(PianoSequenzer model, IAudioFileReader audioFileReader, ITestToneProvider testToneProvider)
         {
             this.Model = model;
 
-            this.SynthesizerViewModel = new SynthesizerViewModel(model.Synthesizer, audioFileReader);
+            this.SynthesizerViewModel = new SynthesizerViewModel(model.Synthesizer, audioFileReader, testToneProvider);
             this.PianoViewModel = new PianoViewModel(model);
 
             //Spiele Ton, wenn er angeklickt wird

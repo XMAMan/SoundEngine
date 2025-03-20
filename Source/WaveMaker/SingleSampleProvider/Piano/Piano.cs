@@ -12,10 +12,10 @@ namespace WaveMaker
 
         public int SampleRate { get; private set; }
 
-        public Piano(int sampleRate)
+        public Piano(int sampleRate, IAudioRecorder audioRecorder)
         {
             this.SampleRate = sampleRate;
-            this.Synthesizer = new Synthesizer(sampleRate);
+            this.Synthesizer = new Synthesizer(sampleRate, audioRecorder);
         }
         public float GetNextSample()
         {

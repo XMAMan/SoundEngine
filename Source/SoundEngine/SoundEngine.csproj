@@ -46,6 +46,7 @@
     <Compile Include="SoundGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundSnippedCollection.cs" />
+    <Compile Include="SoundSnippeds\AudioRecorderSnipped.cs" />
     <Compile Include="SoundSnippeds\FrequencyTone.cs" />
     <Compile Include="SoundSnippeds\ISoundSnipped.cs" />
     <Compile Include="SoundSnippeds\MusicFile.cs" />

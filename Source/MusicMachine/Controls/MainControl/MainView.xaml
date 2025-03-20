@@ -10,6 +10,10 @@
         mc:Ignorable="d"
         Title="{Binding MultiSequenzerViewModel.CurrentProjectName}" Height="600" Width="1155" Icon="pack://application:,,,/MusicMachine;component/Resources/Note.png">
     <Grid>
-        <local:MultiSequenzerView DataContext="{Binding MultiSequenzerViewModel}"/>
+        <StackPanel>
+            <TextBox Text="{Binding Text}"/>
+            <local:MultiSequenzerView DataContext="{Binding MultiSequenzerViewModel}"/>
+        </StackPanel>
+        
     </Grid>
 </rxui:ReactiveWindow>

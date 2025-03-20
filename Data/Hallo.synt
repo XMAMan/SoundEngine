@@ -17,7 +17,7 @@
   <AudioFileName>Soundsystem.mp3</AudioFileName>
   <LeftAudioFilePosition>720</LeftAudioFilePosition>
   <RightAudioFilePosition>1220</RightAudioFilePosition>
-  <UseDataFromAudioFileInsteadFromOszi>true</UseDataFromAudioFileInsteadFromOszi>
+  <SignalSource>AudioFile</SignalSource>
   <AudioFileGain>7</AudioFileGain>
   <AudioFilePitch>1</AudioFilePitch>
   <IsLowPassEnabled>false</IsLowPassEnabled>

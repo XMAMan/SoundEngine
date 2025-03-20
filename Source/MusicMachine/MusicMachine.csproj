@@ -146,6 +146,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\SynthesizerElements\MicrophoneControl\ITestToneProvider.cs" />
+    <Compile Include="Controls\SynthesizerElements\MicrophoneControl\MicrophoneView.xaml.cs">
+      <DependentUpon>MicrophoneView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SynthesizerElements\MicrophoneControl\MicrophoneViewModel.cs" />
     <Compile Include="Helper\FileNameHelper.cs" />
     <Compile Include="Helper\GraphicHelper.cs" />
     <Compile Include="Helper\InteractionActions.cs" />
@@ -234,6 +239,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\SynthesizerElements\MicrophoneControl\MicrophoneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SynthesizerElements\Oscillator\OscillatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -304,7 +313,12 @@
   <ItemGroup>
     <Resource Include="Resources\Note.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Controls\SynthesizerElements\MicrophoneControl\StartRecord.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Controls\SynthesizerElements\MicrophoneControl\StopRecord.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

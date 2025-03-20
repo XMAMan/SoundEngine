@@ -29,10 +29,11 @@ namespace WaveMaker.Sequenzer
     {
         private List<PianoSequenzer> Sequenzers = new List<PianoSequenzer>();
         private PianoSequenzer sequenzerWithLongestLength = null;
+        private IAudioRecorder audioRecorder;
 
-        public static MultiSequenzer LoadFromFile(string musicFile, IAudioFileReader audioFileReader, int sampleRate)
+        public static MultiSequenzer LoadFromFile(string musicFile, IAudioFileReader audioFileReader, int sampleRate, IAudioRecorder audioRecorder)
         {
-            MultiSequenzer multi = new MultiSequenzer(sampleRate);
+            MultiSequenzer multi = new MultiSequenzer(sampleRate, audioRecorder);
             var data = XmlHelper.LoadFromXmlFile<MultiSequenzerData>(musicFile);
             multi.SetAllSettings(data, Path.GetDirectoryName(musicFile), audioFileReader);
             return multi;
@@ -43,9 +44,10 @@ namespace WaveMaker.Sequenzer
             return Sequenzers.ToList();
         }
 
-        public MultiSequenzer(int sampleRate)
+        public MultiSequenzer(int sampleRate, IAudioRecorder audioRecorder)
         {
             this.SampleRate = sampleRate;
+            this.audioRecorder = audioRecorder;
         }
 
         public MultiSequenzerData GetAllSettings()
@@ -131,7 +133,7 @@ namespace WaveMaker.Sequenzer
 
         public PianoSequenzer[] AddMidiFile(MidiFile midiFile)
         {
-            var newItems = midiFile.Instruments.Select(instrument => new PianoSequenzer(instrument, this.SampleRate, this)).ToArray();
+            var newItems = midiFile.Instruments.Select(instrument => new PianoSequenzer(instrument, this.SampleRate, this, this.audioRecorder)).ToArray();
             Sequenzers.AddRange(newItems);
 
             UpdateMaxAllowedSize();
@@ -142,7 +144,7 @@ namespace WaveMaker.Sequenzer
 
         public PianoSequenzer AddEmptySequenzer(SequenzerSize maxAllowedSize)
         {
-            var newItem = new PianoSequenzer(GetNextFreeInstrument(), maxAllowedSize, this.SampleRate, this);
+            var newItem = new PianoSequenzer(GetNextFreeInstrument(), maxAllowedSize, this.SampleRate, this, this.audioRecorder);
             Sequenzers.Add(newItem);
 
             UpdateMaxAllowedSize();

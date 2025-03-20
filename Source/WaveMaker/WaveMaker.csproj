@@ -46,9 +46,12 @@
     <Compile Include="BlockSampleEffects\PitchShifter.cs" />
     <Compile Include="BlockSampleEffects\SpeedChanger.cs" />
     <Compile Include="Helper\XmlHelper.cs" />
+    <Compile Include="IAudioRecorder.cs" />
+    <Compile Include="SignalSource.cs" />
     <Compile Include="SingleSampleProvider\ISingleSampleProvider.cs" />
     <Compile Include="IAudioFileHandler.cs" />
-    <Compile Include="IWaveMaker.cs" />
+    <Compile Include="IAudioPlayer.cs" />
+    <Compile Include="SingleSampleProvider\Piano\PianoComponents\AudioRecorderPianoComponent.cs" />
     <Compile Include="SingleSampleProvider\Piano\PianoComponents\GainEffect.cs" />
     <Compile Include="SingleSampleProvider\Piano\Piano.cs" />
     <Compile Include="SingleSampleProvider\Piano\PianoComponents\AdsrEnvelope.cs" />

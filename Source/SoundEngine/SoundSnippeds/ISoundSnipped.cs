@@ -24,11 +24,8 @@ namespace SoundEngine.SoundSnippeds
         float KeyStrokeSpeed { get; set; } //1 = Spiele in normaler Geschwindigkeit, 2 = Doppelt so schnell, 0.5 = Halbe Geschwindigkeit
     }
 
-    //Menge von Samples (Aus mp3/wma/wav oder .music-Datei)
-    public interface IAudioFileSnipped : ISoundSnippedWithEndTrigger
+    public interface IAudioEffects
     {
-        float Pitch { get; set; } //Für Audio-File-Töne
-        float Speed { get; set; } //Für Audio-File-Töne
         bool UseDelayEffekt { get; set; }
         bool UseHallEffekt { get; set; }
         bool UseGainEffekt { get; set; }
@@ -37,9 +34,24 @@ namespace SoundEngine.SoundSnippeds
         float VolumeLfoFrequency { get; set; }
     }
 
+    //Menge von Samples (Aus mp3/wma/wav oder .music-Datei)
+    public interface IAudioFileSnipped : ISoundSnippedWithEndTrigger, IAudioEffects
+    {
+        float Pitch { get; set; } //Für Audio-File-Töne
+        float Speed { get; set; } //Für Audio-File-Töne
+    }
+
     public interface IFrequenceToneSnipped : ISoundSnipped
     {
         float Frequency { get; set; } //Für Synthi-Töne        
         Synthesizer Synthesizer { get; }
     }
+
+    public interface IAudioRecorderSnipped : ISoundSnipped, IAudioEffects
+    {
+        string[] GetAvailableDevices();
+        string SelectedDevice { get; set; }
+        void UseDefaultDevice();
+    }
 }
+

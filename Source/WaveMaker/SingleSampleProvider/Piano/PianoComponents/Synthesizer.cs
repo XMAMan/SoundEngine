@@ -27,7 +27,7 @@ namespace WaveMaker.KeyboardComponents
         public string AudioFileName { get; set; } = "";
         public float LeftAudioFilePosition { get; set; } = 0;
         public float RightAudioFilePosition { get; set; } = 0;
-        public bool UseDataFromAudioFileInsteadFromOszi { get; set; } = false;
+        public SignalSource SignalSource { get; set; } = SignalSource.Oscillator;
         public float AudioFileGain { get; set; } = 100;
         public float AudioFilePitch { get; set; } = 1;
         public float AudioFileSpeed { get; set; } = 1;
@@ -55,11 +55,18 @@ namespace WaveMaker.KeyboardComponents
     //[OscilatorWithLfo] -> [MultiOscillator] -> [Filter] -> [AdsrEnvelope]
     public class Synthesizer : IPianoComponent
     {
+        //Source 1: Oscilator
         public OscilatorWithLfo Oscilator { get; private set; }
         public MultiOscillator MultiOscillator { get; private set; }
         public Mixer OscWithSubOscMixer { get; private set; }
+
+        //Source 2: AudioFile
         public AudioFile AudioFile { get; private set; } //Kann anstelle der gemixten Oszilatoren genommen werden
-        public Switch OsziAudioFileSwitch { get; private set; }
+        
+        //Source 3: Microfon
+        public AudioRecorderPianoComponent AudioRecorder { get; private set; }
+
+        public Switch SourceSwitch { get; private set; }
        
         public Filter LowPass { get; private set; }
         public Filter HighPass { get; private set; }
@@ -71,7 +78,7 @@ namespace WaveMaker.KeyboardComponents
 
         private IPianoStopKeyHandler[] stopKeyHandler; //Sagen, wie lange nach dem Release-Key-Signal noch der Ton weiter geht 
 
-        public Synthesizer(int sampleRate)
+        public Synthesizer(int sampleRate, IAudioRecorder audioRecorder)
         {
             //Source 1: Oscilator
             this.Oscilator = new OscilatorWithLfo(sampleRate);
@@ -81,11 +88,14 @@ namespace WaveMaker.KeyboardComponents
             //Source 2: AudioFile
             this.AudioFile = new AudioFile(sampleRate);
 
-            //Switch between Oscilator and AudioFile
-            this.OsziAudioFileSwitch = new Switch(this.OscWithSubOscMixer, this.AudioFile);
+            //Source 3: Microfon
+            this.AudioRecorder = new AudioRecorderPianoComponent(audioRecorder);
+
+            //Switch between Oscilator, AudioFile and Microfon
+            this.SourceSwitch = new Switch(this.OscWithSubOscMixer, this.AudioFile, this.AudioRecorder);
 
             //Effects
-            this.LowPass = new Filter(this.OsziAudioFileSwitch, FilterType.LowPass, sampleRate) { CutOffFrequence = 0.5f };
+            this.LowPass = new Filter(this.SourceSwitch, FilterType.LowPass, sampleRate) { CutOffFrequence = 0.5f };
             this.HighPass = new Filter(this.LowPass, FilterType.HighPass, sampleRate) { CutOffFrequence = 0.5f };
             this.AdsrEnvelope = new AdsrEnvelope(this.HighPass, sampleRate);
             this.DelayEffect = new DelayEffect(this.AdsrEnvelope, sampleRate);
@@ -129,8 +139,8 @@ namespace WaveMaker.KeyboardComponents
                 this.AudioFileData = audioFileReader.GetSamplesFromAudioFile(absolutPath, sampleRate);
             }
             this.LeftAudioFilePosition = data.LeftAudioFilePosition;
-            this.RightAudioFilePosition = data.RightAudioFilePosition;
-            this.UseDataFromAudioFileInsteadFromOszi = data.UseDataFromAudioFileInsteadFromOszi;            
+            this.RightAudioFilePosition = data.RightAudioFilePosition;  
+            this.SignalSource = data.SignalSource;
             this.AudioFilePitch = data.AudioFilePitch;
             this.AudioFileSpeed = data.AudioFileSpeed;
             this.IsLowPassEnabled = data.IsLowPassEnabled;
@@ -176,8 +186,8 @@ namespace WaveMaker.KeyboardComponents
                 AmplitudeLfoPulseWidth = this.AmplitudeLfoPulseWidth,
                 AudioFileName = this.AudioFileName,
                 LeftAudioFilePosition = this.LeftAudioFilePosition,
-                RightAudioFilePosition = this.RightAudioFilePosition,
-                UseDataFromAudioFileInsteadFromOszi = this.UseDataFromAudioFileInsteadFromOszi,               
+                RightAudioFilePosition = this.RightAudioFilePosition,  
+                SignalSource = this.SignalSource,
                 AudioFilePitch = this.AudioFilePitch,
                 AudioFileSpeed = this.AudioFileSpeed,
                 IsLowPassEnabled = this.IsLowPassEnabled,
@@ -239,7 +249,7 @@ namespace WaveMaker.KeyboardComponents
         public float[] AudioFileData { get { return this.AudioFile.SampleData; } set { this.AudioFile.SampleData = value; } }
         public float LeftAudioFilePosition { get { return this.AudioFile.LeftPositionInMilliseconds; } set { this.AudioFile.LeftPositionInMilliseconds = value; } }
         public float RightAudioFilePosition { get { return this.AudioFile.RightPositionInMilliseconds; } set { this.AudioFile.RightPositionInMilliseconds = value; } }
-        public bool UseDataFromAudioFileInsteadFromOszi { get { return this.OsziAudioFileSwitch.SwitchValue == Switch.SwitchValues.B; } set { this.OsziAudioFileSwitch.SwitchValue = value ? Switch.SwitchValues.B : Switch.SwitchValues.A; } }
+        public SignalSource SignalSource { get => this.SourceSwitch.SignalSource; set => this.SourceSwitch.SignalSource = value; }
         public float AudioFilePitch { get { return this.AudioFile.Pitch; } set { this.AudioFile.Pitch = value; } }
         public float AudioFileSpeed { get { return this.AudioFile.Speed; } set { this.AudioFile.Speed = value; } }
 

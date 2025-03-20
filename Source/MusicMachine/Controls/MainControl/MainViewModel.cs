@@ -1,5 +1,7 @@
 ﻿using MusicMachine.Controls.SequenzerElements.MultiSequenzer;
+using NAudioWaveMaker;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System;
 using WaveMaker;
 using WaveMaker.Sequenzer;
@@ -56,7 +58,8 @@ namespace MusicMachine.Controls.MainControl
     //https://www.youtube.com/watch?v=GJRMmJnpknY -> Hier wird erklärt wie man ein Lied komponiert (Arkorde)
     public class MainViewModel : ReactiveObject, IDisposable
     {
-        private IWaveMaker waveMaker;
+        private IAudioPlayer audioPlayer;
+        private IAudioRecorder audioRecorder;
 
         public MultiSequenzerViewModel MultiSequenzerViewModel { get; private set; }
 
@@ -64,17 +67,27 @@ namespace MusicMachine.Controls.MainControl
         {
             int sampleRate = 44100 / 2; //Das hier ist der Vorgabewert, welcher dann an alle anderen Stellen durchgereicht wird (Könnte man als Globallen Einstellparameter auslagern)
 
-            var multiSequenzer = new MultiSequenzer(sampleRate);
+            this.audioRecorder = new AudioRecorder(sampleRate);
+
+            var multiSequenzer = new MultiSequenzer(sampleRate, this.audioRecorder);
+
+            this.audioPlayer = new NAudioWaveMaker.AudioPlayer(multiSequenzer);
+            this.audioPlayer.StartPlaying();
+
             this.MultiSequenzerViewModel = new MultiSequenzerViewModel(multiSequenzer, new NAudioWaveMaker.AudioFileHandler());
-            this.waveMaker = new NAudioWaveMaker.WaveMaker(multiSequenzer);
-            this.waveMaker.StartPlaying();
         }
 
         public void Dispose()
         {
-            if (this.waveMaker is IDisposable)
+            if (this.audioPlayer is IDisposable)
             {
-                (this.waveMaker as IDisposable).Dispose();
+                (this.audioPlayer as IDisposable).Dispose();
+            }
+
+            if (this.audioRecorder is IDisposable)
+            {
+
+               (this.audioRecorder as IDisposable).Dispose();
             }
         }
     }

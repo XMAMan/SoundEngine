@@ -15,6 +15,7 @@ namespace SoundEngine
         private MultiSequenzer frequenzTones; //Jeder Sequenzer erzeugt ein anderen Ton (Enthält keine Noten; Es wird nur der Synthesizer benutzt)
 
         private IAudioFileReader audioFileReader;
+        private IAudioRecorder audioRecorder;
 
         private List<FrequencyTone> frequenzeToneList = new List<FrequencyTone>();
         public IFrequenceToneSnipped[] GetAllFrequenceTones()
@@ -22,14 +23,17 @@ namespace SoundEngine
             return this.frequenzeToneList.ToArray();
         }
 
-        public SoundSnippedCollection(IAudioFileReader audioFileReader, int sampleRate)
+        public SoundSnippedCollection(IAudioFileReader audioFileReader, int sampleRate, IAudioRecorder audioRecorder, ISingleSampleProvider audioRecorderSnipped)
         {
             this.SampleRate = sampleRate;
             this.audioFileReader = audioFileReader;
+            this.audioRecorder = audioRecorder;
 
-            this.frequenzTones = new MultiSequenzer(this.SampleRate);
+            this.frequenzTones = new MultiSequenzer(this.SampleRate, this.audioRecorder);
 
             this.frequenzTones.Volume = 1;
+
+            this.sampleProviders.Add(audioRecorderSnipped);
         }
 
         public float Volume { get; set; } = 1;
@@ -57,7 +61,7 @@ namespace SoundEngine
         //.music-Dateien wo ich die darin enthaltenen Instrumente einzeln starten/stoppen will
         public IFrequenceToneSnipped[] AddSynthSoundCollection(string musicFile)
         {
-            var multi = MultiSequenzer.LoadFromFile(musicFile, this.audioFileReader, this.SampleRate);
+            var multi = MultiSequenzer.LoadFromFile(musicFile, this.audioFileReader, this.SampleRate, this.audioRecorder);
             multi.Volume = 1;
             var syntList = multi.GetAllSequenzers().Select(x => new FrequencyTone(x)).ToList();
             this.frequenzeToneList.AddRange(syntList);
@@ -68,7 +72,7 @@ namespace SoundEngine
         //.music-Dateien (Beispiel: Intro-Musik die aus mehreren Instrumenten besteht) -> Die Wiedergabe läßt alle Einzelsequenzer gleichzeitig abspielen
         public IMusicFileSnipped AddMusicFile(string musicFile)
         {
-            var multi = MultiSequenzer.LoadFromFile(musicFile, this.audioFileReader, this.SampleRate);
+            var multi = MultiSequenzer.LoadFromFile(musicFile, this.audioFileReader, this.SampleRate, this.audioRecorder);
             multi.Volume = 1;
             var soundFile = new MusicFile(multi);
             this.sampleProviders.Add(soundFile);

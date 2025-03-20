@@ -10,7 +10,7 @@
              xmlns:adsrenvelope="clr-namespace:MusicMachine.Controls.SynthesizerElements.AdsrEnvelope" 
              xmlns:audiofilecontrol="clr-namespace:MusicMachine.Controls.SynthesizerElements.AudioFileControl" 
              xmlns:filter="clr-namespace:MusicMachine.Controls.SynthesizerElements.Filter" 
-             xmlns:oscillator="clr-namespace:MusicMachine.Controls.SynthesizerElements.Oscillator" xmlns:spezialeffects="clr-namespace:MusicMachine.Controls.SynthesizerElements.SpezialEffects"
+             xmlns:oscillator="clr-namespace:MusicMachine.Controls.SynthesizerElements.Oscillator" xmlns:spezialeffects="clr-namespace:MusicMachine.Controls.SynthesizerElements.SpezialEffects" xmlns:microphonecontrol="clr-namespace:MusicMachine.Controls.SynthesizerElements.MicrophoneControl"
                           mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -27,6 +27,9 @@
                     </GroupBox>
                     <GroupBox Header="AudioFile" Visibility="{Binding AudioFileVisibility}">
                         <audiofilecontrol:AudioFileView DataContext="{Binding AudioFileViewModel}" Height="30" HorizontalAlignment="Left"/>
+                    </GroupBox>
+                    <GroupBox Header="Microphone" Visibility="{Binding MicrophoneVisibility}">
+                        <microphonecontrol:MicrophoneView DataContext="{Binding MicrophoneViewModel}"/>
                     </GroupBox>
                 </StackPanel>
                 <GroupBox Header="Effects" Visibility="Visible">

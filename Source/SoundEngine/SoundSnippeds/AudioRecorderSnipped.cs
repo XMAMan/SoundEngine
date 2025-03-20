@@ -4,59 +4,35 @@ using WaveMaker.KeyboardComponents;
 
 namespace SoundEngine.SoundSnippeds
 {
-    //wav,wma,mp3,... (Alles was NAudio untersützt)
-    class SoundFile : ISingleSampleProvider, ISoundSnipped, IAudioFileSnipped
+    //Wiedergabe der Mikrofon-Eingangsdaten aber mit Effekten versehen
+    internal class AudioRecorderSnipped : ISingleSampleProvider, IAudioRecorderSnipped
     {
-        private AudioFile audioFile;
+        private IAudioRecorder audioRecorder;
         private Synthesizer synthesizer;
         private KeySampleData keySampleData = new KeySampleData(float.NaN);
 
-        internal SoundFile(int sampmleRate, float[] samples)
+        public AudioRecorderSnipped(int sampleRate, IAudioRecorder audioRecorder)
         {
-            this.SampleRate = sampmleRate;
+            this.audioRecorder = audioRecorder;
+            this.SampleRate = sampleRate;
 
-            this.audioFile = GetFileFromSamples(sampmleRate, samples);
-
-            this.synthesizer = new Synthesizer(sampmleRate, null) 
-            { 
-                SignalSource = SignalSource.AudioFile,
-                AudioFileData = samples,
-                LeftAudioFilePosition = 0,
-                RightAudioFilePosition = audioFile.GetFileLengthInMilliseconds()
-            };           
-        }
-
-        private AudioFile GetFileFromSamples(int sampmleRate, float[] samples)
-        {
-            var audioFile = new AudioFile(sampmleRate);
-            audioFile.SampleData = samples;
-            audioFile.RightPositionInMilliseconds = audioFile.GetFileLengthInMilliseconds();
-
-            return audioFile;
+            this.synthesizer = new Synthesizer(sampleRate, audioRecorder)
+            {
+                SignalSource = SignalSource.Microphone,
+            };
         }
 
         public int SampleRate { get; private set; }
+
         public float GetNextSample()
         {
             if (this.IsRunning == false) return 0;
 
             this.keySampleData.SampleIndex++;
-            if (this.keySampleData.SampleIndex >= this.audioFile.SampleData.Length)
-            {
-                if (this.AutoLoop)
-                {
-                    this.keySampleData.SampleIndex = 0;
-                }
-                else
-                {
-                    this.IsRunning = false;
-                }
-
-                if (this.EndTrigger != null) this.EndTrigger();
-            }
 
             return this.synthesizer.GetSample(this.keySampleData) * this.Volume;
         }
+
         private bool isRunning = false;
         public bool IsRunning
         {
@@ -72,31 +48,35 @@ namespace SoundEngine.SoundSnippeds
             }
         }
         public Action<bool> IsRunningChanged { get; set; } = null;
-        public Action EndTrigger { get; set; } = null;
 
         public void Play()
         {
-            Reset();
+            this.audioRecorder.StartRecording();
             this.IsRunning = true;
         }
         public void Stop()
         {
             this.IsRunning = false;
+            this.audioRecorder.StopRecording();            
         }
-        public void Reset() //Springe zum Anfang zurück
-        {
-            this.keySampleData.SampleIndex = 0;
-        }
-        public float Volume { get; set; } = 1;
-        public bool AutoLoop { get; set; } = false;
 
-        public float Pitch { get { return this.audioFile.Pitch; } set { this.audioFile.Pitch = value; } }
-        public float Speed { get { return this.audioFile.Speed; } set { this.audioFile.Speed = value; } }
+        public float Volume { get; set; } = 1;
+
         public bool UseDelayEffekt { get { return this.synthesizer.UseDelayEffekt; } set { this.synthesizer.UseDelayEffekt = value; } }
         public bool UseHallEffekt { get { return this.synthesizer.UseHallEffekt; } set { this.synthesizer.UseHallEffekt = value; } }
         public bool UseGainEffekt { get { return this.synthesizer.UseGainEffekt; } set { this.synthesizer.UseGainEffekt = value; } }
         public float Gain { get { return this.synthesizer.Gain; } set { this.synthesizer.Gain = value; } }
         public bool UseVolumeLfo { get { return this.synthesizer.UseVolumeLfo; } set { this.synthesizer.UseVolumeLfo = value; } }
         public float VolumeLfoFrequency { get { return this.synthesizer.VolumeLfoFrequency; } set { this.synthesizer.VolumeLfoFrequency = value; } }
+
+        public string[] GetAvailableDevices()
+        {
+            return this.audioRecorder.GetAvailableDevices();
+        }
+        public string SelectedDevice { get { return this.audioRecorder.SelectedDevice; } set { this.audioRecorder.SelectedDevice = value; } }
+        public void UseDefaultDevice()
+        {
+            this.audioRecorder.UseDefaultDevice();
+        }
     }
 }

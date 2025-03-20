@@ -27,7 +27,6 @@ namespace SoundEngine.SoundSnippeds
 
             return sample;
         }
-        //public bool IsRunning { get { return this.multiSequenzer.IsRunning; } set { this.multiSequenzer.IsRunning = value; } }
 
         private bool isRunning = false;
         public bool IsRunning

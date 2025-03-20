@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-16"?>
 <MultiSequenzerData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <MidiFileFileName>Potter1.mid</MidiFileFileName>
+  <MidiFileFileName />
   <LengthInMillisecondsForNewCreatedNotes>250</LengthInMillisecondsForNewCreatedNotes>
-  <SnapToGrid>false</SnapToGrid>
-  <SampleCount>742350</SampleCount>
+  <SnapToGrid>true</SnapToGrid>
+  <SampleCount>551250</SampleCount>
   <MinToneIndex>24</MinToneIndex>
-  <MaxToneIndex>88</MaxToneIndex>
+  <MaxToneIndex>72</MaxToneIndex>
   <SynthesizerData>
     <SequenzerData>
       <InstrumentName>AcousticGrand</InstrumentName>
-	  <Volume>0.5</Volume>
+      <Volume>0.5</Volume>
       <IsEnabled>true</IsEnabled>
+      <TestToneFrequence>440</TestToneFrequence>
       <SynthesizerData>
         <UseFrequencyLfo>false</UseFrequencyLfo>
         <FrequencyLfoFrequenc>5</FrequencyLfoFrequenc>
@@ -18,60 +19,94 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
+        <UsePulsewidthLfo>false</UsePulsewidthLfo>
+        <PulsewidthLfoFrequence>5</PulsewidthLfoFrequence>
+        <PulsewidthLfoAmplitude>0.2</PulsewidthLfoAmplitude>
         <OsziType>Rectangle</OsziType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
         <OsziCount>2</OsziCount>
         <Pitch>3</Pitch>
+        <SubOszVolume>0</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
-        <AmplitudeLfoFrequenc>3.27586269</AmplitudeLfoFrequenc>
-        <AudioFileName>Load Audio-File</AudioFileName>
+        <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
+        <AmplitudeLfoAmplitude>1</AmplitudeLfoAmplitude>
+        <AmplitudeLfoPulseWidth>1</AmplitudeLfoPulseWidth>
+        <AudioFileName>Soundsystem.mp3</AudioFileName>
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
-        <RightAudioFilePosition>0</RightAudioFilePosition>
-        <SignalSource>Oscillator</SignalSource>
-        <AudioFileGain>7</AudioFileGain>
+        <RightAudioFilePosition>4000</RightAudioFilePosition>
+        <SignalSource>AudioFile</SignalSource>
+        <AudioFileGain>100</AudioFileGain>
+        <AudioFilePitch>1</AudioFilePitch>
+        <AudioFileSpeed>1</AudioFileSpeed>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassCutOffFrequence>0.5</LowPassCutOffFrequence>
         <LowPassResonance>0.200000048</LowPassResonance>
+        <IsHighPassEnabled>false</IsHighPassEnabled>
+        <HighPassCutOffFrequence>0.5</HighPassCutOffFrequence>
+        <HighPassResonance>0.200000048</HighPassResonance>
         <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
+        <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
-      <InstrumentName>Vibraphone</InstrumentName>
+      <InstrumentName>BrightAcoustic</InstrumentName>
+      <Volume>0.5</Volume>
+      <IsEnabled>true</IsEnabled>
+      <TestToneFrequence>440</TestToneFrequence>
       <SynthesizerData>
-        <Volume>1</Volume>
-        <IsEnabled>true</IsEnabled>
         <UseFrequencyLfo>false</UseFrequencyLfo>
         <FrequencyLfoFrequenc>5</FrequencyLfoFrequenc>
         <FrequencyLfoAmplitude>0.8</FrequencyLfoAmplitude>
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>Triangle</OsziType>
+        <UsePulsewidthLfo>false</UsePulsewidthLfo>
+        <PulsewidthLfoFrequence>5</PulsewidthLfoFrequence>
+        <PulsewidthLfoAmplitude>0.2</PulsewidthLfoAmplitude>
+        <OsziType>Rectangle</OsziType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
         <OsziCount>2</OsziCount>
         <Pitch>3</Pitch>
+        <SubOszVolume>0</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
+        <AmplitudeLfoAmplitude>1</AmplitudeLfoAmplitude>
+        <AmplitudeLfoPulseWidth>1</AmplitudeLfoPulseWidth>
         <AudioFileName>Load Audio-File</AudioFileName>
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
         <SignalSource>Oscillator</SignalSource>
-        <AudioFileGain>7</AudioFileGain>
+        <AudioFileGain>100</AudioFileGain>
+        <AudioFilePitch>1</AudioFilePitch>
+        <AudioFileSpeed>1</AudioFileSpeed>
         <IsLowPassEnabled>false</IsLowPassEnabled>
-        <LowPassCutOffFrequence>1</LowPassCutOffFrequence>
+        <LowPassCutOffFrequence>0.5</LowPassCutOffFrequence>
         <LowPassResonance>0.200000048</LowPassResonance>
-        <AttackTimeInMs>0</AttackTimeInMs>
+        <IsHighPassEnabled>false</IsHighPassEnabled>
+        <HighPassCutOffFrequence>0.5</HighPassCutOffFrequence>
+        <HighPassResonance>0.200000048</HighPassResonance>
+        <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
-        <SustainVolume>0.24545452</SustainVolume>
+        <SustainVolume>0.9</SustainVolume>
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
+        <UseHallEffekt>false</UseHallEffekt>
+        <UseGainEffekt>false</UseGainEffekt>
+        <Gain>7</Gain>
+        <UseVolumeLfo>false</UseVolumeLfo>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
   </SynthesizerData>
+  <KeyStrokeSpeed>1</KeyStrokeSpeed>
 </MultiSequenzerData>

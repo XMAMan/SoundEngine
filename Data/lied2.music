@@ -30,7 +30,7 @@
         <AudioFileName>Load Audio-File</AudioFileName>
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
-        <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+        <SignalSource>Oscillator</SignalSource>
         <AudioFileGain>7</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>
@@ -67,7 +67,7 @@
         <AudioFileName>Load Audio-File</AudioFileName>
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
         <RightAudioFilePosition>0</RightAudioFilePosition>
-        <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+        <SignalSource>Oscillator</SignalSource>
         <AudioFileGain>7</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <IsLowPassEnabled>false</IsLowPassEnabled>

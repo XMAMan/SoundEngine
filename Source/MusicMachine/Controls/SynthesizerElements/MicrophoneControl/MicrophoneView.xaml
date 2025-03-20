@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="MusicMachine.Controls.SynthesizerElements.MicrophoneControl.MicrophoneView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MusicMachine.Controls.SynthesizerElements.MicrophoneControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding StartStopCommand}"  Width="35" Height="35">
+                <Image Source="{Binding StartStopImage}" Width="30" Height="30" Name="image"/>
+            </Button>
+            <ComboBox HorizontalAlignment="Left" Margin="2" ItemsSource="{Binding SignalSources}" SelectedItem="{Binding SelectedSignalSource}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

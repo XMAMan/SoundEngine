@@ -1,4 +1,5 @@
-﻿using SoundEngine.SoundSnippeds;
+﻿using NAudioWaveMaker;
+using SoundEngine.SoundSnippeds;
 using System;
 using WaveMaker;
 
@@ -6,26 +7,38 @@ namespace SoundEngine
 {
     public class SoundGenerator : IDisposable, ISoundGenerator
     {
-        private IWaveMaker waveMaker;
+        private IAudioPlayer audioPlayer;
+        private IAudioRecorder audioRecorder;
         private SoundSnippedCollection sampleProviderCollection;
 
         public SoundGenerator()
         {
-            this.sampleProviderCollection = new SoundSnippedCollection(new NAudioWaveMaker.AudioFileHandler(), this.SampleRate);
+            this.audioRecorder = new NAudioWaveMaker.AudioRecorder(this.SampleRate);
+            var audioRecorderSnipp = new AudioRecorderSnipped(this.SampleRate, this.audioRecorder);
+            this.sampleProviderCollection = new SoundSnippedCollection(new NAudioWaveMaker.AudioFileHandler(), this.SampleRate, this.audioRecorder, audioRecorderSnipp);
 
-            this.waveMaker = new NAudioWaveMaker.WaveMaker(this.sampleProviderCollection);
-            this.waveMaker.StartPlaying();
+            this.audioPlayer = new NAudioWaveMaker.AudioPlayer(this.sampleProviderCollection);
+            this.audioPlayer.StartPlaying();
+
+            this.AudioRecorderSnipped = audioRecorderSnipp;
         }
 
         public float Volume { get { return this.sampleProviderCollection.Volume; } set { this.sampleProviderCollection.Volume = value; } }
 
         public int SampleRate { get { return 44100 / 2; } }
 
+        public IAudioRecorderSnipped AudioRecorderSnipped { get; private set; }
+
         public void Dispose()
         {
-            if (this.waveMaker is IDisposable)
+            if (this.audioPlayer is IDisposable)
             {
-                (this.waveMaker as IDisposable).Dispose();
+                (this.audioPlayer as IDisposable).Dispose();
+            }
+
+            if (this.audioRecorder is IDisposable)
+            {
+                (this.audioRecorder as IDisposable).Dispose();
             }
         }
 

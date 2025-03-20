@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoundEngineTest"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1600">
+        Title="MainWindow" Height="500" Width="1600">
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
@@ -49,6 +49,16 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[6]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts6}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SoundEffekts.music[7]:"/>
+                <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts7}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
                 <Label Content="TieferBass.synt:"/>
                 <local:FrequenceToneSnippedView DataContext="{Binding TieferBass}"/>
             </StackPanel>
@@ -61,6 +71,11 @@
             <StackPanel Orientation="Horizontal">
                 <Label Content="Hallo.synt:"/>
                 <local:FrequenceToneSnippedView DataContext="{Binding Hallo}"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="AudioRecorder:"/>
+                <local:AudioRecorderSnippedView DataContext="{Binding AudioRecorder}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
