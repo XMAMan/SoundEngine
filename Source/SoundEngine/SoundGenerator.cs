@@ -1,5 +1,4 @@
-﻿using NAudioWaveMaker;
-using SoundEngine.SoundSnippeds;
+﻿using SoundEngine.SoundSnippeds;
 using System;
 using WaveMaker;
 
