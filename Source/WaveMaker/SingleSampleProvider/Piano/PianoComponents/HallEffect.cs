@@ -5,8 +5,19 @@
     {
         private IPianoComponent source;
         private DelayEffect[] delays;
+        private int sampleRate;
 
-        public int HallCount { get; set; } = 5; //Anzahl der Schallwiederholungen
+        //Anzahl der Schallwiederholungen
+        private int hallCount = 5;
+        public int HallCount 
+        { 
+            get => this.hallCount;
+            set
+            {
+                this.hallCount = value;
+                SetAllInternSettings(this.sampleRate, value, this.Gain, this.DelayTimeInMs);
+            }
+        }
         public bool IsEnabled { get; set; } = false;
         public float Gain //geht von 0 bis +1 (Stärke des Effekts)
         { 
@@ -16,7 +27,10 @@
             }
             set
             {
-                foreach (var d in this.delays) d.Gain = value;
+                for (int i = 0; i < this.delays.Length; i++)
+                {
+                    this.delays[i].DelayTimeInMs = value - i * 0.05f;
+                }
             }
         }
 
@@ -28,7 +42,10 @@
             }
             set
             {
-                foreach (var d in this.delays) d.DelayTimeInMs = value;
+                for (int i = 0; i < this.delays.Length; i++)
+                {
+                    this.delays[i].DelayTimeInMs = value + 300 * i;
+                }
             }
         }
 
@@ -37,11 +54,20 @@
         public HallEffect(IPianoComponent source, int sampleRate)
         {
             this.source = source;
+            this.sampleRate = sampleRate;
 
-            this.delays = new DelayEffect[this.HallCount];
+            SetAllInternSettings(sampleRate, this.HallCount, 0.3f, 200);
+        }
 
-            this.delays[0] = new DelayEffect(source, sampleRate) { IsEnabled = true, DelayTimeInMs = 200 };
-            for (int i = 1; i < this.delays.Length; i++) this.delays[i] = new DelayEffect(this.delays[i - 1], sampleRate) { IsEnabled = true, DelayTimeInMs = 200 + 300 * i, Gain = 0.3f - i * 0.05f };
+        private void SetAllInternSettings(int sampleRate, int HallCount, float gain, float delayTimeInMs)
+        {
+            this.delays = new DelayEffect[HallCount];
+
+            this.delays[0] = new DelayEffect(source, sampleRate) { IsEnabled = true };
+            for (int i = 1; i < this.delays.Length; i++) this.delays[i] = new DelayEffect(this.delays[i - 1], sampleRate) { IsEnabled = true };
+
+            this.Gain = gain;
+            this.DelayTimeInMs = delayTimeInMs;
         }
 
         public float GetSample(KeySampleData data)

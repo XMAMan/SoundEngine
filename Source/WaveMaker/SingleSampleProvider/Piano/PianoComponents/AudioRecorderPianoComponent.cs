@@ -8,6 +8,7 @@
             this.AudioRecorder = audioRecorder;
         }
 
+        //sorge dafür, dass wenn GetSample für ein SampleIndex mehrmals aufgerufen wird, dass es immer den gleichen Wert zurück gibt
         private int alreadyUsedIndex = -1;
         private float lastSample = 0;
 
