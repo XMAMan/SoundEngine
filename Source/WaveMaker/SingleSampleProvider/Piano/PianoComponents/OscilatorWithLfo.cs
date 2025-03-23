@@ -13,7 +13,7 @@ namespace WaveMaker.KeyboardComponents
             :base(sampleRate)
         {
             this.lfoFrequency = new LowFrequenzyOszillator(sampleRate) { Frequency = 5, Amplitude = 0.8f, SignalType = SignalType.Sinus };
-            this.lfoAmplitude = new LowFrequenzyOszillator(sampleRate) { SignalType = SignalType.Rectangle, PusleWidth = 1.0f }; //PulseWidth von 1 bedeutet, es wird eines Sinusschwingung verwendet (Siehe Zeile 40)
+            this.lfoAmplitude = new LowFrequenzyOszillator(sampleRate) { SignalType = SignalType.Rectangle, PusleWidth = 1.0f }; //PulseWidth von 1 bedeutet, es wird eines Sinusschwingung verwendet (Siehe Zeile 42)
             this.lfoPulsewidth = new LowFrequenzyOszillator(sampleRate) { Frequency = 5, Amplitude = 0.2f, SignalType = SignalType.Sinus };
             this.ramp = new Ramp(sampleRate);
         }

@@ -127,7 +127,7 @@ namespace NAudioWaveMaker
 
         void WaveIn_DataAvailable(object sender, NAudio.Wave.WaveInEventArgs e)
         {
-            buffered.AddSamples(e.Buffer, 0, e.BytesRecorded);
+            buffered.AddSamples(e.Buffer, 0, e.BytesRecorded);            
         }
 
         public void Dispose()

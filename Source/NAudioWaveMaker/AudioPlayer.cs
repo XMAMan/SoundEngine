@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WaveMaker;
 
 //https://csharp.hotexamples.com/de/examples/NAudio.Wave/AudioFileReader/-/php-audiofilereader-class-examples.html -> NAudio-Beispiele
@@ -14,10 +15,10 @@ namespace NAudioWaveMaker
 
         private WaveOut driverOut;
         private ISampleProvider sampleProvider;
-
+        
         public AudioPlayer(ISingleSampleProvider audioCallback)
         {
-            this.sampleProvider = new SampleProviderFromSingleSampleProvider(audioCallback);
+            this.sampleProvider = new SampleProviderFromSingleSampleProvider(audioCallback);            
 
             UseDefaultDevice();
         }
@@ -128,12 +129,15 @@ namespace NAudioWaveMaker
     {
         private int sampleIndex = 0;
         private ISingleSampleProvider audioCallback;
+        private TaskScheduler uiContext; //Wird benötigt, um Exceptions vom Audio-Timer-Thread in den GUI-Thread zu bringen
+
         public WaveFormat WaveFormat { get; private set; }
 
         public SampleProviderFromSingleSampleProvider(ISingleSampleProvider audioCallback)
         {
             this.audioCallback = audioCallback;
             this.WaveFormat = WaveFormat.CreateIeeeFloatWaveFormat(audioCallback.SampleRate, 2); //SampleRate = 44100 / 2
+            this.uiContext = TaskScheduler.FromCurrentSynchronizationContext();
         }
 
         public int Read(float[] buffer, int offset, int count)
@@ -155,7 +159,10 @@ namespace NAudioWaveMaker
                 }
                 catch (Exception ex)
                 {
-                    string error = ex.ToString();
+                    Task.Factory.StartNew(() =>
+                    {
+                        throw new Exception("AudioPlayer", ex);
+                    }, System.Threading.CancellationToken.None, TaskCreationOptions.None, this.uiContext);
                 }
                 
                 this.sampleIndex++;
