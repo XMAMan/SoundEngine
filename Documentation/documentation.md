@@ -18,7 +18,7 @@ the MultiSequenzer-object which change the sampleposition- and keyPress-state fr
 * MultiSequenzer.PianoSequenzer.Piano.keys[i]	-> Which key is pressed?
 
 The MultiSequenzer.GetNextSample()-function will return a float-samplevalue depending from the 3 
-varialbes, named here.
+variables, named here.
 The GUI-Thread can change any other variable/state inside the MultiSequenzer-object. The other variables are 
 used to define the instruments and the notes. 
 
