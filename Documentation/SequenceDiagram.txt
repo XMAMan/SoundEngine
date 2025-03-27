@@ -1,0 +1,87 @@
+@startuml
+participant "GUI-Thread" as GUI
+database "MultiSequenzer" as M
+participant "Audio-Output Timer" as OUT
+
+== Initialization ==
+note over M: MultiSequenzer-Object is created and referenced by GUI-Thread and Audio-Output-Timer
+GUI->GUI: Create MainView with MultiSequenzerView as child
+GUI->GUI: MainView.Constructor: Create MainViewModel
+GUI->GUI: MainViewModel.Constructor: <font color=red>Create MultiSequenzer</font>
+GUI->M: Call Constructor
+activate M
+M->M: MultiSequenzer.Constructor: Create PianoSequenzer-List 'Sequenzers'
+M-->GUI:
+deactivate M
+GUI->GUI: MainViewModel.Constructor: Create AudioPlayer with <font color=red>MultiSequenzer as Input</font>
+
+GUI->GUI: MainViewModel.Constructor: Call audioPlayer.StartPlaying()
+GUI->GUI: AudioPlayer.StartPlaying: Create NAudio.Wave.WaveOut
+GUI->GUI: AudioPlayer.StartPlaying: Call WaveOut.Play()
+GUI->GUI: WaveOut.Play: Create and start 'Audio-Output Timer'
+GUI->OUT: WaveOut.Play: Start Timer with <font color=red>MultiSequenzer</font>.GetNextSample() as callback
+activate OUT
+OUT->OUT: WaveOut.TimerCallback: Call <font color=red>MultiSequenzer.GetNextSample()</font> for each sample
+GUI->GUI: MainViewModel.Constructor: Create MultiSequenzerViewModel with <font color=red>MultiSequenzer as Input</font>
+GUI->GUI: MultiSequenzerViewModel.Constructor: Create SequenzerViewModel-List 'Sequenzers'
+
+
+== Create sequenzer ==
+note over M: MultiSequenzer.PianoSequenzer-List is modified by GUI-Thread
+GUI->GUI: MultiSequenzerView.CreateNewSession-MenueItem: Trigger CreateNewSessionCommand
+GUI->GUI: MultiSequenzerView.CreateNewSessionCommand: Call AddEmptySequenzer
+GUI->GUI: MultiSequenzerView.AddEmptySequenzer: PianoSequenzer sequenzerModel = MultiSequenzer.AddEmptySequenzer
+GUI->M: MultiSequenzer.AddEmptySequenzer: Call MultiSequenzer.AddEmptySequenzer
+activate M
+M->M: MultiSequenzer.AddEmptySequenzer: Create PianoSequenzer
+M->M: PianoSequenzer.Constructor: Create Piano-Object
+M->M: Piano.Constructor: Create Synthesizer-Object
+M->M: PianoSequenzer.Constructor: Create SequenzerKeys-Object
+M->M: <font color=red>MultiSequenzer.AddEmptySequenzer: Sequenzers.Add(PianoSequenzer)</font> 
+M-->GUI: PianoSequenzer-Object
+deactivate M
+GUI->GUI: MultiSequenzerView.AddEmptySequenzer: Create SequenzerViewModel with PianoSequenzer as Input
+GUI->GUI: MultiSequenzerView.AddEmptySequenzer: Add SequenzerViewModel to SequenzerViewModel-List
+GUI->GUI: MultiSequenzerView.AddEmptySequenzer: SelectedSequenzer = Sequenzers[0]
+
+== Play tones: Part 1: PlayDown-MouseDown ==
+note over M: MultiSequenzer.PianoSequenzer.Piano.keys[i] is modified by GUI-Thread
+GUI->GUI: MultiSequenzerView.PlayTone-Button: Trigger MouseDown-Event
+GUI->GUI: MultiSequenzerViewModel.PlayTestToneMouseDown: Call StartPlayingTestTone
+GUI->GUI: MultiSequenzerViewModel.StartPlayingTestTone: Call SelectedSequenzer.PlayTestToneMouseDown()
+GUI->GUI: SequenzerViewModel.PlayTestToneMouseDown: testTonekeyIndex = StartPlayingKey(TestToneFrequence)
+GUI->M: SequenzerViewModel.StartPlayingKey: Call PianoSequenzer.StartPlayingKey(frequency)
+activate M
+M->M: PianoSequenzer.StartPlayingKey: Call Piano.StartPlayingKey(frequency)
+M->M: <font color=red>Piano.StartPlayingKey: keys[i] = new KeyboardKey(this.Synthesizer, frequency)</font> 
+M->M: KeyboardKey.Constructor: Create KeySampleData-Object 
+M->M: KeySampleData.Constructor: SampleIndex = 0
+M->M: KeySampleData.Constructor: Frequency = frequency from Constructor-Parameter
+M-->GUI:
+deactivate M
+
+== Play tones: Part 2: AudioTimer-GetNextSample ==
+note over M
+MultiSequenzer.PianoSequenzer.Piano.keys[i].KeySampleData.SampleIndex is modified by Audio-Output-Timer
+MultiSequenzer.PianoSequenzer.SequenzerKeys.SampleIndex is modified by Audio-Output-Timer
+MultiSequenzer.PianoSequenzer.Piano.keys[i] is modified by Audio-Output-Timer
+MultiSequenzer.PianoSequenzer.Piano.keys[i].Synthesizer is readed by Audio-Output-Timer to get a float-Sample
+end note
+OUT->OUT: WaveOut.TimerCallback: Call MultiSequenzer.GetNextSample()
+OUT->M: MultiSequenzer.GetNextSample: Call PianoSequenzer-List[0].GetNextSample
+activate M
+M->M: PianoSequenzer.GetNextSample: Call SequenzerKeys.StartNextKeys()
+M->M: <font color=red>SequenzerKeys.StartNextKeys: this.SampleIndex += keyStrokeSpeed</font>
+note left: MultiSequenzer.PianoSequenzer.SequenzerKeys.SampleIndex is the playposition for the whole sequencer (blue line)
+M->M: PianoSequenzer.GetNextSample: Call Piano.StartPlayingKey
+M->M: <font color=red>Piano.StartPlayingKey: keys[i] = new KeyboardKey(Synthesizer, frequency)</font>
+note left: MultiSequenzer.PianoSequenzer.Piano.keys[i] defines, which keys are pressed
+M->M: PianoSequenzer.GetNextSample: Call Piano.GetNextSample()
+M->M: Piano.GetNextSample: Call keys[i].GetNextSample()
+M->M: KeyboardKey.GetNextSample: <font color=green>Call Synthesizer.GetSample with KeySampleData/SampleIndex as Input</font>
+M->M: <font color=red>KeyboardKey.GetNextSample: KeySampleData.SampleIndex++</font>
+note left: MultiSequenzer.PianoSequenzer.Piano.keys[i].KeySampleData.SampleIndex is the playposition inside a single note/key
+M-->OUT: float-Sample
+OUT->OUT: Write float-Sample to audio-output-buffer
+deactivate M
+@enduml

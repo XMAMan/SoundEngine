@@ -75,6 +75,8 @@ Usage
 Create with the editor (MusicMachine-Project) a .music-file. Use the SoundGenerator-class to load this file and play sounds in your game.
 Example for usage is in the SoundEngineTest-Project. 
 
+For the developer-documentation is shown here: [developer-documentation](./Documentation/documentation.md)
+
 License
 -------
 

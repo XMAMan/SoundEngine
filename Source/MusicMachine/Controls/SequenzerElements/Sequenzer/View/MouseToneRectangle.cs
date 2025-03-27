@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 
 namespace MusicMachine.Controls.SequenzerElements.Sequenzer
 {
+    //Das ist das Rechteck mit gestrichelter Linie, was sich verändert, wenn die Maus-Y-Position sich verändert
     public class MouseToneRectangle
     {
         private Rectangle rectangle;
