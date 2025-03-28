@@ -2,7 +2,6 @@
 using MusicMachine.Helper;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
 using System.IO;
 using System.Reactive;
 using System.Windows.Media.Imaging;

@@ -1,9 +1,6 @@
 ﻿using ReactiveUI;
-using System.Collections.Generic;
-using System;
 using WaveMaker;
 using WaveMaker.KeyboardComponents;
-using System.Linq;
 using ReactiveUI.Fody.Helpers;
 using System.Windows;
 using MusicMachine.Controls.SynthesizerElements.AdsrEnvelope;

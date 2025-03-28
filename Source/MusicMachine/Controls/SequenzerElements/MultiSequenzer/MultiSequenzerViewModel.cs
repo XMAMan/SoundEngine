@@ -7,11 +7,8 @@ using MusicMachine.Controls.SynthesizerElements.MicrophoneControl;
 using MusicMachine.Helper;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows;
@@ -22,7 +19,7 @@ using WaveMaker.Sequenzer;
 
 namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
 {
-    
+
     public class MultiSequenzerViewModel : ReactiveObject, ITestToneProvider
     {
         private WaveMaker.Sequenzer.MultiSequenzer model;

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WaveMaker.KeyboardComponents
+﻿namespace WaveMaker.KeyboardComponents
 {
     public enum SignalType { Sinus, Rectangle, Triangle, SawTooth, Noise }
     public class Oscillator : IPianoComponent

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace WaveMaker.KeyboardComponents
+﻿namespace WaveMaker.KeyboardComponents
 {
     public enum FilterType { LowPass, HighPass }
     public class Filter : IPianoComponent

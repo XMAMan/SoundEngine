@@ -1,21 +1,19 @@
 ﻿<rxui:ReactiveUserControl x:Class="MusicMachine.Controls.SequenzerElements.Sequenzer.SequenzerView"
-             x:TypeArguments="vm:SequenzerViewModel"
-             xmlns:rxui="http://reactiveui.net"
              xmlns:vm="clr-namespace:MusicMachine.Controls.SequenzerElements.Sequenzer"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:TypeArguments="vm:SequenzerViewModel"             
+             xmlns:rxui="http://reactiveui.net"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"             
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local1="clr-namespace:MusicMachine.Controls.SequenzerElements.Piano"
-             xmlns:local2="clr-namespace:MusicMachine.Controls.SequenzerElements.Sequenzer"
+             xmlns:local1="clr-namespace:MusicMachine.Controls.SequenzerElements.Piano" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" >
         <DockPanel>
 
-
-                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" HorizontalAlignment="Left" Height="{Binding ElementName=YZoom, Path=Value}">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left" HorizontalAlignment="Left" Height="{Binding ElementName=YZoom, Path=Value}">
                 <!-- Der RadioButton sorgt heimlich im Hintergrund dafür, dass immer nur bei ein Sequenzer IsActivated==true ist -->
                 <RadioButton GroupName="sex" VerticalAlignment="Center" IsChecked="{Binding IsActivated}" Visibility="Collapsed"/>
                     <StackPanel>
@@ -54,8 +52,8 @@
                                    MaxToneIndex="{Binding ElementName=MultiSequenzerView1, Path=DataContext.SequenzerSize.MaxToneIndex , Mode=OneWay}" 
                                    />
             </StackPanel>
-            
-                <vm:SequenzerCanvas x:Name="sequenzerCanvas1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+
+                 <vm:SequenzerCanvas x:Name="sequenzerCanvas1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                                                    Notes="{Binding SequenzerKeys}" 
                                                    MouseToneIndex="{Binding MouseToneIndex, Mode=OneWay}" 
                                                    MinSampleLengthForNewNotes="{Binding ElementName=MultiSequenzerView1, Path=DataContext.MinSampleLengthForNewNotes, Mode=OneWay}"

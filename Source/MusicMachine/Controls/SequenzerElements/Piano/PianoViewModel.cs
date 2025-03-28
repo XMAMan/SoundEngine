@@ -1,5 +1,4 @@
 ﻿using ReactiveUI;
-using System.Linq;
 using System.Reactive;
 using WaveMaker.Sequenzer;
 

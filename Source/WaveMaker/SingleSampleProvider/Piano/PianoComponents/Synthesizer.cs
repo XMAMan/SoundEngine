@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-
-namespace WaveMaker.KeyboardComponents
+﻿namespace WaveMaker.KeyboardComponents
 {
     public class SynthesizerData
     {        

@@ -1,5 +1,4 @@
-﻿using System;
-using WaveMaker.KeyboardComponents;
+﻿using WaveMaker.KeyboardComponents;
 
 namespace WaveMaker
 {

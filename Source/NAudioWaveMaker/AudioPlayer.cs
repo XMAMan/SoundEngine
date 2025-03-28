@@ -1,8 +1,7 @@
-﻿using NAudio.Wave;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using NAudio;
+using NAudio.Wave;
+using System.Management;
+using System.Runtime.InteropServices;
 using WaveMaker;
 
 //https://csharp.hotexamples.com/de/examples/NAudio.Wave/AudioFileReader/-/php-audiofilereader-class-examples.html -> NAudio-Beispiele
@@ -13,7 +12,7 @@ namespace NAudioWaveMaker
     {
         private const string DefaultDevice = "Default";
 
-        private WaveOut driverOut;
+        private WaveOutEvent driverOut;
         private ISampleProvider sampleProvider;
         
         public AudioPlayer(ISingleSampleProvider audioCallback)
@@ -44,15 +43,22 @@ namespace NAudioWaveMaker
         public string[] GetAvailableDevices()
         {
             List<string> deviceNames = new List<string>();
-            for (int idx = 0; idx < NAudio.Wave.WaveOut.DeviceCount; ++idx)
+            for (int idx = 0; idx < WaveInterop.waveOutGetNumDevs(); ++idx)
             {
-                string devName = NAudio.Wave.WaveOut.GetCapabilities(idx).ProductName;
+                string devName = GetCapabilities(idx).ProductName;
                 deviceNames.Add(devName);
             }
 
             return deviceNames.ToArray();
         }
 
+        private static WaveOutCapabilities GetCapabilities(int devNumber)
+        {
+            WaveOutCapabilities waveOutCaps = default(WaveOutCapabilities);
+            int waveOutCapsSize = Marshal.SizeOf(waveOutCaps);
+            MmException.Try(WaveInterop.waveOutGetDevCaps((IntPtr)devNumber, out waveOutCaps, waveOutCapsSize), "waveOutGetDevCaps");
+            return waveOutCaps;
+        }
         private int GetDeviceNumber(string deviceName)
         {
             if (deviceName == DefaultDevice) return -1;
@@ -71,7 +77,7 @@ namespace NAudioWaveMaker
 
             int deviceNumber = GetDeviceNumber(deviceName);
 
-            this.driverOut = new WaveOut();
+            this.driverOut = new WaveOutEvent();
             this.driverOut.DeviceNumber = deviceNumber;
             this.driverOut.DesiredLatency = 100; //So viel Zeit wartet NAudio, bevor es meine Samples dann zur Soundkarte schickt
             this.driverOut.Init(this.sampleProvider);

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace WaveMaker.BlockSampleEffects
+﻿namespace WaveMaker.BlockSampleEffects
 {
     class PitchShifter : IBlockSampleEffects
     {

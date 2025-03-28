@@ -1,7 +1,6 @@
-﻿using NAudio.Wave;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using NAudio;
+using NAudio.Wave;
+using System.Runtime.InteropServices;
 using WaveMaker;
 
 namespace NAudioWaveMaker
@@ -48,14 +47,22 @@ namespace NAudioWaveMaker
         public string[] GetAvailableDevices()
         {
             List<string> availableMicrophones = new List<string>();
-            for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
+            for (int i = 0; i < WaveInterop.waveInGetNumDevs(); i++)
             {
-                var caps = NAudio.Wave.WaveIn.GetCapabilities(i);
+                var caps = GetCapabilities(i);
                 availableMicrophones.Add(caps.ProductName);
             }
 
 
             return availableMicrophones.ToArray();
+        }
+
+        private static WaveInCapabilities GetCapabilities(int devNumber)
+        {
+            WaveInCapabilities waveInCaps = default(WaveInCapabilities);
+            int waveInCapsSize = Marshal.SizeOf(waveInCaps);
+            MmException.Try(WaveInterop.waveInGetDevCaps((IntPtr)devNumber, out waveInCaps, waveInCapsSize), "waveInGetDevCaps");
+            return waveInCaps;
         }
 
         private int GetDeviceNumber(string deviceName)

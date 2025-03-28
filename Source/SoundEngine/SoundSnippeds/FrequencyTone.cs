@@ -1,5 +1,4 @@
-﻿using System;
-using WaveMaker;
+﻿using WaveMaker;
 using WaveMaker.KeyboardComponents;
 using WaveMaker.Sequenzer;
 

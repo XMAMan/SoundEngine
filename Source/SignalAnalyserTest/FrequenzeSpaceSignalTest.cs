@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SignalAnalyser;
+﻿using SignalAnalyser;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -7,12 +6,11 @@ using System.Text;
 
 namespace SignalAnalyserTest
 {
-    [TestClass]
     public class FrequenzeSpaceSignalTest
     {
-        private string WorkingDirectory = @"..\..\..\UnitTestResults\";
+        private string WorkingDirectory = @"..\..\..\..\UnitTestResults\";
 
-        [TestMethod]
+        [Fact]
         public void PlotFrequenceSpace()
         {
             int n = 32; //32 Abtastpunkte
@@ -64,7 +62,7 @@ namespace SignalAnalyserTest
             //15 Hz-> - 1,490116E-07
         }
 
-        [TestMethod]
+        [Fact]
         public void ModifiSignalInFrequenceSpace()
         {
             int n = 32;
@@ -130,7 +128,7 @@ namespace SignalAnalyserTest
             //15 Hz-> - 1,490116E-07   Differenze = 0,0000
         }
 
-        [TestMethod]
+        [Fact]
         public void CreateSawthouthSignalWithSinusSum()
         {
             //Gegeben ist eine Rechteck/Sägezahnkurve

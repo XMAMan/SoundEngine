@@ -2,9 +2,6 @@
 using ReactiveUI.Fody.Helpers;
 using SoundEngine;
 using SoundEngine.SoundSnippeds;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive;
 using WaveMaker.KeyboardComponents;
 
@@ -220,7 +217,7 @@ namespace SoundEngineTest
 
     public class SoundTable : IDisposable
     {
-        private string WorkingDirectory = @"..\..\..\..\Data\";
+        private string WorkingDirectory = @"..\..\..\..\..\Data\";
 
         private SoundGenerator soundGenerator;
 

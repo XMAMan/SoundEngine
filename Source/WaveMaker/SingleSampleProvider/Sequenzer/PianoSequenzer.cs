@@ -1,6 +1,4 @@
 ﻿using MidiParser;
-using System.Collections.Generic;
-using System.Linq;
 using WaveMaker.KeyboardComponents;
 
 namespace WaveMaker.Sequenzer

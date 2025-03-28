@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Threading.Tasks;
-using System;
 using System.Windows;
 
 namespace MusicMachine

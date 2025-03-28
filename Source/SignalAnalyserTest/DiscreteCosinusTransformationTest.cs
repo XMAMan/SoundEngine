@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SignalAnalyser;
+﻿using SignalAnalyser;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -7,12 +6,11 @@ using System.Text;
 
 namespace SignalAnalyserTest
 {
-    [TestClass]
     public class DiscreteCosinusTransformationTest
     {
-        private string WorkingDirectory = @"..\..\..\UnitTestResults\";
+        private string WorkingDirectory = @"..\..\..\..\UnitTestResults\";
 
-        [TestMethod]
+        [Fact]
         public void PlotFrequenceSpace()
         {
             int n = 32; //32 Abtastpunkte

@@ -1,7 +1,5 @@
 ﻿using Microsoft.Win32;
 using ReactiveUI;
-using System;
-using System.Threading.Tasks;
 
 namespace MusicMachine.Helper
 {

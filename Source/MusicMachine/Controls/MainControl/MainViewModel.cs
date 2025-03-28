@@ -1,7 +1,6 @@
 ﻿using MusicMachine.Controls.SequenzerElements.MultiSequenzer;
 using NAudioWaveMaker;
 using ReactiveUI;
-using System;
 using WaveMaker;
 using WaveMaker.Sequenzer;
 

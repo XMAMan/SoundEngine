@@ -1,7 +1,4 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using WaveMaker.KeyboardComponents;
 
 namespace MusicMachine.Controls.SynthesizerElements.Oscillator

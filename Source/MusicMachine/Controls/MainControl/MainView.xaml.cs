@@ -1,12 +1,11 @@
-﻿using ReactiveUI;
-using System;
+﻿using System.Windows;
 
 namespace MusicMachine.Controls.MainControl
 {
     /// <summary>
     /// Interaktionslogik für MainView.xaml
     /// </summary>
-    public partial class MainView : ReactiveWindow<MainViewModel>
+    public partial class MainView : Window
     {
         private MainViewModel model = new MainViewModel();
         public MainView()

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace MidiParser
+﻿namespace MidiParser
 {
     public class MidiNote
     {

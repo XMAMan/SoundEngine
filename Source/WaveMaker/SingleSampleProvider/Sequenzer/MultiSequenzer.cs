@@ -1,8 +1,4 @@
 ﻿using MidiParser;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using WaveMaker.Helper;
 
 namespace WaveMaker.Sequenzer
