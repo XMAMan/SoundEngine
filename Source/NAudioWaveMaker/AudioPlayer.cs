@@ -1,6 +1,5 @@
 ﻿using NAudio;
 using NAudio.Wave;
-using System.Management;
 using System.Runtime.InteropServices;
 using WaveMaker;
 
