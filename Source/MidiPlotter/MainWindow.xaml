@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Drag a MidiFile(*.mid) into this window to show it" Height="450" Width="800">
     <Grid>
-        <TextBlock x:Name="text1"/>
+        <TextBox x:Name="text1" TextWrapping="Wrap" AcceptsReturn="True"/>
     </Grid>
 </Window>

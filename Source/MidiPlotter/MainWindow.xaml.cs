@@ -21,9 +21,16 @@ namespace MidiPlotter
         {
             InitializeComponent();
 
+            //Quelle für Drag & Drop-Handling für TextBox: https://xcalibursystems.com/wpf-drag-and-drop-textbox-for-windows-explorer-files/
             text1.AllowDrop = true;
-            text1.DragEnter += new DragEventHandler(textBox1_DragEnter);
-            text1.Drop += new DragEventHandler(textBox1_DragDrop);
+            text1.PreviewDragEnter += new DragEventHandler(textBox1_DragEnter);
+            text1.PreviewDragOver += new DragEventHandler(textBox1_DragOver);
+            text1.PreviewDrop += new DragEventHandler(textBox1_DragDrop);
+        }
+
+        private void textBox1_DragOver(object sender, DragEventArgs e)
+        {
+            e.Handled = true;
         }
 
         private void textBox1_DragEnter(object sender, DragEventArgs e)
@@ -32,6 +39,8 @@ namespace MidiPlotter
                 e.Effects = DragDropEffects.Copy;
             else
                 e.Effects = DragDropEffects.None;
+
+            e.Handled = true;
         }
 
         private void textBox1_DragDrop(object sender, DragEventArgs e)
