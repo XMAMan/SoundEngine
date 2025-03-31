@@ -415,19 +415,45 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             //keyUp.WhereLastKeys(Key.A)
             //       .InvokeCommand(this.PlayTestToneMouseUp);
 
-            keyDown
-                .Select(x => KeyToSequenzerIndex(x.Key))
-                .Where(x => x >= 0 && x < this.Sequenzers.Count)
-                .Subscribe(x => this.Sequenzers[x].PlayTestToneMouseDown());
+            keyDown.
+                Do(x => HandleKeyDownEvent(x.Key))
+                .Subscribe();
 
-            keyUp
-                .Select(x => KeyToSequenzerIndex(x.Key))
-                .Where(x => x >= 0 && x < this.Sequenzers.Count)
-                .Subscribe(x =>
-                {
-                    this.Sequenzers[x].PlayTestToneMouseUp();
-                    StopMicrophonIfPlaying();
-                });
+            keyUp.
+                Do(x => HandleKeyUpEvent(x.Key))
+                .Subscribe();
+        }
+
+        private void HandleKeyDownEvent(Key key)
+        {
+            int index = KeyToSequenzerIndex(key);
+
+            if (index >= 0 && index < this.Sequenzers.Count)
+            {
+                this.Sequenzers[index].PlayTestToneMouseDown();
+            }
+
+            switch (key)
+            {
+                case Key.Delete:
+                    if (this.SelectedSequenzer != null)
+                    {
+                        this.SelectedSequenzer.DeleteSelectedNotes();
+                    }
+                    break;
+            }
+        }
+
+        private void HandleKeyUpEvent(Key key)
+        {
+            int index = KeyToSequenzerIndex(key);
+
+            if (index >= 0 && index < this.Sequenzers.Count)
+            {
+                this.Sequenzers[index].PlayTestToneMouseUp();
+                StopMicrophonIfPlaying();
+            }
+
         }
 
         private static int KeyToSequenzerIndex(Key key)

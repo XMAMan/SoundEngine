@@ -221,6 +221,17 @@ namespace MusicMachine.Controls.SequenzerElements.Sequenzer
             }
         }
 
+        public void DeleteSelectedNotes()
+        {
+            //Entferne aus ViewModel
+            var toRemove = this.SequenzerKeys.Where(x => x.IsMarked).ToArray();
+            foreach (var key in toRemove)
+                this.SequenzerKeys.Remove(key);
+
+            //Entferne aus Model
+            UpdateModelAfterNoteChanges();
+        }
+
         private SequenzerKey CreateNewNote(MouseNoteEventArgs args)
         {
             SequenzerKey key = new SequenzerKey()
