@@ -129,7 +129,22 @@ namespace WaveMaker.Sequenzer
 
         public PianoSequenzer[] AddMidiFile(MidiFile midiFile)
         {
-            var newItems = midiFile.Instruments.Select(instrument => new PianoSequenzer(instrument, this.SampleRate, this, this.audioRecorder)).ToArray();
+            List<PianoSequenzer> list = new List<PianoSequenzer>();
+            foreach (var instrument in midiFile.Instruments)
+            {
+                //Sorge dafür, dass alle neu hinzugefügten Sequenzer ein anderen Midi-Instrumenteneintrag bekommen
+                //Das ist notwendig, da sonst beim Speichern das eine Instrument die Daten vom vorherigen Instrument überschreibt
+                bool isFree = this.Sequenzers.Any(x => x.InstrumentName == instrument.InstrumentName) == false;
+                if (isFree == false)
+                {
+                    instrument.InstrumentName = GetNextFreeInstrument();
+                }
+
+                var newSequenzer = new PianoSequenzer(instrument, this.SampleRate, this, this.audioRecorder);
+                list.Add(newSequenzer);
+            }
+            var newItems = list.ToArray();
+
             Sequenzers.AddRange(newItems);
 
             UpdateMaxAllowedSize();
