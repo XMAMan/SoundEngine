@@ -42,7 +42,9 @@
                             </StackPanel>
                             <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsEnabled}"/>
                         </StackPanel>
-                    </StackPanel>
+                    <Button FontFamily="Marlett" FontSize="20" Content="5" Command="{Binding MoveAllNotesUpCommand}" ToolTip="move all notes one octave up"/>
+                    <Button FontFamily="Marlett" FontSize="20" Content="6" Command="{Binding MoveAllNotesDownCommand}" ToolTip="move all notes one octave down"/>
+                </StackPanel>
 
 
 

@@ -74,6 +74,20 @@ namespace MusicMachine.Controls.SequenzerElements.Sequenzer
                 return this;
             });
 
+            //Button-Handler um alle Noten um eine Oktave nach oben zu verschieben
+            this.MoveAllNotesUpCommand = ReactiveCommand.Create<Unit, SequenzerViewModel>(args =>
+            {
+                MoveAllNotes(+12);
+                return this;
+            });
+
+            //Button-Handler um alle Noten um eine Oktave nach unten zu verschieben
+            this.MoveAllNotesDownCommand = ReactiveCommand.Create<Unit, SequenzerViewModel>(args =>
+            {
+                MoveAllNotes(-12);
+                return this;
+            });
+
             //Füge neue Noten ein, wenn in freien Bereich im Canvas geklickt wurde
             this.CreateNoteCommand = ReactiveCommand.Create<MouseNoteEventArgs, SequenzerViewModel>(args => 
             {
@@ -176,6 +190,8 @@ namespace MusicMachine.Controls.SequenzerElements.Sequenzer
         public ReactiveCommand<Unit, Unit> SaveSynthesizerCommand { get; private set; }
         public ReactiveCommand<Unit, Unit> LoadSynthesizerCommand { get; private set; }
         public ReactiveCommand<Unit, SequenzerViewModel> DeleteSequenzerCommand { get; private set; }
+        public ReactiveCommand<Unit, SequenzerViewModel> MoveAllNotesUpCommand { get; private set; }
+        public ReactiveCommand<Unit, SequenzerViewModel> MoveAllNotesDownCommand { get; private set; }
 
         public Interaction<string, string> OpenFileDialog { get; private set; } = new Interaction<string, string>(); //Input: Filter (openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";); Output: Dateiname von der Datei die geöffnet werden soll
         public Interaction<string, string> SaveFileDialog { get; private set; } = new Interaction<string, string>(); //Input: Filter (openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";); Output: Dateiname von der Datei, die erzeugt werden soll
@@ -229,6 +245,26 @@ namespace MusicMachine.Controls.SequenzerElements.Sequenzer
                 this.SequenzerKeys.Remove(key);
 
             //Entferne aus Model
+            UpdateModelAfterNoteChanges();
+        }
+
+        public void MoveAllNotes(int shift)
+        {
+            var copy = this.SequenzerKeys.ToArray();
+            foreach (var note in copy)
+            {
+                int newNoteNumber = note.Model.NoteNumber + shift;
+                newNoteNumber = Math.Min(127, Math.Max(0, newNoteNumber));
+                note.Model.NoteNumber = (byte)newNoteNumber;
+            }
+
+            //Entferne alte Position aus ViewModel
+            this.SequenzerKeys.Clear();
+
+            //Füge neue Position in ViewModel ein
+            this.SequenzerKeys.AddRange(copy);
+
+            //Füge in Model ein
             UpdateModelAfterNoteChanges();
         }
 
