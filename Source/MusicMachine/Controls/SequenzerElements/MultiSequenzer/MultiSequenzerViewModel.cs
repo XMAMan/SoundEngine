@@ -1,6 +1,7 @@
 ﻿using DynamicData;
 using DynamicData.Binding;
 using MidiParser;
+using MidiPlayer;
 using MusicMachine.Controls.NewSequenzerDialog;
 using MusicMachine.Controls.SequenzerElements.Sequenzer;
 using MusicMachine.Controls.SynthesizerElements.MicrophoneControl;
@@ -186,6 +187,9 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             //PlayMidi
             this.PlayMidiCommand = ReactiveCommand.Create(() =>
             {
+                //string error = MidiDllWraper.PlayTestTone();
+                //return;
+
                 if (this.midiPlayer != null)
                 {
                     this.midiPlayer.Stop();

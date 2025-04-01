@@ -1,7 +1,9 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 
 namespace MidiPlayer
 {
+    //Wrapper für die 32-Bit winmm.dll, welche nur verwendet werden kann, wenn das Projekt als Zielplattform auf x86 gestellt ist
     public class MidiDllWraper
     {
         [DllImport("winmm.dll")]
@@ -45,6 +47,31 @@ namespace MidiPlayer
 
         [DllImport("winmm.dll")]
         public static extern int midiOutClose(int handle);
+
+        [DllImport("winmm.dll")]
+        public static extern int midiOutGetErrorText(int errCode, StringBuilder message, int sizeOfMessage); //Fehler für midiOut-Methoden. Quelle: https://stackoverflow.com/questions/19446403/windows-midi-streaming-and-sysex
+
+        public static string GetMidiOutErrorText(int errCode)
+        {
+            if (0 == errCode) return ""; //No error
+            var sb = new StringBuilder(256); // MAXERRORLENGTH
+            var s = 0 == midiOutGetErrorText(errCode, sb, sb.Capacity) ? sb.ToString() : String.Format("MIDI Error {0}.", errCode);
+            return s;
+        }
+
+        //Das geht nur, wenn beim MusicMachine-Projekt in der csproj-Datei folgender Eintrag steht: <PlatformTarget>x86</PlatformTarget>
+        public static string PlayTestTone()
+        {
+            int handle = 0;
+            string err1 = MidiDllWraper.GetMidiOutErrorText(MidiDllWraper.midiOutOpen(ref handle, 0, null, 0, 0));
+            string err2 = MidiDllWraper.GetMidiOutErrorText(MidiDllWraper.midiOutShortMsg(handle, 0x000003C0));//00-00 Nor Used | 03 = Instrument 3 | C = Program Change-Event | 0 = Channel 0
+            string err3 = MidiDllWraper.GetMidiOutErrorText(MidiDllWraper.midiOutShortMsg(handle, 0x00403C90));//00-Not Used | 40 Speed to Press | 3c 3. Note C | 9 = Press Down | 0 = Channel 0
+            System.Threading.Thread.Sleep(1000);
+            string err4 = MidiDllWraper.GetMidiOutErrorText(MidiDllWraper.midiOutShortMsg(handle, 0x00003C90));//00 Not Used |00 (Velocity)Key-Up |3C Note 3C | 90 = Key Up (Eigentlich ist NoteOff 8 aber wenn man NoteOn mit Velocity=0 macht, entspricht das ein NoteOff
+            string err5 = MidiDllWraper.GetMidiOutErrorText(MidiDllWraper.midiOutClose(handle));
+
+            return string.Join("\n", new string[] { err1, err2, err3, err4, err5 });
+        }
     }
 
     /// <summary>
