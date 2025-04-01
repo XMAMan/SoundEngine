@@ -373,7 +373,9 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             //Speichere die mid-Datei mit den Noten nur, wenn es auch Daten enthält
             if (data.MidiFileFileName != "")
             {
-                var midiFile = this.model.GetNotesAsMidiFile(this.KeyStrokeSpeed);
+                //KeyStrokeSpeed muss beim Speichern 1 sein, da diese Angabe ja auch in der .music-Datei gespeichert wird und es somit den Effekt doppelt
+                //anwenden würde wenn die .mid-Datei auch mit veränderter Geschwindigkeit gespeichert wird.
+                var midiFile = this.model.GetNotesAsMidiFile(1); 
                 midiFile.WriteToFile(Path.GetDirectoryName(musicFile) + "\\" + data.MidiFileFileName);
             }
 
