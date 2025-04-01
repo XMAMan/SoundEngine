@@ -1,4 +1,7 @@
 ﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using System.Reactive.Linq;
+using System.Windows;
 using WaveMaker.KeyboardComponents;
 
 namespace MusicMachine.Controls.SynthesizerElements.Oscillator
@@ -9,7 +12,14 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
         public OscillatorViewModel(Synthesizer model)
         {
             this.model = model;
+
+            this.WhenAnyValue(x => x.SelectedSignalType)
+                .Select(x => x == SignalType.Rectangle ? Visibility.Collapsed : Visibility.Visible)
+                .Do(x => this.PulseWidthLfoVisibility = x)
+                .Subscribe();
         }
+
+        [Reactive] public Visibility PulseWidthLfoVisibility { get; set; } = Visibility.Collapsed;
 
         public IEnumerable<SignalType> SignalTypes
         {
