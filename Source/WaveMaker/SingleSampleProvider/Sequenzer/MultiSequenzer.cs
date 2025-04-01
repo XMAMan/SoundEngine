@@ -255,7 +255,7 @@ namespace WaveMaker.Sequenzer
         {
             this.audioExportIsRunning = true;
 
-            float[] data = new float[this.CurrentNoteSize.MaxSamplePosition];
+            float[] data = new float[(int)(this.CurrentNoteSize.MaxSamplePosition / this.KeyStrokeSpeed)];
             foreach (var sequenzer in this.Sequenzers.ToList())
             {
                 sequenzer.ResetPlayPosition();
