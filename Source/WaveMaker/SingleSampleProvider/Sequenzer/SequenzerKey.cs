@@ -80,7 +80,7 @@ namespace WaveMaker.Sequenzer
             return result.OrderBy(x => x.StartByteIndex).ToArray();
         }
 
-        public MidiNote[] GetAsMidiNotes(int sampleRate)
+        public MidiNote[] GetAsMidiNotes(int sampleRate, float keyStrokeSpeed)
         {
             List<MidiNote> notes = new List<MidiNote>();
             foreach (var key in this.Notes)
@@ -88,7 +88,7 @@ namespace WaveMaker.Sequenzer
                 notes.Add(new MidiNote()
                 {
                     Type = MidiNote.NoteType.On,
-                    TimeInMs = key.StartByteIndex / (double)sampleRate * 1000,
+                    TimeInMs = key.StartByteIndex / (double)sampleRate * 1000 / keyStrokeSpeed,
                     NoteNumber = key.NoteNumber,
                     Volume = key.Volume
                 });
@@ -96,7 +96,7 @@ namespace WaveMaker.Sequenzer
                 notes.Add(new MidiNote()
                 {
                     Type = MidiNote.NoteType.Off,
-                    TimeInMs = (key.StartByteIndex + key.Length - 1) / (double)sampleRate * 1000,
+                    TimeInMs = (key.StartByteIndex + key.Length - 1) / (double)sampleRate * 1000 / keyStrokeSpeed,
                     NoteNumber = key.NoteNumber,
                     Volume = key.Volume
                 });

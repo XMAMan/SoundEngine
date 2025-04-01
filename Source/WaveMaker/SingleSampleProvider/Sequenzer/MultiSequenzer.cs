@@ -200,13 +200,14 @@ namespace WaveMaker.Sequenzer
             throw new Exception("No free Instrument found");
         }
 
-        public MidiFile GetNotesAsMidiFile()
+        //keyStrokeSpeed = 1 = Spiele in normaler Geschwindigkeit, 2 = Doppelt so schnell, 0.5 = Halbe Geschwindigkeit
+        public MidiFile GetNotesAsMidiFile(float keyStrokeSpeed)
         {
             return MidiFile.FromData(this.Sequenzers.Select(x =>
                 new MidiInstrument()
                 {
                     InstrumentName = x.InstrumentName,
-                    Notes = x.Notes.GetAsMidiNotes(this.SampleRate)
+                    Notes = x.Notes.GetAsMidiNotes(this.SampleRate, keyStrokeSpeed)
                 })
                 .ToArray());
         }
@@ -223,6 +224,9 @@ namespace WaveMaker.Sequenzer
 
         public float GetNextSample()
         {
+            //Verhindere, dass der Audio-Timer und das ViewModel gleichzeitig beim Model den SampleIndex schreiben
+            if (this.audioExportIsRunning) return 0;
+
             //if (this.IsRunning == false) return 0; //Wenn ich das so mache, können die Töne nicht durch verschieben der PlayPosition mit der Maus angespielt werden
 
             if (this.IsFinish && this.AutoLoop)
@@ -246,8 +250,11 @@ namespace WaveMaker.Sequenzer
             return sum * this.Volume;
         }
 
+        private bool audioExportIsRunning = false;
         public float[] GetAllSamples()
         {
+            this.audioExportIsRunning = true;
+
             float[] data = new float[this.CurrentNoteSize.MaxSamplePosition];
             foreach (var sequenzer in this.Sequenzers.ToList())
             {
@@ -259,11 +266,14 @@ namespace WaveMaker.Sequenzer
                 float sample = 0;
                 foreach (var sequenzer in this.Sequenzers.ToList())
                 {
-                    sample += sequenzer.GetNextSample(true);
+                    sample += sequenzer.GetNextSample(true, this.KeyStrokeSpeed);
                 }
                 sample *= this.Volume;
                 data[sampleIndex] = sample;
             }
+
+            this.audioExportIsRunning = false;
+
             return data;
         }
     }

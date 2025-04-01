@@ -195,7 +195,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
                     this.midiPlayer.Stop();
                 }
 
-                var midiFile = this.model.GetNotesAsMidiFile();
+                var midiFile = this.model.GetNotesAsMidiFile(this.KeyStrokeSpeed);
 
                 this.midiPlayer = new MidiPlayer.MidiPlayer(midiFile);
                 this.midiPlayer.Start();
@@ -373,7 +373,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             //Speichere die mid-Datei mit den Noten nur, wenn es auch Daten enthält
             if (data.MidiFileFileName != "")
             {
-                var midiFile = this.model.GetNotesAsMidiFile();
+                var midiFile = this.model.GetNotesAsMidiFile(this.KeyStrokeSpeed);
                 midiFile.WriteToFile(Path.GetDirectoryName(musicFile) + "\\" + data.MidiFileFileName);
             }
 
