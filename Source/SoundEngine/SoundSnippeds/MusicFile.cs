@@ -14,12 +14,22 @@ namespace SoundEngine.SoundSnippeds
         public int SampleRate { get { return this.multiSequenzer.SampleRate; } }
         public float GetNextSample()
         {
-            this.IsRunning = this.multiSequenzer.IsRunning && this.multiSequenzer.IsFinish == false;
+            bool isRunningOld = this.multiSequenzer.IsRunning && this.multiSequenzer.IsFinish == false;
             float sample = this.multiSequenzer.GetNextSample();
 
             bool isRunningNext = this.multiSequenzer.IsRunning && this.multiSequenzer.IsFinish == false;
 
-            if (this.EndTrigger != null && this.IsRunning && isRunningNext == false)
+            if (this.IsRunning == false && isRunningNext)
+            {
+                this.IsRunning = true;
+            }
+
+            if (this.IsRunning == true && isRunningNext == false && this.AutoLoop == false)
+            {
+                this.IsRunning = false;
+            }
+
+            if (this.EndTrigger != null && isRunningOld && isRunningNext == false)
             {
                 this.EndTrigger();
             }
