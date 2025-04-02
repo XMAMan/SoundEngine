@@ -46,7 +46,10 @@ namespace SoundEngine.SoundSnippeds
 
         public void Play()
         {
-            Reset();
+            if (this.multiSequenzer.IsFinish)
+            {
+                Reset();
+            }
             this.multiSequenzer.IsRunning = true;
             this.IsRunning = this.multiSequenzer.IsFinish == false;
         }
