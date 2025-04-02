@@ -48,10 +48,12 @@ namespace SoundEngine.SoundSnippeds
         {
             Reset();
             this.multiSequenzer.IsRunning = true;
+            this.IsRunning = this.multiSequenzer.IsFinish == false;
         }
         public void Stop()
         {
             this.multiSequenzer.IsRunning = false;
+            this.IsRunning = false;
         }
         public void Reset() //Springe zum Anfang zurück
         {
