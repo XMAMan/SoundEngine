@@ -41,11 +41,7 @@ namespace SoundEngine.SoundSnippeds
         {
             this.IsRunning = true;
 
-            int index = this.sequenzer.StartPlayingKey(this.Frequency);
-            if (index != -1)
-            {
-                this.runningKeys.Add(index);
-            }
+            PlayAndReturnHandle();
         }
         public void Stop()
         {
@@ -56,6 +52,24 @@ namespace SoundEngine.SoundSnippeds
                 this.sequenzer.ReleaseKey(keyIndex);
             }
             this.runningKeys.Clear();
+        }
+        public int PlayAndReturnHandle()
+        {
+            int index = this.sequenzer.StartPlayingKey(this.Frequency);
+            if (index != -1)
+            {
+                this.runningKeys.Add(index);
+            }
+            return index;
+        }
+        public void StopFromHandle(int handle)
+        {
+            if (this.runningKeys.Contains(handle) == false) return;
+
+            this.runningKeys.Remove(handle);
+            this.sequenzer.ReleaseKey(handle);
+
+            this.IsRunning = this.runningKeys.Any();
         }
         public float Volume { get; set; } = 1;
 

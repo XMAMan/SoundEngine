@@ -8,7 +8,7 @@ namespace SoundEngine.SoundSnippeds
         bool IsRunning { get; }
         Action<bool> IsRunningChanged { get; set; }
         void Play();
-        void Stop();
+        void Stop(); //Bei ein FrequencyTone stoppt es alle laufenden Töne
         float Volume { get; set; }
     }
 
@@ -46,6 +46,8 @@ namespace SoundEngine.SoundSnippeds
     {
         float Frequency { get; set; } //Für Synthi-Töne        
         Synthesizer Synthesizer { get; }
+        int PlayAndReturnHandle();
+        void StopFromHandle(int handle);
     }
 
     public interface IAudioRecorderSnipped : ISoundSnipped, IAudioEffects
