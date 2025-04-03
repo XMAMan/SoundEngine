@@ -50,8 +50,8 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
 
         public float Pitch
         {
-            get { return this.model.Pitch; }
-            set { this.model.Pitch = value; this.RaisePropertyChanged(nameof(Pitch)); }
+            get { return this.model.MultiOsziPitch; }
+            set { this.model.MultiOsziPitch = value; this.RaisePropertyChanged(nameof(Pitch)); }
         }
 
         public float SubOszVolume
@@ -150,7 +150,7 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
             this.SelectedSignalType = data.OsziType;
             this.PusleWidth = data.PusleWidth;
             this.OsziCount = data.OsziCount;
-            this.Pitch = data.Pitch;
+            this.Pitch = data.MultiOsziPitch;
             this.SubOszVolume = data.SubOszVolume;
             this.UseAmplitudeLfo = data.UseAmplitudeLfo;
             this.AmplitudeLfoFrequenc = data.AmplitudeLfoFrequenc;

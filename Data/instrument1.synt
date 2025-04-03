@@ -12,7 +12,7 @@
   <UseAccordEffekt>true</UseAccordEffekt>
   <PusleWidth>0.01724138</PusleWidth>
   <OsziCount>7</OsziCount>
-  <Pitch>0.001</Pitch>
+  <MultiOsziPitch>0.001</MultiOsziPitch>
   <UseAmplitudeLfo>true</UseAmplitudeLfo>
   <AmplitudeLfoFrequenc>30.8620682</AmplitudeLfoFrequenc>
   <IsLowPassEnabled>true</IsLowPassEnabled>

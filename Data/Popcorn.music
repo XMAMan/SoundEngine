@@ -23,7 +23,7 @@
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.0862069055</PusleWidth>
         <OsziCount>1</OsziCount>
-        <Pitch>3</Pitch>
+        <MultiOsziPitch>3</MultiOsziPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>
@@ -51,7 +51,7 @@
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
         <OsziCount>2</OsziCount>
-        <Pitch>3</Pitch>
+        <MultiOsziPitch>3</MultiOsziPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>
@@ -79,7 +79,7 @@
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
         <OsziCount>2</OsziCount>
-        <Pitch>2.482862</Pitch>
+        <MultiOsziPitch>2.482862</MultiOsziPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>

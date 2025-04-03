@@ -22,7 +22,7 @@
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
         <OsziCount>2</OsziCount>
-        <Pitch>3</Pitch>
+        <MultiOsziPitch>3</MultiOsziPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>3.27586269</AmplitudeLfoFrequenc>
         <AudioFileName>Load Audio-File</AudioFileName>
@@ -55,7 +55,7 @@
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
         <OsziCount>2</OsziCount>
-        <Pitch>3</Pitch>
+        <MultiOsziPitch>3</MultiOsziPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <AudioFileName>Load Audio-File</AudioFileName>

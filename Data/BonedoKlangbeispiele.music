@@ -23,7 +23,7 @@
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.155172408</PusleWidth>
         <OsziCount>1</OsziCount>
-        <Pitch>1.27620685</Pitch>
+        <MultiOsziPitch>1.27620685</MultiOsziPitch>
         <SubOszVolume>0.37931034</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
@@ -61,7 +61,7 @@
         <UseAccordEffekt>true</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
         <OsziCount>4</OsziCount>
-        <Pitch>1.27620685</Pitch>
+        <MultiOsziPitch>1.27620685</MultiOsziPitch>
         <SubOszVolume>0.448275864</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
