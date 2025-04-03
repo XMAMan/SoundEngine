@@ -40,7 +40,7 @@ namespace SoundEngine.SoundSnippeds
             if (this.IsRunning == false) return 0;
 
             this.keySampleData.SampleIndex++;
-            if (this.keySampleData.SampleIndex >= this.audioFile.SampleData.Length)
+            if (this.keySampleData.SampleIndex >= (int)(this.audioFile.SampleData.Length * this.Speed))
             {
                 if (this.AutoLoop)
                 {
@@ -89,8 +89,8 @@ namespace SoundEngine.SoundSnippeds
         public float Volume { get; set; } = 1;
         public bool AutoLoop { get; set; } = false;
 
-        public float Pitch { get { return this.audioFile.Pitch; } set { this.audioFile.Pitch = value; } }
-        public float Speed { get { return this.audioFile.Speed; } set { this.audioFile.Speed = value; } }
+        public float Pitch { get { return this.synthesizer.AudioFilePitch; } set { this.synthesizer.AudioFilePitch = value; } }
+        public float Speed { get { return this.synthesizer.AudioFileSpeed; } set { this.synthesizer.AudioFileSpeed = value; } }
         public bool UseDelayEffekt { get { return this.synthesizer.UseDelayEffekt; } set { this.synthesizer.UseDelayEffekt = value; } }
         public bool UseHallEffekt { get { return this.synthesizer.UseHallEffekt; } set { this.synthesizer.UseHallEffekt = value; } }
         public bool UseGainEffekt { get { return this.synthesizer.UseGainEffekt; } set { this.synthesizer.UseGainEffekt = value; } }
