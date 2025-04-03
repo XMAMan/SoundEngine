@@ -75,5 +75,6 @@ namespace SoundEngine.SoundSnippeds
         public float Volume { get { return this.multiSequenzer.Volume; } set { this.multiSequenzer.Volume = value; } }
         public bool AutoLoop { get { return this.multiSequenzer.AutoLoop; } set { this.multiSequenzer.AutoLoop = value; } }
         public float KeyStrokeSpeed { get { return this.multiSequenzer.KeyStrokeSpeed; } set { this.multiSequenzer.KeyStrokeSpeed = value; } }
+        public int KeyShift { get { return this.multiSequenzer.GetKeyShiftFromFirstSequenzer(); } set { this.multiSequenzer.SetKeyShiftFromAllSequenzer(value); } }
     }
 }

@@ -110,6 +110,8 @@ namespace SoundEngineTest
             this.snipp = snip;
         }
         public float KeyStrokeSpeed { get { return this.snipp.KeyStrokeSpeed; } set { this.snipp.KeyStrokeSpeed = value; } }
+        public int KeyShift { get { return this.snipp.KeyShift; } set { this.snipp.KeyShift = value; } }
+
 
     }
 

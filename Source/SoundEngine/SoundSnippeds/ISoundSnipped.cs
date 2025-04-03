@@ -22,6 +22,7 @@ namespace SoundEngine.SoundSnippeds
     public interface IMusicFileSnipped : ISoundSnippedWithEndTrigger
     {
         float KeyStrokeSpeed { get; set; } //1 = Spiele in normaler Geschwindigkeit, 2 = Doppelt so schnell, 0.5 = Halbe Geschwindigkeit
+        int KeyShift { get; set; } //Wie viele Okataven nach oben oder unten verschieben
     }
 
     public interface IAudioEffects
