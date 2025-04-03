@@ -13,6 +13,7 @@ namespace WaveMaker.Sequenzer
         public int MaxToneIndex { get; set; }
         public List<SequenzerData> SynthesizerData { get; set; }
         public float KeyStrokeSpeed { get; set; } = 1;
+        public int KeyShift { get; set; } = 0; //Wie viele Halbtöne nach oben oder unten verschieben? (z.B. 2 = 2 Halbtöne nach oben, -2 = 2 Halbtöne nach unten)
     }
 
     interface IMultiSequenzer
@@ -54,6 +55,7 @@ namespace WaveMaker.Sequenzer
                 MinToneIndex = this.MaxAllowedSize.MinToneIndex,
                 MaxToneIndex = this.MaxAllowedSize.MaxToneIndex,
                 KeyStrokeSpeed = this.KeyStrokeSpeed,
+                KeyShift = this.GetKeyShiftFromFirstSequenzer(),
                 SynthesizerData = this.GetAllSynthesizerData()
             };
         }
@@ -88,6 +90,7 @@ namespace WaveMaker.Sequenzer
             }
 
             this.KeyStrokeSpeed = data.KeyStrokeSpeed;
+            this.SetKeyShiftFromAllSequenzer(data.KeyShift);
         }
 
         public void ClearAllSequenzers()
@@ -275,6 +278,23 @@ namespace WaveMaker.Sequenzer
             this.audioExportIsRunning = false;
 
             return data;
+        }
+
+        public void SetKeyShiftFromAllSequenzer(int keyShift)
+        {
+            foreach (var sequenzer in this.Sequenzers)
+            {
+                sequenzer.KeyShift = keyShift;
+            }
+        }
+
+        public int GetKeyShiftFromFirstSequenzer()
+        {
+            if (this.Sequenzers.Count > 0)
+            {
+                return this.Sequenzers[0].KeyShift;
+            }
+            return 0;
         }
     }
 }

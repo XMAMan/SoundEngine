@@ -91,11 +91,20 @@
                     </i:Interaction.Triggers>
                 </Slider>
 
+                <Label Content="KeyShift:" Margin="10 0 0 0"/>
+                <Slider Minimum="-3" Maximum="3" Value="{Binding KeyShift}" Width="50" Margin="0 3" ToolTip="Doubleclick for reset the KeyShift">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding MouseDoubleClickOnKeyShiftCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Slider>
+
                 <Label Content="X-Zoom:" Margin="10 0 0 0"/>
-                <Slider Minimum="0" Maximum="50000" Value="{Binding SequencerPixelWidth}" Width="150" Margin="0 3" />
+                <Slider Minimum="0" Maximum="50000" Value="{Binding SequencerPixelWidth}" Width="120" Margin="0 3" />
 
                 <Label Content="Y-Zoom:" Margin="10 0 0 0"/>
-                <Slider Minimum="110" Maximum="600" Value="{Binding SequencerPixelHeight}" Width="150" Margin="0 3" x:Name="YZoom"/>
+                <Slider Minimum="110" Maximum="600" Value="{Binding SequencerPixelHeight}" Width="120" Margin="0 3" x:Name="YZoom"/>
 
                 <Label Content="SnapToGrid"/>
                 <CheckBox IsChecked="{Binding SnapToGrid}" Margin="-3 5 10 0"/>

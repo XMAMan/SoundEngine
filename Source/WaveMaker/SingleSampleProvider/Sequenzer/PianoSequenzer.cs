@@ -52,6 +52,7 @@ namespace WaveMaker.Sequenzer
         public float TestToneFrequence { get; set; } = 440;
         public SequenzerSize MaxAllowedSize { get; private set; }
         public SequenzerSize CurrentNoteSize { get; private set; }
+        public int KeyShift { get; set; } = 0; //Um so viele Oktaven wird beim Anspielen einer Taste alles noch verschoben
 
         private Piano piano;
         private IMultiSequenzer multiSequenzer; //Der Sequenzer muss dem MultiSequenzer sagen können, dass wenn sich Noten bei ihm geändert haben, die sequenzerWithLongestLength-Variable beim MultiSequenzer aktualisiert werden muss
@@ -131,7 +132,7 @@ namespace WaveMaker.Sequenzer
       
         private void PlayTone(SequenzerKey key, int sampleIndex)
         {
-            int keyIndex = this.piano.StartPlayingKey(key.NoteNumber);
+            int keyIndex = this.piano.StartPlayingKey(key.NoteNumber + this.KeyShift * 12);
             if (keyIndex == Piano.NoMoreKeys) return;
             int stopIndex = sampleIndex + key.Length;
 

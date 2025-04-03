@@ -272,6 +272,11 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             {
                 this.KeyStrokeSpeed = 1;
             });
+
+            this.MouseDoubleClickOnKeyShiftCommand = ReactiveCommand.Create(() =>
+            {
+                this.KeyShift = 0;
+            });
         }
 
         [Reactive] public Visibility MainVisibility { get; set; } = Visibility.Collapsed;
@@ -303,7 +308,13 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
             get { return this.model.KeyStrokeSpeed; }
             set { this.model.KeyStrokeSpeed = value; this.RaisePropertyChanged(nameof(KeyStrokeSpeed)); }
         }
-        
+
+        //Um so viele Oktaven werden alle Sequenzer verschoben
+        public int KeyShift
+        {
+            get { return this.model.GetKeyShiftFromFirstSequenzer(); }
+            set { this.model.SetKeyShiftFromAllSequenzer(value); this.RaisePropertyChanged(nameof(KeyShift)); }
+        }
 
         [Reactive] public float LengthInMillisecondsForNewCreatedNotes { get; set; } = 250; //So lang sind neu erstellte Noten
         [ObservableAsProperty] public int MinSampleLengthForNewNotes { get; private set; }
@@ -315,6 +326,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
         [Reactive] public double CurrentPosition { get; set; } = 0; //Geht von 0 bis SampleCount
 
         public ReactiveCommand<Unit, Unit> MouseDoubleClickOnKeyStrokeSpeedCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> MouseDoubleClickOnKeyShiftCommand { get; private set; }
 
         [Reactive] public int FrequenceForTestTone { get; set; } = 65; 
 
@@ -359,6 +371,7 @@ namespace MusicMachine.Controls.SequenzerElements.MultiSequenzer
 
             this.CurrentProjectName = Path.GetFileNameWithoutExtension(musicFile);
             this.KeyStrokeSpeed = data.KeyStrokeSpeed;
+            this.KeyShift = data.KeyShift;
         }
 
         private void SaveMusicFile(string musicFile)
