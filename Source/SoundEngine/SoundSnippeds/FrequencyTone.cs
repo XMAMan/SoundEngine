@@ -7,7 +7,8 @@ namespace SoundEngine.SoundSnippeds
     class FrequencyTone : ISingleSampleProvider, ISoundSnipped, IFrequenceToneSnipped
     {
         private PianoSequenzer sequenzer;
-        private int keyIndex = -1;
+        private List<int> runningKeys = new List<int>();
+
         internal FrequencyTone(PianoSequenzer sequenzer)
         {
             this.sequenzer = sequenzer;
@@ -38,16 +39,23 @@ namespace SoundEngine.SoundSnippeds
         public Action<bool> IsRunningChanged { get; set; } = null;
         public void Play()
         {
-            if (this.keyIndex != -1) Stop();
-
             this.IsRunning = true;
-            this.keyIndex = this.sequenzer.StartPlayingKey(this.Frequency);
+
+            int index = this.sequenzer.StartPlayingKey(this.Frequency);
+            if (index != -1)
+            {
+                this.runningKeys.Add(index);
+            }
         }
         public void Stop()
         {
             this.IsRunning = false;
-            this.sequenzer.ReleaseKey(this.keyIndex);
-            this.keyIndex = -1;                      
+
+            foreach (int keyIndex in this.runningKeys.ToList())
+            {
+                this.sequenzer.ReleaseKey(keyIndex);
+            }
+            this.runningKeys.Clear();
         }
         public float Volume { get; set; } = 1;
 
@@ -58,7 +66,11 @@ namespace SoundEngine.SoundSnippeds
             set
             {
                 this.frequency = value;
-                if (this.keyIndex != -1) this.sequenzer.SetFrequencyFromPlayingTone(this.keyIndex, this.frequency);
+
+                foreach (int keyIndex in this.runningKeys.ToList())
+                {
+                    this.sequenzer.SetFrequencyFromPlayingTone(keyIndex, this.frequency);
+                }
             }
         }
         public float Pitch { get { return this.sequenzer.Synthesizer.AudioFilePitch; } set { this.sequenzer.Synthesizer.AudioFilePitch = value; } } 
