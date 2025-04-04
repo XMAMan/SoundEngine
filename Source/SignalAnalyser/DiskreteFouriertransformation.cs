@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace SignalAnalyser
+﻿namespace SignalAnalyser
 {
     //Wandelt von ein Signal mit beliebiger Sampleanzahl, wo das Signal genau eine Periode angibt, zwischen Zeitraum und Frequenzraum um
     //https://www.tu-chemnitz.de/informatik/ThIS/downloads/courses/ws02/datkom/Fouriertransformation.pdf

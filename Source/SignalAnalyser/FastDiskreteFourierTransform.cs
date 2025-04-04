@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace SignalAnalyser
+﻿namespace SignalAnalyser
 {
     static class FastDiskreteFourierTransform
     {

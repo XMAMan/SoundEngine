@@ -1,7 +1,6 @@
 ﻿using DynamicData;
 using DynamicData.Binding;
 using MidiParser;
-using MidiPlayer;
 using MusicMachine.Controls.NewSequenzerDialog;
 using MusicMachine.Controls.SequenzerElements.Sequenzer;
 using MusicMachine.Controls.SynthesizerElements.MicrophoneControl;

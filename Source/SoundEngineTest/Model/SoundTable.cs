@@ -1,6 +1,5 @@
 ﻿using SoundEngine.SoundSnippeds;
 using SoundEngine;
-using WaveMaker;
 
 namespace SoundEngineTest.Model
 {

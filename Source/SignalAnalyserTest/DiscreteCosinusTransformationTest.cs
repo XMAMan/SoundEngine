@@ -1,7 +1,5 @@
 ﻿using SignalAnalyser;
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 
 namespace SignalAnalyserTest

@@ -29,6 +29,7 @@ namespace SoundEngineTest.Model
 
         public event Action<Ball> EndTrigger = null; //Wird aufgerufen, wenn der Ton zu Ende ist
 
+        //Wird für den FrequencyTone benötigt
         public void CheckIfMaxToneLengthIsReached()
         {
             if (DateTime.Now - this.startTime > TimeSpan.FromSeconds(this.maxToneLength))

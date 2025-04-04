@@ -1,7 +1,4 @@
 ﻿using SoundEngine.SoundSnippeds;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using WaveMaker;
 using WaveMaker.Helper;
 using WaveMaker.KeyboardComponents;

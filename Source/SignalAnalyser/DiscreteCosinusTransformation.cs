@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SignalAnalyser
+﻿namespace SignalAnalyser
 {
     //https://www.tu-chemnitz.de/informatik/ThIS/downloads/courses/ws02/datkom/Fouriertransformation.pdf
     public static class DiscreteCosinusTransformation //Wird bei Jpeg eingesetzt
