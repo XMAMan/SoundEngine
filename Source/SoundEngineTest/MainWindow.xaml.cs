@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SoundEngineTest.ViewModel;
+using System;
 using System.Text;
 using System.Windows;
 
@@ -9,7 +10,7 @@ namespace SoundEngineTest
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ViewModel model = new ViewModel();
+        private MainViewModel viewModel = new MainViewModel();
 
         public MainWindow()
         {
@@ -29,14 +30,14 @@ namespace SoundEngineTest
             string result = str.ToString();
 
 
-            this.DataContext = model;
+            this.DataContext = viewModel;
 
             this.Closed += MainWindow_Closed;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {
-            this.model.Dispose();
+            this.viewModel.Dispose();
         }
     }
 }
