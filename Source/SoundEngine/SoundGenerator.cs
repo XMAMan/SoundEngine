@@ -44,11 +44,6 @@ namespace SoundEngine
             }
         }
 
-        public IFrequenceToneSnipped[] GetAllFrequenceTones()
-        {
-            return this.sampleProviderCollection.GetAllFrequenceTones();
-        }
-
         //wav,wma,mp3,... (Alles was NAudio untersützt)
         public IAudioFileSnipped AddSoundFile(string audioFile)
         {

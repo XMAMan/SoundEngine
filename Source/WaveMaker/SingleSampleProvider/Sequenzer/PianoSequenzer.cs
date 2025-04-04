@@ -80,6 +80,22 @@ namespace WaveMaker.Sequenzer
             this.CurrentNoteSize = new SequenzerSize(this.Notes.MinToneIndex, this.Notes.MaxToneIndex, this.Notes.MaxSamplePosition);
         }
 
+        public PianoSequenzer GetCopy()
+        {
+            var copy = new PianoSequenzer(this.InstrumentName, this.MaxAllowedSize, this.SampleRate, this.multiSequenzer, this.piano.Synthesizer.AudioRecorder.AudioRecorder)
+            {
+                KeyShift = this.KeyShift,
+                TestToneFrequence = this.TestToneFrequence,
+                Volume = this.Volume,
+                IsEnabled = this.IsEnabled,
+            };
+
+            copy.piano = this.piano.GetCopy();
+            copy.Notes = this.Notes.GetCopy();
+
+            return copy;
+        }
+
         public int SampleRate { get { return this.piano.SampleRate; } }
 
 

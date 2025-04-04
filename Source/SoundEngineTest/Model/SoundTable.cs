@@ -1,5 +1,6 @@
 ﻿using SoundEngine.SoundSnippeds;
 using SoundEngine;
+using WaveMaker;
 
 namespace SoundEngineTest.Model
 {
@@ -14,6 +15,7 @@ namespace SoundEngineTest.Model
         public string[] GetAvailableOutputDevices() { return this.soundGenerator.GetAvailableOutputDevices(); }
 
         public IMusicFileSnipped BackGroundMusic { get; private set; }
+        public IMusicFileSnipped MarioStart { get; private set; }
         public IFrequenceToneSnipped SoundEffekts0 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts1 { get; private set; }
         public IFrequenceToneSnipped SoundEffekts2 { get; private set; }
@@ -24,6 +26,7 @@ namespace SoundEngineTest.Model
         public IFrequenceToneSnipped SoundEffekts7 { get; private set; }
         public IFrequenceToneSnipped TieferBass { get; private set; }
         public IAudioFileSnipped Soundsystem { get; private set; }
+        public IAudioFileSnipped GlassBroke { get; private set; }
         public IFrequenceToneSnipped Hallo { get; private set; }
         public IAudioRecorderSnipped AudioRecorder { get; private set; }
         public SoundTable()
@@ -43,7 +46,9 @@ namespace SoundEngineTest.Model
             this.TieferBass = this.soundGenerator.AddFrequencyTone(WorkingDirectory + "TieferBass.synt");
 
             this.BackGroundMusic = this.soundGenerator.AddMusicFile(WorkingDirectory + "lied3.music");
+            this.MarioStart = this.soundGenerator.AddMusicFile(WorkingDirectory + "MarioStart.music");
             this.Soundsystem = this.soundGenerator.AddSoundFile(WorkingDirectory + "Soundsystem.mp3");
+            this.GlassBroke = this.soundGenerator.AddSoundFile(WorkingDirectory + "GlassBroke.wav");
             this.Hallo = this.soundGenerator.AddFrequencyTone(WorkingDirectory + "Hallo.synt");
 
             this.AudioRecorder = this.soundGenerator.AudioRecorderSnipped;

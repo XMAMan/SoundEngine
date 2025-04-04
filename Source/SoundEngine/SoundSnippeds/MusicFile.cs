@@ -76,5 +76,19 @@ namespace SoundEngine.SoundSnippeds
         public bool AutoLoop { get { return this.multiSequenzer.AutoLoop; } set { this.multiSequenzer.AutoLoop = value; } }
         public float KeyStrokeSpeed { get { return this.multiSequenzer.KeyStrokeSpeed; } set { this.multiSequenzer.KeyStrokeSpeed = value; } }
         public int KeyShift { get { return this.multiSequenzer.GetKeyShiftFromFirstSequenzer(); } set { this.multiSequenzer.SetKeyShiftFromAllSequenzer(value); } }
+
+
+        public IMusicFileSnipped GetCopy()
+        {
+            var copy = new MusicFile(this.multiSequenzer.GetCopy());
+            this.CopyWasCreated?.Invoke(copy);
+            return copy;
+        }
+        public Action<ISoundSnipped> CopyWasCreated { get; set; } = null;
+        public Action<ISoundSnipped> DisposeWasCalled { get; set; } = null;
+        public void Dispose()
+        {
+            this.DisposeWasCalled?.Invoke(this);
+        }
     }
 }

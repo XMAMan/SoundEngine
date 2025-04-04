@@ -153,7 +153,28 @@ namespace NAudioWaveMaker
                         break;
                 }
             }
-            return MakeMonoFromStereoData(samples.ToArray());
+            var timmedSamples = Trim(samples.ToArray());
+            return MakeMonoFromStereoData(timmedSamples);
+        }
+
+        //Entferne führende und folgende Nullen
+        private static float[] Trim(float[] samples)
+        {
+            int startIndex = 0;
+            while (startIndex < samples.Length && samples[startIndex] == 0)
+            {
+                startIndex++;
+            }
+
+            int endIndex = samples.Length - 1;
+            while (endIndex > startIndex && samples[endIndex] == 0)
+            {
+                endIndex--;
+            }
+
+            float[] trimData = new float[endIndex - startIndex + 1];
+            Array.Copy(samples, startIndex, trimData, 0, endIndex - startIndex + 1);
+            return trimData;
         }
 
     }

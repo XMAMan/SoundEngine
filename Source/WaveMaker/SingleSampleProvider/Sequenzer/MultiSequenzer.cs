@@ -47,6 +47,23 @@ namespace WaveMaker.Sequenzer
             this.audioRecorder = audioRecorder;
         }
 
+        private MultiSequenzer(MultiSequenzer copy)
+        {
+            this.Sequenzers = copy.Sequenzers.Select(x => x.GetCopy()).ToList();
+            this.MaxAllowedSize = copy.MaxAllowedSize;
+            this.CurrentNoteSize = copy.CurrentNoteSize;
+            this.SampleRate = copy.SampleRate;
+            this.IsRunning = copy.IsRunning;
+            this.Volume = copy.Volume;
+
+            this.UpdateAfterNoteChanges();
+        }
+
+        public MultiSequenzer GetCopy()
+        {
+            return new MultiSequenzer(this);
+        }
+
         public MultiSequenzerData GetAllSettings()
         {
             return new MultiSequenzerData()

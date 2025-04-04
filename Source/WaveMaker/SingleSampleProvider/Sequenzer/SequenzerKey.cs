@@ -29,6 +29,25 @@ namespace WaveMaker.Sequenzer
             this.MaxSamplePosition = maxSampleIndex;
         }
 
+        private SequenzerKeys(SequenzerKeys copy)
+        {
+            this.Notes = copy.Notes.Select(x => x.GetCopy()).ToArray();
+            this.SampleIndex = copy.SampleIndex;
+            this.MinToneIndex = copy.MinToneIndex;
+            this.MaxToneIndex = copy.MaxToneIndex;
+            this.MaxSamplePosition = copy.MaxSamplePosition;
+            this.currentToneIndex = copy.currentToneIndex;
+            this.nextStartIndex = copy.nextStartIndex;
+            this.noMoreKeysToStart = copy.noMoreKeysToStart;
+            this.IsFinish = copy.IsFinish;
+        }
+
+        public SequenzerKeys GetCopy()
+        {
+            var copy = new SequenzerKeys(this);
+            return copy;
+        }
+
         public void OrderNotes()
         {
             this.Notes = this.Notes.OrderBy(x => x.StartByteIndex).ToArray();
@@ -201,5 +220,16 @@ namespace WaveMaker.Sequenzer
         public int Length; //Anzahl der Samples
         public float Volume; //Lautstärke (0..1)
         public byte NoteNumber; //60 = Middle C
+
+        public SequenzerKey GetCopy()
+        {
+            var copy = new SequenzerKey();
+            copy.StartByteIndex = this.StartByteIndex;
+            copy.Length = this.Length;
+            copy.Volume = this.Volume;
+            copy.NoteNumber = this.NoteNumber;
+
+            return copy;
+        }
     }
 }

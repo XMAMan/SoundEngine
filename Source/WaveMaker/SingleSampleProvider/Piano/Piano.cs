@@ -16,6 +16,14 @@ namespace WaveMaker
             this.SampleRate = sampleRate;
             this.Synthesizer = new Synthesizer(sampleRate, audioRecorder);
         }
+
+        public Piano GetCopy()
+        {
+            var copy = new Piano(this.SampleRate, this.Synthesizer.AudioRecorder.AudioRecorder);
+            copy.Synthesizer = this.Synthesizer.GetCopy();
+            return copy;
+        }
+
         public float GetNextSample()
         {
             float sum = 0;

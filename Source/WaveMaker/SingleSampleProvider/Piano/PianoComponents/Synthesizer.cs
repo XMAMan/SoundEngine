@@ -73,10 +73,13 @@
         public GainEffect GainEffect { get; private set; }
         public VolumeLfo VolumeLfo { get; private set; }
 
+        private int sampleRate;
         private IPianoStopKeyHandler[] stopKeyHandler; //Sagen, wie lange nach dem Release-Key-Signal noch der Ton weiter geht 
 
         public Synthesizer(int sampleRate, IAudioRecorder audioRecorder)
         {
+            this.sampleRate = sampleRate; //Wird für die Copy-Funktion benötigt
+
             //Source 1: Oscilator
             this.Oscilator = new OscilatorWithLfo(sampleRate);
             this.MultiOscillator = new MultiOscillator(this.Oscilator);
@@ -108,6 +111,17 @@
             };
         }
 
+        public Synthesizer GetCopy()
+        {
+            var copy = new Synthesizer(this.sampleRate, this.AudioRecorder.AudioRecorder);
+
+            var data = this.GetAllSettings();
+            copy.SetAllSettings(data, null, "", this.sampleRate);
+            copy.AudioFileData = this.AudioFileData;
+
+            return copy;
+        }
+
         public void SetAllSettings(SynthesizerData data, IAudioFileReader audioFileReader, string searchDirectoryForAudioFiles, int sampleRate)
         {
             this.UseFrequencyLfo = data.UseFrequencyLfo;
@@ -131,7 +145,7 @@
             this.AmplitudeLfoPulseWidth = data.AmplitudeLfoPulseWidth;
             this.AudioFileName = data.AudioFileName;
             string absolutPath = searchDirectoryForAudioFiles + "\\" + data.AudioFileName;
-            if (File.Exists(absolutPath))
+            if (audioFileReader != null && File.Exists(absolutPath))
             {
                 this.AudioFileData = audioFileReader.GetSamplesFromAudioFile(absolutPath, sampleRate);
             }

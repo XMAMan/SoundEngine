@@ -4,13 +4,20 @@ using SoundEngineTest.Controls.AudioRecorder;
 using SoundEngineTest.Controls.FreqeunceTone;
 using SoundEngineTest.Controls.MusicFile;
 using SoundEngineTest.Model;
+using System.Reactive.Linq;
 
 namespace SoundEngineTest.ViewModel
 {
     public class MainViewModel : ReactiveObject, IDisposable
     {
         private SoundTable table = new SoundTable();
+
+        private IDisposable timer;
+        private List<ITimerTickHandler> timerTickHandlers = new List<ITimerTickHandler>();
+
         public float Volume { get { return this.table.Volume; } set { this.table.Volume = value; } }
+
+        //Single-Sound-Testing
         public MusicFileSnippedViewModel BackGroundMusic { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts0 { get; private set; }
         public FrequenceToneSnippedViewModel SoundEffekts1 { get; private set; }
@@ -24,6 +31,12 @@ namespace SoundEngineTest.ViewModel
         public AudioFileSnippedViewModel Soundsystem { get; private set; }
         public FrequenceToneSnippedViewModel Hallo { get; private set; }
         public AudioRecorderSnippedViewModel AudioRecorder { get; private set; }
+
+        //Multi-Sound-Testing
+        public MultiFrequencyToneViewModel SoundEffekts0Multi { get; private set; }
+        public MultiMusicFileViewModel MultiMusicFileViewModel { get; private set; }
+        public MultiAudioFile MultiAudioFile { get; private set; }
+
         public MainViewModel()
         {
             this.SoundEffekts0 = new FrequenceToneSnippedViewModel(table.SoundEffekts0);
@@ -41,6 +54,22 @@ namespace SoundEngineTest.ViewModel
             this.Hallo = new FrequenceToneSnippedViewModel(table.Hallo);
 
             this.AudioRecorder = new AudioRecorderSnippedViewModel(table.AudioRecorder);
+
+
+            this.SoundEffekts0Multi = new MultiFrequencyToneViewModel(table.SoundEffekts0);
+            this.timerTickHandlers.Add(this.SoundEffekts0Multi);
+
+            this.MultiMusicFileViewModel = new MultiMusicFileViewModel(table.MarioStart);
+            this.MultiAudioFile = new MultiAudioFile(table.GlassBroke);
+
+            this.timer = Observable.Interval(TimeSpan.FromMilliseconds(250))
+                .Subscribe(x =>
+                {
+                    foreach (var handler in this.timerTickHandlers)
+                    {
+                        handler.HandleTimerTick();
+                    }
+                });
         }
 
         public IEnumerable<string> Outputdevice
@@ -64,6 +93,7 @@ namespace SoundEngineTest.ViewModel
         public void Dispose()
         {
             this.table.Dispose();
+            this.timer?.Dispose();
         }
 
 

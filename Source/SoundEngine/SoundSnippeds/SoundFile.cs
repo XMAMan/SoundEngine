@@ -21,8 +21,25 @@ namespace SoundEngine.SoundSnippeds
                 SignalSource = SignalSource.AudioFile,
                 AudioFileData = samples,
                 LeftAudioFilePosition = 0,
-                RightAudioFilePosition = audioFile.GetFileLengthInMilliseconds()
+                RightAudioFilePosition = audioFile.GetFileLengthInMilliseconds(),
+                AttackTimeInMs = 0,
+                DecayTimeInMs = 0,
+                SustainVolume = 1,
+                ReleaseTimeInMs = 0,
             };           
+        }
+
+        public IAudioFileSnipped GetCopy()
+        {
+            var copy = new SoundFile(this.SampleRate, this.audioFile.SampleData);
+            this.CopyWasCreated?.Invoke(copy);
+            return copy;
+        }
+        public Action<ISoundSnipped> CopyWasCreated { get; set; } = null;
+        public Action<ISoundSnipped> DisposeWasCalled { get; set; } = null;
+        public void Dispose()
+        {
+            this.DisposeWasCalled?.Invoke(this);
         }
 
         private AudioFile GetFileFromSamples(int sampmleRate, float[] samples)

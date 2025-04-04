@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SoundEngineTest"
+        xmlns:local="clr-namespace:SoundEngineTest" xmlns:freqeuncetone="clr-namespace:SoundEngineTest.Controls.FreqeunceTone" xmlns:musicfile="clr-namespace:SoundEngineTest.Controls.MusicFile"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1600">
     <Grid>
@@ -88,8 +88,31 @@
                 </StackPanel>
             </GroupBox>
 
-            
-            
+            <GroupBox Header="Multi-Sound-Testing">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <GroupBox Header="Multi-Sound-Testing">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="SoundEffekts.music[0]:"/>
+                                    <freqeuncetone:MultiFrequencyTone DataContext="{Binding SoundEffekts0Multi}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="MarioStart.music:"/>
+                                    <musicfile:MultiMusicFile DataContext="{Binding MultiMusicFileViewModel}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="GlassBroke.wav:"/>
+                                    <musicfile:MultiMusicFile DataContext="{Binding MultiAudioFile}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+
+
+                </StackPanel>
+            </GroupBox>
+
         </StackPanel>
     </Grid>
 </Window>

@@ -1,15 +1,18 @@
 ﻿using System;
+using WaveMaker;
 using WaveMaker.KeyboardComponents;
 
 namespace SoundEngine.SoundSnippeds
 {
-    public interface ISoundSnipped
+    public interface ISoundSnipped : ISingleSampleProvider, IDisposable
     {
         bool IsRunning { get; }
         Action<bool> IsRunningChanged { get; set; }
         void Play();
         void Stop(); //Bei ein FrequencyTone stoppt es alle laufenden Töne
         float Volume { get; set; }
+        Action<ISoundSnipped> CopyWasCreated { get; set; }
+        Action<ISoundSnipped> DisposeWasCalled { get; set; } //Wird aufgerufen, wenn Dispose aufgerufen wurde
     }
 
     public interface ISoundSnippedWithEndTrigger : ISoundSnipped
@@ -23,6 +26,7 @@ namespace SoundEngine.SoundSnippeds
     {
         float KeyStrokeSpeed { get; set; } //1 = Spiele in normaler Geschwindigkeit, 2 = Doppelt so schnell, 0.5 = Halbe Geschwindigkeit
         int KeyShift { get; set; } //Wie viele Okataven nach oben oder unten verschieben
+        IMusicFileSnipped GetCopy();
     }
 
     public interface IAudioEffects
@@ -40,14 +44,14 @@ namespace SoundEngine.SoundSnippeds
     {
         float Pitch { get; set; } //Für Audio-File-Töne
         float Speed { get; set; } //Für Audio-File-Töne
+        IAudioFileSnipped GetCopy();
     }
 
     public interface IFrequenceToneSnipped : ISoundSnipped
     {
         float Frequency { get; set; } //Für Synthi-Töne        
         Synthesizer Synthesizer { get; }
-        int PlayAndReturnHandle();
-        void StopFromHandle(int handle);
+        IFrequenceToneSnipped GetCopy();
     }
 
     public interface IAudioRecorderSnipped : ISoundSnipped, IAudioEffects
@@ -55,6 +59,7 @@ namespace SoundEngine.SoundSnippeds
         string[] GetAvailableDevices();
         string SelectedDevice { get; set; }
         void UseDefaultDevice();
+        IAudioRecorderSnipped GetCopy();
     }
 }
 

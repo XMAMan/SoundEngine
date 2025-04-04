@@ -7,12 +7,25 @@ namespace SoundEngine.SoundSnippeds
     class FrequencyTone : ISingleSampleProvider, ISoundSnipped, IFrequenceToneSnipped
     {
         private PianoSequenzer sequenzer;
-        private List<int> runningKeys = new List<int>();
+        private int keyIndex = -1;
 
         internal FrequencyTone(PianoSequenzer sequenzer)
         {
             this.sequenzer = sequenzer;
             this.Frequency = sequenzer.TestToneFrequence;
+        }
+
+        public IFrequenceToneSnipped GetCopy()
+        {
+            var copy= new FrequencyTone(this.sequenzer.GetCopy());
+            this.CopyWasCreated?.Invoke(copy);
+            return copy;
+        }
+        public Action<ISoundSnipped> CopyWasCreated { get; set; } = null;
+        public Action<ISoundSnipped> DisposeWasCalled { get; set; } = null;
+        public void Dispose()
+        {
+            this.DisposeWasCalled?.Invoke(this);
         }
 
         public int SampleRate { get { return this.sequenzer.SampleRate; } }
@@ -36,41 +49,21 @@ namespace SoundEngine.SoundSnippeds
 
             }
         }
-        public Action<bool> IsRunningChanged { get; set; } = null;
+        public Action<bool> IsRunningChanged { get; set; } = null;        
         public void Play()
         {
-            this.IsRunning = true;
+            if (this.keyIndex != -1) Stop();
 
-            PlayAndReturnHandle();
+            this.IsRunning = true;
+            this.keyIndex = this.sequenzer.StartPlayingKey(this.Frequency);
         }
         public void Stop()
         {
             this.IsRunning = false;
-
-            foreach (int keyIndex in this.runningKeys.ToList())
-            {
-                this.sequenzer.ReleaseKey(keyIndex);
-            }
-            this.runningKeys.Clear();
+            this.sequenzer.ReleaseKey(this.keyIndex);
+            this.keyIndex = -1;
         }
-        public int PlayAndReturnHandle()
-        {
-            int index = this.sequenzer.StartPlayingKey(this.Frequency);
-            if (index != -1)
-            {
-                this.runningKeys.Add(index);
-            }
-            return index;
-        }
-        public void StopFromHandle(int handle)
-        {
-            if (this.runningKeys.Contains(handle) == false) return;
 
-            this.runningKeys.Remove(handle);
-            this.sequenzer.ReleaseKey(handle);
-
-            this.IsRunning = this.runningKeys.Any();
-        }
         public float Volume { get; set; } = 1;
 
         private float frequency = 440;
@@ -80,11 +73,7 @@ namespace SoundEngine.SoundSnippeds
             set
             {
                 this.frequency = value;
-
-                foreach (int keyIndex in this.runningKeys.ToList())
-                {
-                    this.sequenzer.SetFrequencyFromPlayingTone(keyIndex, this.frequency);
-                }
+                if (this.keyIndex != -1) this.sequenzer.SetFrequencyFromPlayingTone(this.keyIndex, this.frequency);
             }
         }
         public float Pitch { get { return this.sequenzer.Synthesizer.AudioFilePitch; } set { this.sequenzer.Synthesizer.AudioFilePitch = value; } } 

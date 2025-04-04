@@ -17,12 +17,6 @@ namespace SoundEngine
         private IAudioFileReader audioFileReader;
         private IAudioRecorder audioRecorder;
 
-        private List<FrequencyTone> frequenzeToneList = new List<FrequencyTone>();
-        public IFrequenceToneSnipped[] GetAllFrequenceTones()
-        {
-            return this.frequenzeToneList.ToArray();
-        }
-
         public SoundSnippedCollection(IAudioFileReader audioFileReader, int sampleRate, IAudioRecorder audioRecorder, ISingleSampleProvider audioRecorderSnipped)
         {
             this.SampleRate = sampleRate;
@@ -54,7 +48,7 @@ namespace SoundEngine
         {
             float[] samples = this.audioFileReader.GetSamplesFromAudioFile(audioFile, this.SampleRate);
             var soundFile = new SoundFile(this.SampleRate, samples);
-            this.sampleProviders.Add(soundFile);
+            AddSoundSnipped(soundFile);
             return soundFile;
         }
 
@@ -64,8 +58,10 @@ namespace SoundEngine
             var multi = MultiSequenzer.LoadFromFile(musicFile, this.audioFileReader, this.SampleRate, this.audioRecorder);
             multi.Volume = 1;
             var syntList = multi.GetAllSequenzers().Select(x => new FrequencyTone(x)).ToList();
-            this.frequenzeToneList.AddRange(syntList);
-            this.sampleProviders.AddRange(this.frequenzeToneList);
+            foreach (var synt in syntList)
+            {
+                this.AddSoundSnipped(synt);
+            }
             return syntList.ToArray();
         }
 
@@ -75,7 +71,7 @@ namespace SoundEngine
             var multi = MultiSequenzer.LoadFromFile(musicFile, this.audioFileReader, this.SampleRate, this.audioRecorder);
             multi.Volume = 1;
             var soundFile = new MusicFile(multi);
-            this.sampleProviders.Add(soundFile);
+            AddSoundSnipped(soundFile);
             return soundFile;
         }
 
@@ -86,8 +82,7 @@ namespace SoundEngine
             PianoSequenzer sequenzer = this.frequenzTones.AddEmptySequenzer(new SequenzerSize(0, 127, 1));
             sequenzer.Synthesizer.SetAllSettings(data, this.audioFileReader, Path.GetDirectoryName(syntiFile), this.SampleRate);
             var tone = new FrequencyTone(sequenzer);
-            this.frequenzeToneList.Add(tone);
-            this.sampleProviders.Add(tone);
+            AddSoundSnipped(tone);
             return tone;
         }
 
@@ -96,8 +91,19 @@ namespace SoundEngine
         {
             PianoSequenzer sequenzer = this.frequenzTones.AddEmptySequenzer(new SequenzerSize(0, 127, 1));
             var tone = new FrequencyTone(sequenzer);
-            this.frequenzeToneList.Add(tone);
             return tone;
+        }
+
+        private void AddSoundSnipped(ISoundSnipped snipped)
+        {
+            this.sampleProviders.Add(snipped);
+            snipped.CopyWasCreated += this.AddSoundSnipped;
+            snipped.DisposeWasCalled += this.RemoveSoundSnipped;
+        }
+
+        private void RemoveSoundSnipped(ISoundSnipped snipped)
+        {
+            this.sampleProviders.Remove(snipped);
         }
     }
 }

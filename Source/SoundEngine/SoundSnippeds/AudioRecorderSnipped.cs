@@ -22,6 +22,19 @@ namespace SoundEngine.SoundSnippeds
             };
         }
 
+        public IAudioRecorderSnipped GetCopy()
+        {
+            var copy = new AudioRecorderSnipped(this.SampleRate, this.audioRecorder);
+            this.CopyWasCreated?.Invoke(copy);
+            return copy;
+        }
+        public Action<ISoundSnipped> CopyWasCreated { get; set; } = null;
+        public Action<ISoundSnipped> DisposeWasCalled { get; set; } = null;
+        public void Dispose()
+        {
+            this.DisposeWasCalled?.Invoke(this);
+        }
+
         public int SampleRate { get; private set; }
 
         public float GetNextSample()
