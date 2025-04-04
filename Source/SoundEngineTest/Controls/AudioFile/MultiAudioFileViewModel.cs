@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace SoundEngineTest.Controls.AudioFile
 {
-    public class MultiAudioFile : ReactiveObject
+    public class MultiAudioFileViewModel : ReactiveObject
     {
         protected IAudioFileSnipped snipp;
         private List<Ball> balls = new List<Ball>();
-        public MultiAudioFile(IAudioFileSnipped snipp)
+        public MultiAudioFileViewModel(IAudioFileSnipped snipp)
         {
             this.snipp = snipp;
 
@@ -45,5 +45,8 @@ namespace SoundEngineTest.Controls.AudioFile
         public ReactiveCommand<Unit, Unit> Play { get; private set; }
         public ReactiveCommand<Unit, Unit> Stop { get; private set; }
         [Reactive] public int ActiveCounter { get; set; } = 0;
+
+        public float Pitch { get { return snipp.Pitch; } set { snipp.Pitch = value; } }
+        public float Speed { get { return snipp.Speed; } set { snipp.Speed = value; } }
     }
 }

@@ -40,5 +40,8 @@ namespace SoundEngineTest.Controls.MusicFile
         public ReactiveCommand<Unit, Unit> Play { get; private set; }
         public ReactiveCommand<Unit, Unit> Stop { get; private set; }
         [Reactive] public int ActiveCounter { get; set; } = 0;
+
+        public float KeyStrokeSpeed { get { return snipp.KeyStrokeSpeed; } set { snipp.KeyStrokeSpeed = value; } }
+        public int KeyShift { get { return snipp.KeyShift; } set { snipp.KeyShift = value; } }
     }
 }

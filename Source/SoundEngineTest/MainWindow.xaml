@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SoundEngineTest" xmlns:freqeuncetone="clr-namespace:SoundEngineTest.Controls.FreqeunceTone" xmlns:musicfile="clr-namespace:SoundEngineTest.Controls.MusicFile"
+        xmlns:local="clr-namespace:SoundEngineTest" xmlns:freqeuncetone="clr-namespace:SoundEngineTest.Controls.FreqeunceTone" xmlns:musicfile="clr-namespace:SoundEngineTest.Controls.MusicFile" xmlns:audiofile="clr-namespace:SoundEngineTest.Controls.AudioFile"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1600">
     <Grid>
@@ -103,7 +103,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="GlassBroke.wav:"/>
-                                    <musicfile:MultiMusicFile DataContext="{Binding MultiAudioFile}"/>
+                                    <audiofile:MultiAudioFile DataContext="{Binding MultiAudioFile}"/>
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>

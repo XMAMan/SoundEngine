@@ -42,6 +42,7 @@ namespace SoundEngineTest.Controls.FreqeunceTone
         public ReactiveCommand<Unit, Unit> Stop { get; private set; }
         [Reactive] public int ToneLength { get; set; } = 3;
         [Reactive] public int ActiveCounter { get; set; } = 0;
+        public float Frequency { get { return snipp.Frequency; } set { snipp.Frequency = value; } }
 
         public void HandleTimerTick()
         {

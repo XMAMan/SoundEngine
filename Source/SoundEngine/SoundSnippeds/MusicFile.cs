@@ -81,6 +81,8 @@ namespace SoundEngine.SoundSnippeds
         public IMusicFileSnipped GetCopy()
         {
             var copy = new MusicFile(this.multiSequenzer.GetCopy());
+            copy.isRunning = this.isRunning;
+
             this.CopyWasCreated?.Invoke(copy);
             return copy;
         }

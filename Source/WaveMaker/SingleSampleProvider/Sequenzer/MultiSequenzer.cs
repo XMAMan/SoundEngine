@@ -55,6 +55,8 @@ namespace WaveMaker.Sequenzer
             this.SampleRate = copy.SampleRate;
             this.IsRunning = copy.IsRunning;
             this.Volume = copy.Volume;
+            this.AutoLoop = copy.AutoLoop;
+            this.KeyStrokeSpeed = copy.KeyStrokeSpeed;
 
             this.UpdateAfterNoteChanges();
         }

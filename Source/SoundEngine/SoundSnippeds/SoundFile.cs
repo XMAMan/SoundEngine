@@ -31,10 +31,23 @@ namespace SoundEngine.SoundSnippeds
 
         public IAudioFileSnipped GetCopy()
         {
-            var copy = new SoundFile(this.SampleRate, this.audioFile.SampleData);
+            var copy = new SoundFile(this.SampleRate, this.audioFile.SampleData.ToArray());
+            copy.isRunning = this.isRunning;
+            copy.Volume = this.Volume;
+            copy.AutoLoop = this.AutoLoop;
+            copy.Pitch = this.Pitch;
+            copy.Speed = this.Speed;
+            copy.UseDelayEffekt = this.UseDelayEffekt;
+            copy.UseHallEffekt = this.UseHallEffekt;
+            copy.UseGainEffekt = this.UseGainEffekt;
+            copy.Gain = this.Gain;
+            copy.UseVolumeLfo = this.UseVolumeLfo;
+            copy.VolumeLfoFrequency = this.VolumeLfoFrequency;
+
             this.CopyWasCreated?.Invoke(copy);
             return copy;
         }
+
         public Action<ISoundSnipped> CopyWasCreated { get; set; } = null;
         public Action<ISoundSnipped> DisposeWasCalled { get; set; } = null;
         public void Dispose()

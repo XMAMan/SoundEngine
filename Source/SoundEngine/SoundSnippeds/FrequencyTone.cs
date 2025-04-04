@@ -18,6 +18,10 @@ namespace SoundEngine.SoundSnippeds
         public IFrequenceToneSnipped GetCopy()
         {
             var copy= new FrequencyTone(this.sequenzer.GetCopy());
+            copy.frequency = this.frequency;
+            copy.isRunning = this.isRunning;
+            copy.Volume = this.Volume;
+
             this.CopyWasCreated?.Invoke(copy);
             return copy;
         }

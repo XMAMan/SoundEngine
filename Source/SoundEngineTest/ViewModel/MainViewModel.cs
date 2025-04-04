@@ -35,7 +35,7 @@ namespace SoundEngineTest.ViewModel
         //Multi-Sound-Testing
         public MultiFrequencyToneViewModel SoundEffekts0Multi { get; private set; }
         public MultiMusicFileViewModel MultiMusicFileViewModel { get; private set; }
-        public MultiAudioFile MultiAudioFile { get; private set; }
+        public MultiAudioFileViewModel MultiAudioFile { get; private set; }
 
         public MainViewModel()
         {
@@ -60,7 +60,7 @@ namespace SoundEngineTest.ViewModel
             this.timerTickHandlers.Add(this.SoundEffekts0Multi);
 
             this.MultiMusicFileViewModel = new MultiMusicFileViewModel(table.MarioStart);
-            this.MultiAudioFile = new MultiAudioFile(table.GlassBroke);
+            this.MultiAudioFile = new MultiAudioFileViewModel(table.GlassBroke);
 
             this.timer = Observable.Interval(TimeSpan.FromMilliseconds(250))
                 .Subscribe(x =>
