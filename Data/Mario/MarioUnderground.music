@@ -3,13 +3,13 @@
   <MidiFileFileName>MarioUnderground.mid</MidiFileFileName>
   <LengthInMillisecondsForNewCreatedNotes>250</LengthInMillisecondsForNewCreatedNotes>
   <SnapToGrid>true</SnapToGrid>
-  <SampleCount>311707</SampleCount>
+  <SampleCount>311564</SampleCount>
   <MinToneIndex>38</MinToneIndex>
   <MaxToneIndex>62</MaxToneIndex>
   <SynthesizerData>
     <SequenzerData>
       <InstrumentName>DrawbarOrgan</InstrumentName>
-      <Volume>0.33999997</Volume>
+      <Volume>0.36666662</Volume>
       <IsEnabled>true</IsEnabled>
       <TestToneFrequence>80.80899</TestToneFrequence>
       <SynthesizerData>
@@ -59,7 +59,7 @@
     </SequenzerData>
     <SequenzerData>
       <InstrumentName>CharangLead</InstrumentName>
-      <Volume>0.7066667</Volume>
+      <Volume>1</Volume>
       <IsEnabled>true</IsEnabled>
       <TestToneFrequence>237.95506</TestToneFrequence>
       <SynthesizerData>
@@ -96,15 +96,15 @@
         <HighPassCutOffFrequence>0.5</HighPassCutOffFrequence>
         <HighPassResonance>0.20000005</HighPassResonance>
         <AttackTimeInMs>0</AttackTimeInMs>
-        <DecayTimeInMs>179.0909</DecayTimeInMs>
-        <SustainVolume>0.08484849</SustainVolume>
+        <DecayTimeInMs>263.93936</DecayTimeInMs>
+        <SustainVolume>0.1939394</SustainVolume>
         <ReleaseTimeInMs>383.33334</ReleaseTimeInMs>
         <UseDelayEffekt>false</UseDelayEffekt>
         <UseHallEffekt>false</UseHallEffekt>
         <UseGainEffekt>false</UseGainEffekt>
-        <Gain>7</Gain>
+        <Gain>2.3760684</Gain>
         <UseVolumeLfo>false</UseVolumeLfo>
-        <VolumeLfoFrequency>60.615383</VolumeLfoFrequency>
+        <VolumeLfoFrequency>20</VolumeLfoFrequency>
       </SynthesizerData>
     </SequenzerData>
   </SynthesizerData>
