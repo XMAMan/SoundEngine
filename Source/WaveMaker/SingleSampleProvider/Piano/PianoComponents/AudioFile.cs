@@ -38,6 +38,9 @@ namespace WaveMaker.KeyboardComponents
 
             SpeedChanger speedChanger = new SpeedChanger() { Speed = this.Speed };
             this.modifiedSamples = speedChanger.GetModifiSamples(this.modifiedSamples);
+
+            this.LeftPositionInMilliseconds = this.leftPositionInMilliseconds;
+            this.RightPositionInMilliseconds = this.rightPositionInMilliseconds;
         }
 
         //Hiermit kann der Anfang des Audiofiles weggeschnitten werden
@@ -46,7 +49,7 @@ namespace WaveMaker.KeyboardComponents
         public float LeftPositionInMilliseconds
         {
             get { return this.leftPositionInMilliseconds; }
-            set { this.leftPositionInMilliseconds = value; this.leftIndex = (int)(value / 1000 * this.SampleRate); }
+            set { this.leftPositionInMilliseconds = value; this.leftIndex = (int)(value / 1000 * this.SampleRate * this.Speed); }
         }
 
         //Hiermit kann das Ende des AudioFiles weggeschnitten werden
@@ -55,7 +58,7 @@ namespace WaveMaker.KeyboardComponents
         public float RightPositionInMilliseconds
         {
             get { return this.rightPositionInMilliseconds; }
-            set { this.rightPositionInMilliseconds = value; this.rightIndex = (int)(value / 1000 * this.SampleRate); }
+            set { this.rightPositionInMilliseconds = value; this.rightIndex = (int)(value / 1000 * this.SampleRate * this.Speed); }
         }
 
         public float GetFileLengthInMilliseconds()
