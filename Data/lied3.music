@@ -19,11 +19,11 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>SawTooth</OsziType>
+        <OsciType>SawTooth</OsciType>
         <UseAccordEffekt>true</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
-        <OsziCount>2</OsziCount>
-        <MultiOsziPitch>1.44858623</MultiOsziPitch>
+        <OsciCount>2</OsciCount>
+        <MultiOsciPitch>1.44858623</MultiOsciPitch>
 		<AudioFileName>Load Audio-File</AudioFileName>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
@@ -48,11 +48,11 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-6.368965</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>Rectangle</OsziType>
+        <OsciType>Rectangle</OsciType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.224137932</PusleWidth>
-        <OsziCount>2</OsziCount>
-        <MultiOsziPitch>1.6209656</MultiOsziPitch>
+        <OsciCount>2</OsciCount>
+        <MultiOsciPitch>1.6209656</MultiOsciPitch>
 		<AudioFileName>Load Audio-File</AudioFileName>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>

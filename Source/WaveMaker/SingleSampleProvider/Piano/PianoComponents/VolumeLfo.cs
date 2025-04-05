@@ -3,7 +3,7 @@
     public class VolumeLfo : IPianoComponent
     {
         private IPianoComponent source;
-        private LowFrequenzyOszillator lfo;
+        private LowFrequenzyOscillator lfo;
 
         public bool IsEnabled { get; set; } = false;
         public float Frequency { get => this.lfo.Frequency; set => this.lfo.Frequency = value; }
@@ -11,7 +11,7 @@
         public VolumeLfo(IPianoComponent source, int sampleRate) 
         {
             this.source = source;
-            this.lfo = new LowFrequenzyOszillator(sampleRate) { SignalType = SignalType.Sinus, PusleWidth = 0.5f };
+            this.lfo = new LowFrequenzyOscillator(sampleRate) { SignalType = SignalType.Sinus, PusleWidth = 0.5f };
         }
 
         public float GetSample(KeySampleData data)

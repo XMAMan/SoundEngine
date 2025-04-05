@@ -23,7 +23,7 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel>
                     <GroupBox Header="Oscillator" Visibility="{Binding OscillatorVisibility}">
-                        <oscillator:OscillatorView DataContext="{Binding OsziViewModel}"/>
+                        <oscillator:OscillatorView DataContext="{Binding OsciViewModel}"/>
                     </GroupBox>
                     <GroupBox Header="AudioFile" Visibility="{Binding AudioFileVisibility}">
                         <audiofilecontrol:AudioFileView DataContext="{Binding AudioFileViewModel}" Height="30" HorizontalAlignment="Left"/>

@@ -8,11 +8,11 @@
   <UseFrequenceRamp>true</UseFrequenceRamp>
   <FrequencyRampFactor>-6.92068958</FrequencyRampFactor>
   <RampStepFactor>69</RampStepFactor>
-  <OsziType>Triangle</OsziType>
+  <OsciType>Triangle</OsciType>
   <UseAccordEffekt>true</UseAccordEffekt>
   <PusleWidth>0.01724138</PusleWidth>
-  <OsziCount>7</OsziCount>
-  <MultiOsziPitch>0.001</MultiOsziPitch>
+  <OsciCount>7</OsciCount>
+  <MultiOsciPitch>0.001</MultiOsciPitch>
   <UseAmplitudeLfo>true</UseAmplitudeLfo>
   <AmplitudeLfoFrequenc>30.8620682</AmplitudeLfoFrequenc>
   <IsLowPassEnabled>true</IsLowPassEnabled>

@@ -111,13 +111,26 @@
                     
                         
                     <StackPanel Margin="-4 0 -6 0">
-                        <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="1"  Maximum="10" Value="{Binding OsziCount}"/>
+                         <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="1"  Maximum="10" Value="{Binding OsciCount}"/>
                         <Label Content="Count"/>
                     </StackPanel>
-                    <StackPanel>
+                    <Grid>
+                        <StackPanel>
                             <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0.001"  Maximum="5" Value="{Binding Pitch}"/>
-                        <Label Content="Pitch"/>
-                    </StackPanel>
+                            <Label Content="Pitch"/>
+                        </StackPanel>
+                        <Canvas Visibility="{Binding MultiOsciPitchVisibility}" ToolTip="This element can only be used if Count is greater one">
+                            <Canvas.Background>
+                                <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0" EndPoint="4,4" SpreadMethod="Repeat">
+                                    <GradientStop Offset="0" Color="#884D2E8D"/>
+                                    <GradientStop Offset="0.75" Color="#8880CAE6"/>
+                                    <GradientStop Offset="0.75" Color="#88792424"/>
+                                    <GradientStop Offset="1" Color="#88CCABAB"/>
+                                </LinearGradientBrush>
+                            </Canvas.Background>
+                        </Canvas>
+                    </Grid>
+                   
                     </StackPanel>
             </StackPanel>
             </Border>

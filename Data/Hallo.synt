@@ -6,11 +6,11 @@
   <UseFrequenceRamp>false</UseFrequenceRamp>
   <FrequencyRampFactor>-0.3</FrequencyRampFactor>
   <RampStepFactor>0</RampStepFactor>
-  <OsziType>Rectangle</OsziType>
+  <OsciType>Rectangle</OsciType>
   <UseAccordEffekt>false</UseAccordEffekt>
   <PusleWidth>0.5</PusleWidth>
-  <OsziCount>2</OsziCount>
-  <MultiOsziPitch>3</MultiOsziPitch>
+  <OsciCount>2</OsciCount>
+  <MultiOsciPitch>3</MultiOsciPitch>
   <UseAmplitudeLfo>false</UseAmplitudeLfo>
   <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
   <AmplitudeLfoPulseWidth>0.9</AmplitudeLfoPulseWidth>

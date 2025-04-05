@@ -11,11 +11,11 @@
         public bool UsePulsewidthLfo { get; set; } = false;
         public float PulsewidthLfoFrequence { get; set; } = 5;
         public float PulsewidthLfoAmplitude { get; set; } = 0.2f;
-        public SignalType OsziType { get; set; } = SignalType.Rectangle;
+        public SignalType OsciType { get; set; } = SignalType.Rectangle;
         public bool UseAccordEffekt { get; set; } = false;
         public float PusleWidth { get; set; } = 0.5f;
-        public int OsziCount { get; set; } = 2;
-        public float MultiOsziPitch { get; set; } = 3;
+        public int OsciCount { get; set; } = 2;
+        public float MultiOsciPitch { get; set; } = 3;
         public float SubOszVolume { get; set; } = 0;
         public bool UseAmplitudeLfo { get; set; } = false;
         public float AmplitudeLfoFrequenc { get; set; } = 5;
@@ -83,7 +83,7 @@
             //Source 1: Oscilator
             this.Oscilator = new OscilatorWithLfo(sampleRate);
             this.MultiOscillator = new MultiOscillator(this.Oscilator);
-            this.OscWithSubOscMixer = new Mixer(this.MultiOscillator, new SubOscilator(sampleRate) { OsziType = SignalType.SawTooth }) { VolumeB = 0 };
+            this.OscWithSubOscMixer = new Mixer(this.MultiOscillator, new SubOscilator(sampleRate) { OsciType = SignalType.SawTooth }) { VolumeB = 0 };
             
             //Source 2: AudioFile
             this.AudioFile = new AudioFile(sampleRate);
@@ -133,11 +133,11 @@
             this.UsePulsewidthLfo = data.UsePulsewidthLfo;
             this.PulsewidthLfoFrequence = data.PulsewidthLfoFrequence;
             this.PulsewidthLfoAmplitude = data.PulsewidthLfoAmplitude;
-            this.OsziType = data.OsziType;
+            this.OsciType = data.OsciType;
             this.UseAccordEffekt = data.UseAccordEffekt;
             this.PusleWidth = data.PusleWidth;
-            this.OsziCount = data.OsziCount;
-            this.MultiOsziPitch = data.MultiOsziPitch;
+            this.OsciCount = data.OsciCount;
+            this.MultiOsciPitch = data.MultiOsciPitch;
             this.SubOszVolume = data.SubOszVolume;
             this.UseAmplitudeLfo = data.UseAmplitudeLfo;
             this.AmplitudeLfoFrequenc = data.AmplitudeLfoFrequenc;
@@ -185,11 +185,11 @@
                 UsePulsewidthLfo = this.UsePulsewidthLfo,
                 PulsewidthLfoFrequence = this.PulsewidthLfoFrequence,
                 PulsewidthLfoAmplitude = this.PulsewidthLfoAmplitude,
-                OsziType = this.OsziType,
+                OsciType = this.OsciType,
                 UseAccordEffekt = this.UseAccordEffekt,
                 PusleWidth = this.PusleWidth,
-                OsziCount = this.OsziCount,
-                MultiOsziPitch = this.MultiOsziPitch,
+                OsciCount = this.OsciCount,
+                MultiOsciPitch = this.MultiOsciPitch,
                 SubOszVolume = this.SubOszVolume,
                 UseAmplitudeLfo = this.UseAmplitudeLfo,
                 AmplitudeLfoFrequenc = this.AmplitudeLfoFrequenc,
@@ -244,11 +244,11 @@
         public float PulsewidthLfoAmplitude { get { return this.Oscilator.PulsewidthLfoAmplitude; } set { this.Oscilator.PulsewidthLfoAmplitude = value; } }
 
 
-        public SignalType OsziType { get { return this.Oscilator.OsziType; } set { this.Oscilator.OsziType = value; } }
+        public SignalType OsciType { get { return this.Oscilator.OsciType; } set { this.Oscilator.OsciType = value; } }
         public bool UseAccordEffekt { get { return this.Oscilator.UseAccordEffekt; } set { this.Oscilator.UseAccordEffekt = value; } }
         public float PusleWidth { get { return this.Oscilator.PusleWidth; } set { this.Oscilator.PusleWidth = value; } }
-        public int OsziCount { get { return this.MultiOscillator.OsziCount; } set { this.MultiOscillator.OsziCount = value; } }
-        public float MultiOsziPitch { get { return this.MultiOscillator.Pitch; } set { this.MultiOscillator.Pitch = value; } }
+        public int OsciCount { get { return this.MultiOscillator.OsciCount; } set { this.MultiOscillator.OsciCount = value; } }
+        public float MultiOsciPitch { get { return this.MultiOscillator.Pitch; } set { this.MultiOscillator.Pitch = value; } }
         public float SubOszVolume { get { return this.OscWithSubOscMixer.VolumeB; } set { this.OscWithSubOscMixer.VolumeB = value; } }
         public bool UseAmplitudeLfo { get { return this.Oscilator.UseAmplitudeLfo; } set { this.Oscilator.UseAmplitudeLfo = value; } }
         public float AmplitudeLfoFrequenc { get { return this.Oscilator.AmplitudeLfoFrequenc; } set { this.Oscilator.AmplitudeLfoFrequenc = value; } }

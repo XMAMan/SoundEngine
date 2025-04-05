@@ -22,11 +22,11 @@
         <UsePulsewidthLfo>false</UsePulsewidthLfo>
         <PulsewidthLfoFrequence>5</PulsewidthLfoFrequence>
         <PulsewidthLfoAmplitude>0.2</PulsewidthLfoAmplitude>
-        <OsziType>Rectangle</OsziType>
+        <OsciType>Rectangle</OsciType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
-        <OsziCount>2</OsziCount>
-        <MultiOsziPitch>3</MultiOsziPitch>
+        <OsciCount>2</OsciCount>
+        <MultiOsciPitch>3</MultiOsciPitch>
         <SubOszVolume>0</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>

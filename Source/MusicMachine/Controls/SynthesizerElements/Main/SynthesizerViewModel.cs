@@ -18,7 +18,7 @@ namespace MusicMachine.Controls.SynthesizerElements.Main
         public SynthesizerViewModel(Synthesizer model, IAudioFileReader audioFileReader, ITestToneProvider testToneProvider)
         {
             this.model = model;
-            this.OsziViewModel = new OscillatorViewModel(model);
+            this.OsciViewModel = new OscillatorViewModel(model);
             this.AudioFileViewModel = new AudioFileViewModel(model, audioFileReader);
             this.MicrophoneViewModel = new MicrophoneViewModel(model.AudioRecorder.AudioRecorder, testToneProvider);
             this.SpezialEffectsViewModel = new SpezialEffectsViewModel(model);
@@ -75,7 +75,7 @@ namespace MusicMachine.Controls.SynthesizerElements.Main
         [Reactive] public Visibility AudioFileVisibility { get; private set; } = Visibility.Collapsed;
         [Reactive] public Visibility MicrophoneVisibility { get; private set; } = Visibility.Collapsed;
 
-        public OscillatorViewModel OsziViewModel { get; private set; }
+        public OscillatorViewModel OsciViewModel { get; private set; }
         public AudioFileViewModel AudioFileViewModel { get; private set; }
         public MicrophoneViewModel MicrophoneViewModel { get; private set; }
         public FilterViewModel FilterViewModel { get; private set; }
@@ -89,7 +89,7 @@ namespace MusicMachine.Controls.SynthesizerElements.Main
         public void SetAllSettings(SynthesizerData data, string searchDirectoryForAudioFiles)
         {
             this.SelectedSignalSource = data.SignalSource;
-            this.OsziViewModel.SetAllSettings(data);
+            this.OsciViewModel.SetAllSettings(data);
             this.AudioFileViewModel.SetAllSettings(data, searchDirectoryForAudioFiles);
             this.FilterViewModel.SetAllSettings(data);
             this.AdsrEnvelope.SetAllSettings(data);

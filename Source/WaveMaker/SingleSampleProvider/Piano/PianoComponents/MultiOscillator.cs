@@ -4,7 +4,7 @@
     public class MultiOscillator : IPianoComponent
     {
         private Oscillator oscillator;
-        public int OsziCount { get; set; } = 2;
+        public int OsciCount { get; set; } = 2;
         public float Pitch { get; set; } = 3;
         public MultiOscillator(Oscillator oscillator)
         {
@@ -14,11 +14,11 @@
         public float GetSample(KeySampleData data)
         {
             float sum = 0;
-            for (int i=0;i<this.OsziCount;i++)
+            for (int i=0;i<this.OsciCount;i++)
             {
                 float frequency = data.Frequency + i * this.Pitch;
 
-                sum += this.oscillator.GetSampleFromFrequence(data.SampleIndex, frequency, this.oscillator.PusleWidth) * (1.0f / this.OsziCount);
+                sum += this.oscillator.GetSampleFromFrequence(data.SampleIndex, frequency, this.oscillator.PusleWidth) * (1.0f / this.OsciCount);
             }
 
             return sum;            

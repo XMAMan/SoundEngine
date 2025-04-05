@@ -17,10 +17,16 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
                 .Select(x => x == SignalType.Rectangle ? Visibility.Collapsed : Visibility.Visible)
                 .Do(x => this.PulseWidthLfoVisibility = x)
                 .Subscribe();
+
+            this.WhenAnyValue(x => x.OsciCount)
+                .Select(x => x > 1 ? Visibility.Collapsed : Visibility.Visible)
+                .Do(x => this.MultiOsciPitchVisibility = x)
+                .Subscribe();
         }
 
         [Reactive] public Visibility PulseWidthLfoVisibility { get; set; } = Visibility.Collapsed;
-
+        [Reactive] public Visibility MultiOsciPitchVisibility { get; set; } = Visibility.Collapsed;
+        
         public IEnumerable<SignalType> SignalTypes
         {
             get
@@ -32,8 +38,8 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
 
         public SignalType SelectedSignalType
         {
-            get { return this.model.OsziType; }
-            set { this.model.OsziType = value; this.RaisePropertyChanged(nameof(SelectedSignalType)); }
+            get { return this.model.OsciType; }
+            set { this.model.OsciType = value; this.RaisePropertyChanged(nameof(SelectedSignalType)); }
         }
 
         public float PusleWidth
@@ -42,16 +48,16 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
             set { this.model.PusleWidth = value; this.RaisePropertyChanged(nameof(PusleWidth)); }
         }
 
-        public int OsziCount
+        public int OsciCount
         {
-            get { return this.model.OsziCount; }
-            set { this.model.OsziCount = value; this.RaisePropertyChanged(nameof(OsziCount)); }
+            get { return this.model.OsciCount; }
+            set { this.model.OsciCount = value; this.RaisePropertyChanged(nameof(OsciCount)); }
         }
 
         public float Pitch
         {
-            get { return this.model.MultiOsziPitch; }
-            set { this.model.MultiOsziPitch = value; this.RaisePropertyChanged(nameof(Pitch)); }
+            get { return this.model.MultiOsciPitch; }
+            set { this.model.MultiOsciPitch = value; this.RaisePropertyChanged(nameof(Pitch)); }
         }
 
         public float SubOszVolume
@@ -147,10 +153,10 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
             this.UsePulsewidthLfo = data.UsePulsewidthLfo;
             this.PulsewidthLfoFrequence = data.PulsewidthLfoFrequence;
             this.PulsewidthLfoAmplitude = data.PulsewidthLfoAmplitude;
-            this.SelectedSignalType = data.OsziType;
+            this.SelectedSignalType = data.OsciType;
             this.PusleWidth = data.PusleWidth;
-            this.OsziCount = data.OsziCount;
-            this.Pitch = data.MultiOsziPitch;
+            this.OsciCount = data.OsciCount;
+            this.Pitch = data.MultiOsciPitch;
             this.SubOszVolume = data.SubOszVolume;
             this.UseAmplitudeLfo = data.UseAmplitudeLfo;
             this.AmplitudeLfoFrequenc = data.AmplitudeLfoFrequenc;

@@ -6,18 +6,18 @@
   <UseFrequenceRamp>true</UseFrequenceRamp>
   <FrequencyRampFactor>-0.3</FrequencyRampFactor>
   <RampStepFactor>0</RampStepFactor>
-  <OsziType>Triangle</OsziType>
+  <OsciType>Triangle</OsciType>
   <UseAccordEffekt>false</UseAccordEffekt>
   <PusleWidth>0.120689645</PusleWidth>
-  <OsziCount>5</OsziCount>
-  <MultiOsziPitch>0.241931036</MultiOsziPitch>
+  <OsciCount>5</OsciCount>
+  <MultiOsciPitch>0.241931036</MultiOsciPitch>
   <UseAmplitudeLfo>false</UseAmplitudeLfo>
   <AmplitudeLfoFrequenc>8.448276</AmplitudeLfoFrequenc>
   <AmplitudeLfoPulseWidth>0.9</AmplitudeLfoPulseWidth>
   <AudioFileName>Load Audio-File</AudioFileName>
   <LeftAudioFilePosition>0</LeftAudioFilePosition>
   <RightAudioFilePosition>0</RightAudioFilePosition>
-  <UseDataFromAudioFileInsteadFromOszi>false</UseDataFromAudioFileInsteadFromOszi>
+  <SignalSource>Oscillator</SignalSource>
   <AudioFileGain>7</AudioFileGain>
   <AudioFilePitch>1</AudioFilePitch>
   <IsLowPassEnabled>false</IsLowPassEnabled>

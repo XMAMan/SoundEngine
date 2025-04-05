@@ -22,11 +22,11 @@
         <UsePulsewidthLfo>false</UsePulsewidthLfo>
         <PulsewidthLfoFrequence>17.0689659</PulsewidthLfoFrequence>
         <PulsewidthLfoAmplitude>0.648275852</PulsewidthLfoAmplitude>
-        <OsziType>Rectangle</OsziType>
+        <OsciType>Rectangle</OsciType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.672413647</PusleWidth>
-        <OsziCount>1</OsziCount>
-        <MultiOsziPitch>2.48286247</MultiOsziPitch>
+        <OsciCount>1</OsciCount>
+        <MultiOsciPitch>2.48286247</MultiOsciPitch>
         <SubOszVolume>1</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>

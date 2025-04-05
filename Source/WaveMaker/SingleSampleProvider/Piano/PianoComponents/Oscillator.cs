@@ -11,7 +11,7 @@
 
         public float PusleWidth { get; set; } = 0.5f;
         
-        public SignalType OsziType { get; set; } = SignalType.Rectangle;
+        public SignalType OsciType { get; set; } = SignalType.Rectangle;
 
         class NoiseGenerator : IPianoComponent
         {
@@ -40,7 +40,7 @@
 
         protected float GetSample(int sampleIndex, float frequency, float pulseWidth)
         {
-            switch (this.OsziType)
+            switch (this.OsciType)
             {
                 case SignalType.Sinus:
                     return GetSinusSignal(sampleIndex, frequency);

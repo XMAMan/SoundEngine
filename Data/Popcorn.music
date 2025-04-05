@@ -19,11 +19,11 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>Rectangle</OsziType>
+        <OsciType>Rectangle</OsciType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.0862069055</PusleWidth>
-        <OsziCount>1</OsziCount>
-        <MultiOsziPitch>3</MultiOsziPitch>
+        <OsciCount>1</OsciCount>
+        <MultiOsciPitch>3</MultiOsciPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>
@@ -47,11 +47,11 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>Triangle</OsziType>
+        <OsciType>Triangle</OsciType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
-        <OsziCount>2</OsziCount>
-        <MultiOsziPitch>3</MultiOsziPitch>
+        <OsciCount>2</OsciCount>
+        <MultiOsciPitch>3</MultiOsciPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>
@@ -75,11 +75,11 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>Triangle</OsziType>
+        <OsciType>Triangle</OsciType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
-        <OsziCount>2</OsziCount>
-        <MultiOsziPitch>2.482862</MultiOsziPitch>
+        <OsciCount>2</OsciCount>
+        <MultiOsciPitch>2.482862</MultiOsciPitch>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <IsLowPassEnabled>false</IsLowPassEnabled>

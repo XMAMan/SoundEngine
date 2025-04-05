@@ -19,11 +19,11 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>SawTooth</OsziType>
+        <OsciType>SawTooth</OsciType>
         <UseAccordEffekt>false</UseAccordEffekt>
         <PusleWidth>0.155172408</PusleWidth>
-        <OsziCount>1</OsziCount>
-        <MultiOsziPitch>1.27620685</MultiOsziPitch>
+        <OsciCount>1</OsciCount>
+        <MultiOsciPitch>1.27620685</MultiOsciPitch>
         <SubOszVolume>0.37931034</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
@@ -57,11 +57,11 @@
         <UseFrequenceRamp>false</UseFrequenceRamp>
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
-        <OsziType>SawTooth</OsziType>
+        <OsciType>SawTooth</OsciType>
         <UseAccordEffekt>true</UseAccordEffekt>
         <PusleWidth>0.5</PusleWidth>
-        <OsziCount>4</OsziCount>
-        <MultiOsziPitch>1.27620685</MultiOsziPitch>
+        <OsciCount>4</OsciCount>
+        <MultiOsciPitch>1.27620685</MultiOsciPitch>
         <SubOszVolume>0.448275864</SubOszVolume>
         <UseAmplitudeLfo>false</UseAmplitudeLfo>
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>

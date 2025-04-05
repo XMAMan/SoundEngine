@@ -2,17 +2,17 @@
 {
     public class OscilatorWithLfo : Oscillator
     {
-        private LowFrequenzyOszillator lfoFrequency;
-        private LowFrequenzyOszillator lfoAmplitude;
-        private LowFrequenzyOszillator lfoPulsewidth;
+        private LowFrequenzyOscillator lfoFrequency;
+        private LowFrequenzyOscillator lfoAmplitude;
+        private LowFrequenzyOscillator lfoPulsewidth;
         private Ramp ramp;
 
         public OscilatorWithLfo(int sampleRate)
             :base(sampleRate)
         {
-            this.lfoFrequency = new LowFrequenzyOszillator(sampleRate) { Frequency = 5, Amplitude = 0.8f, SignalType = SignalType.Sinus };
-            this.lfoAmplitude = new LowFrequenzyOszillator(sampleRate) { SignalType = SignalType.Rectangle, PusleWidth = 1.0f }; //PulseWidth von 1 bedeutet, es wird eines Sinusschwingung verwendet (Siehe Zeile 42)
-            this.lfoPulsewidth = new LowFrequenzyOszillator(sampleRate) { Frequency = 5, Amplitude = 0.2f, SignalType = SignalType.Sinus };
+            this.lfoFrequency = new LowFrequenzyOscillator(sampleRate) { Frequency = 5, Amplitude = 0.8f, SignalType = SignalType.Sinus };
+            this.lfoAmplitude = new LowFrequenzyOscillator(sampleRate) { SignalType = SignalType.Rectangle, PusleWidth = 1.0f }; //PulseWidth von 1 bedeutet, es wird eines Sinusschwingung verwendet (Siehe Zeile 42)
+            this.lfoPulsewidth = new LowFrequenzyOscillator(sampleRate) { Frequency = 5, Amplitude = 0.2f, SignalType = SignalType.Sinus };
             this.ramp = new Ramp(sampleRate);
         }
 
@@ -90,16 +90,16 @@
         }
     }
 
-    class LowFrequenzyOszillator
+    class LowFrequenzyOscillator
     {
         public float Amplitude { get; set; } = 1;
         public float Frequency { get; set; } = 5;
-        public SignalType SignalType { get { return this.oscillator.OsziType; } set { this.oscillator.OsziType = value; } }
+        public SignalType SignalType { get { return this.oscillator.OsciType; } set { this.oscillator.OsciType = value; } }
         public float PusleWidth { get { return this.oscillator.PusleWidth; } set { this.oscillator.PusleWidth = value; } }
 
         private Oscillator oscillator;
 
-        public LowFrequenzyOszillator(int sampleRate)
+        public LowFrequenzyOscillator(int sampleRate)
         {
             this.oscillator = new Oscillator(sampleRate);
         }

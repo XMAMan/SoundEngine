@@ -14,7 +14,7 @@
                 switch (value)
                 {
                     case SignalSource.Oscillator:
-                        this.selectedComponent = this.oszi;
+                        this.selectedComponent = this.osci;
                         break;
 
                     case SignalSource.AudioFile:
@@ -28,12 +28,12 @@
             }
         }
 
-        private IPianoComponent oszi, audioFile, microphone;
+        private IPianoComponent osci, audioFile, microphone;
         private IPianoComponent selectedComponent = null;
 
-        public Switch(IPianoComponent oszi, IPianoComponent audioFile, IPianoComponent microphone)
+        public Switch(IPianoComponent osci, IPianoComponent audioFile, IPianoComponent microphone)
         {
-            this.oszi = oszi;
+            this.osci = osci;
             this.audioFile = audioFile;
             this.microphone = microphone;
 

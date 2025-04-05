@@ -46,7 +46,7 @@
                     </Border>
                     <Border BorderBrush="Orange" BorderThickness="4" CornerRadius="8" Margin="5" VerticalAlignment="Top">
                         <StackPanel Margin="2">
-                            <Button Content="Play Tone" x:Name="PlayTone" />
+                            <Button Content="Play Tone" x:Name="PlayTone" ToolTip="you can also hold A,S,D or F for trigger this button"/>
                             <Slider Minimum="1" Maximum="1000" Value="{Binding SelectedSequenzer.TestToneFrequence}" Width="100" Margin="0 3"/>
                         </StackPanel>
                     </Border>
