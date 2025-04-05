@@ -65,7 +65,7 @@
                 </Slider>
 
                 <Label Content="Speed" />
-                <Slider Width="50" Minimum="0.25" Maximum="3" Value="{Binding Speed}" Margin="0 3 0 0" ToolTip="Doubleclick for reset the speed">
+                <Slider Width="50" Minimum="0.25" Maximum="3" Value="{Binding Speed}" FlowDirection="RightToLeft" Margin="0 3 0 0" ToolTip="Doubleclick for reset the speed">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDoubleClick">
                             <i:InvokeCommandAction Command="{Binding MouseDoubleClickOnSpeedCommand}"/>
