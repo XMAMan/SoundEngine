@@ -1,4 +1,5 @@
 ﻿using WaveMaker;
+using WaveMaker.KeyboardComponents;
 using WaveMaker.Sequenzer;
 
 namespace SoundEngine.SoundSnippeds
@@ -77,7 +78,10 @@ namespace SoundEngine.SoundSnippeds
         public float KeyStrokeSpeed { get { return this.multiSequenzer.KeyStrokeSpeed; } set { this.multiSequenzer.KeyStrokeSpeed = value; } }
         public int KeyShift { get { return this.multiSequenzer.GetKeyShiftFromFirstSequenzer(); } set { this.multiSequenzer.SetKeyShiftFromAllSequenzer(value); } }
 
-
+        public Synthesizer GetSynthesizer(int index)
+        {
+            return this.multiSequenzer.GetAllSequenzers().ToArray()[index].Synthesizer;
+        }
         public IMusicFileSnipped GetCopy()
         {
             var copy = new MusicFile(this.multiSequenzer.GetCopy());
