@@ -136,10 +136,10 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
             get { return this.model.RampStepFactor; }
             set { this.model.RampStepFactor = value; this.RaisePropertyChanged(nameof(RampStepFactor)); }
         }
-        public bool UseAccordEffekt
+        public bool UseAccordEffect
         {
-            get { return this.model.UseAccordEffekt; }
-            set { this.model.UseAccordEffekt = value; this.RaisePropertyChanged(nameof(UseAccordEffekt)); }
+            get { return this.model.UseAccordEffect; }
+            set { this.model.UseAccordEffect = value; this.RaisePropertyChanged(nameof(UseAccordEffect)); }
         }
 
         public void SetAllSettings(SynthesizerData data)
@@ -162,7 +162,7 @@ namespace MusicMachine.Controls.SynthesizerElements.Oscillator
             this.AmplitudeLfoFrequenc = data.AmplitudeLfoFrequenc;
             this.AmplitudeLfoAmplitude = data.AmplitudeLfoAmplitude;
             this.AmplitudeLfoPulseWidth = data.AmplitudeLfoPulseWidth;
-            this.UseAccordEffekt = data.UseAccordEffekt;
+            this.UseAccordEffect = data.UseAccordEffect;
         }
     }
 }

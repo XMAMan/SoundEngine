@@ -19,7 +19,7 @@ namespace SoundEngine
             this.audioPlayer.StartPlaying();
             this.audioPlayer.SelectedDevice = this.audioPlayer.GetAvailableDevices()[0]; //Nutze das erste gefundene Audio-Device zur Ausgabe
 
-            this.AudioRecorderSnipped = audioRecorderSnipp;
+            this.AudioRecorder = audioRecorderSnipp;
         }
 
         public float Volume { get { return this.sampleProviderCollection.Volume; } set { this.sampleProviderCollection.Volume = value; } }
@@ -28,7 +28,7 @@ namespace SoundEngine
 
         public int SampleRate { get { return 44100 / 2; } }
 
-        public IAudioRecorderSnipped AudioRecorderSnipped { get; private set; }
+        public IAudioRecorderSnipped AudioRecorder { get; private set; }
 
         public void Dispose()
         {

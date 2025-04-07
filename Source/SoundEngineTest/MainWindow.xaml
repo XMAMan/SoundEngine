@@ -27,43 +27,43 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[0]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts0}"/>
+                        <Label Content="SoundEffects.music[0]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects0}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[1]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts1}"/>
+                        <Label Content="SoundEffects.music[1]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects1}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[2]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts2}"/>
+                        <Label Content="SoundEffects.music[2]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects2}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[3]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts3}"/>
+                        <Label Content="SoundEffects.music[3]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects3}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[4]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts4}"/>
+                        <Label Content="SoundEffects.music[4]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects4}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[5]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts5}"/>
+                        <Label Content="SoundEffects.music[5]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects5}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[6]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts6}"/>
+                        <Label Content="SoundEffects.music[6]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects6}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="SoundEffekts.music[7]:"/>
-                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffekts7}"/>
+                        <Label Content="SoundEffects.music[7]:"/>
+                        <local:FrequenceToneSnippedView DataContext="{Binding SoundEffects7}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
@@ -94,8 +94,8 @@
                         <GroupBox Header="Multi-Sound-Testing">
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal">
-                                    <Label Content="SoundEffekts.music[0]:"/>
-                                    <freqeuncetone:MultiFrequencyTone DataContext="{Binding SoundEffekts0Multi}"/>
+                                    <Label Content="SoundEffects.music[0]:"/>
+                                    <freqeuncetone:MultiFrequencyTone DataContext="{Binding SoundEffects0Multi}"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="MarioStart.music:"/>

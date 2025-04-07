@@ -14,6 +14,8 @@
             this.sampleRate = sampleRate;
         }
 
+        public long FrameSize { get => this.fftFrameSize; }
+
         public float[] GetModifiSamples(float[] samples)
         {
             return this.shifter.PitchShift(this.Pitch, samples.Length, this.fftFrameSize, this.osamp, this.sampleRate, samples);

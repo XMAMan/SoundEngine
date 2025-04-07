@@ -19,34 +19,34 @@ namespace SoundEngineTest.ViewModel
 
         //Single-Sound-Testing
         public MusicFileSnippedViewModel BackGroundMusic { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts0 { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts1 { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts2 { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts3 { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts4 { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts5 { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts6 { get; private set; }
-        public FrequenceToneSnippedViewModel SoundEffekts7 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects0 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects1 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects2 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects3 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects4 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects5 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects6 { get; private set; }
+        public FrequenceToneSnippedViewModel SoundEffects7 { get; private set; }
         public FrequenceToneSnippedViewModel TieferBass { get; private set; }
         public AudioFileSnippedViewModel Soundsystem { get; private set; }
         public FrequenceToneSnippedViewModel Hallo { get; private set; }
         public AudioRecorderSnippedViewModel AudioRecorder { get; private set; }
 
         //Multi-Sound-Testing
-        public MultiFrequencyToneViewModel SoundEffekts0Multi { get; private set; }
+        public MultiFrequencyToneViewModel SoundEffects0Multi { get; private set; }
         public MultiMusicFileViewModel MultiMusicFileViewModel { get; private set; }
         public MultiAudioFileViewModel MultiAudioFile { get; private set; }
 
         public MainViewModel()
         {
-            this.SoundEffekts0 = new FrequenceToneSnippedViewModel(table.SoundEffekts0);
-            this.SoundEffekts1 = new FrequenceToneSnippedViewModel(table.SoundEffekts1);
-            this.SoundEffekts2 = new FrequenceToneSnippedViewModel(table.SoundEffekts2);
-            this.SoundEffekts3 = new FrequenceToneSnippedViewModel(table.SoundEffekts3);
-            this.SoundEffekts4 = new FrequenceToneSnippedViewModel(table.SoundEffekts4);
-            this.SoundEffekts5 = new FrequenceToneSnippedViewModel(table.SoundEffekts5);
-            this.SoundEffekts6 = new FrequenceToneSnippedViewModel(table.SoundEffekts6);
-            this.SoundEffekts7 = new FrequenceToneSnippedViewModel(table.SoundEffekts7);
+            this.SoundEffects0 = new FrequenceToneSnippedViewModel(table.SoundEffects0);
+            this.SoundEffects1 = new FrequenceToneSnippedViewModel(table.SoundEffects1);
+            this.SoundEffects2 = new FrequenceToneSnippedViewModel(table.SoundEffects2);
+            this.SoundEffects3 = new FrequenceToneSnippedViewModel(table.SoundEffects3);
+            this.SoundEffects4 = new FrequenceToneSnippedViewModel(table.SoundEffects4);
+            this.SoundEffects5 = new FrequenceToneSnippedViewModel(table.SoundEffects5);
+            this.SoundEffects6 = new FrequenceToneSnippedViewModel(table.SoundEffects6);
+            this.SoundEffects7 = new FrequenceToneSnippedViewModel(table.SoundEffects7);
 
             this.TieferBass = new FrequenceToneSnippedViewModel(table.TieferBass);
             this.BackGroundMusic = new MusicFileSnippedViewModel(table.BackGroundMusic);
@@ -56,8 +56,8 @@ namespace SoundEngineTest.ViewModel
             this.AudioRecorder = new AudioRecorderSnippedViewModel(table.AudioRecorder);
 
 
-            this.SoundEffekts0Multi = new MultiFrequencyToneViewModel(table.SoundEffekts0);
-            this.timerTickHandlers.Add(this.SoundEffekts0Multi);
+            this.SoundEffects0Multi = new MultiFrequencyToneViewModel(table.SoundEffects0);
+            this.timerTickHandlers.Add(this.SoundEffects0Multi);
 
             this.MultiMusicFileViewModel = new MultiMusicFileViewModel(table.MarioStart);
             this.MultiAudioFile = new MultiAudioFileViewModel(table.GlassBroke);

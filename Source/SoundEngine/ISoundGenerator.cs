@@ -8,7 +8,7 @@ namespace SoundEngine
         float Volume { get; set; }
         string SelectedOutputDevice { get; set; }
         string[] GetAvailableOutputDevices();
-        IAudioRecorderSnipped AudioRecorderSnipped { get; }
+        IAudioRecorderSnipped AudioRecorder { get; }
 
         IFrequenceToneSnipped AddFrequencyTone();
         IFrequenceToneSnipped AddFrequencyTone(string syntiFile);

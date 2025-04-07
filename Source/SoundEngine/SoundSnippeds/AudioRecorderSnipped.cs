@@ -74,10 +74,12 @@ namespace SoundEngine.SoundSnippeds
 
         public float Volume { get; set; } = 1;
 
-        public bool UseDelayEffekt { get { return this.synthesizer.UseDelayEffekt; } set { this.synthesizer.UseDelayEffekt = value; } }
-        public bool UseHallEffekt { get { return this.synthesizer.UseHallEffekt; } set { this.synthesizer.UseHallEffekt = value; } }
-        public bool UseGainEffekt { get { return this.synthesizer.UseGainEffekt; } set { this.synthesizer.UseGainEffekt = value; } }
+        public bool UseDelayEffect { get { return this.synthesizer.UseDelayEffect; } set { this.synthesizer.UseDelayEffect = value; } }
+        public bool UseHallEffect { get { return this.synthesizer.UseHallEffect; } set { this.synthesizer.UseHallEffect = value; } }
+        public bool UseGainEffect { get { return this.synthesizer.UseGainEffect; } set { this.synthesizer.UseGainEffect = value; } }
         public float Gain { get { return this.synthesizer.Gain; } set { this.synthesizer.Gain = value; } }
+        public bool UsePitchEffect { get { return this.synthesizer.UsePitchEffect; } set { this.synthesizer.UsePitchEffect = value; } }
+        public float PitchEffect { get { return this.synthesizer.PitchEffect; } set { this.synthesizer.PitchEffect = value; } }
         public bool UseVolumeLfo { get { return this.synthesizer.UseVolumeLfo; } set { this.synthesizer.UseVolumeLfo = value; } }
         public float VolumeLfoFrequency { get { return this.synthesizer.VolumeLfoFrequency; } set { this.synthesizer.VolumeLfoFrequency = value; } }
 

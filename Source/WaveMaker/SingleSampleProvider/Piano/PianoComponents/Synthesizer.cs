@@ -1,4 +1,6 @@
-﻿namespace WaveMaker.KeyboardComponents
+﻿using WaveMaker.SingleSampleProvider.Piano.PianoComponents;
+
+namespace WaveMaker.KeyboardComponents
 {
     public class SynthesizerData
     {        
@@ -12,7 +14,7 @@
         public float PulsewidthLfoFrequence { get; set; } = 5;
         public float PulsewidthLfoAmplitude { get; set; } = 0.2f;
         public SignalType OsciType { get; set; } = SignalType.Rectangle;
-        public bool UseAccordEffekt { get; set; } = false;
+        public bool UseAccordEffect { get; set; } = false;
         public float PusleWidth { get; set; } = 0.5f;
         public int OsciCount { get; set; } = 2;
         public float MultiOsciPitch { get; set; } = 3;
@@ -38,10 +40,12 @@
         public float DecayTimeInMs { get; set; } = 70;
         public float SustainVolume { get; set; } = 0.9f;
         public float ReleaseTimeInMs { get; set; } = 250;
-        public bool UseDelayEffekt { get; set; } = false;
-        public bool UseHallEffekt { get; set; } = false;
-        public bool UseGainEffekt { get; set; } = false;
+        public bool UseDelayEffect { get; set; } = false;
+        public bool UseHallEffect { get; set; } = false;
+        public bool UseGainEffect { get; set; } = false;
         public float Gain { get; set; } = 7;
+        public bool UsePitchEffect { get; set; } = false;
+        public float PitchEffect { get; set; } = 1;
         public bool UseVolumeLfo { get; set; } = false;
         public float VolumeLfoFrequency { get; set; } = 5;
     }
@@ -53,25 +57,26 @@
     public class Synthesizer : IPianoComponent
     {
         //Source 1: Oscilator
-        public OscilatorWithLfo Oscilator { get; private set; }
-        public MultiOscillator MultiOscillator { get; private set; }
-        public Mixer OscWithSubOscMixer { get; private set; }
+        private OscilatorWithLfo Oscilator;
+        private MultiOscillator MultiOscillator;
+        private Mixer OscWithSubOscMixer;
 
         //Source 2: AudioFile
         public AudioFile AudioFile { get; private set; } //Kann anstelle der gemixten Oszilatoren genommen werden
-        
-        //Source 3: Microfon
-        public AudioRecorderPianoComponent AudioRecorder { get; private set; }
 
-        public Switch SourceSwitch { get; private set; }
-       
-        public Filter LowPass { get; private set; }
-        public Filter HighPass { get; private set; }
-        public AdsrEnvelope AdsrEnvelope { get; private set; }
-        public DelayEffect DelayEffect { get; private set; }        
-        public HallEffect HallEffect { get; private set; }
-        public GainEffect GainEffect { get; private set; }
-        public VolumeLfo VolumeLfo { get; private set; }
+        //Source 3: Microfon
+        public AudioRecorderPianoComponent AudioRecorder { get; private set; } //Kann anstelle der gemixten Oszilatoren genommen werden
+
+        private Switch sourceSwitch;
+
+        private Filter lowPass;
+        private Filter highPass;
+        private AdsrEnvelope adsrEnvelope;
+        private DelayEffect delayEffect;
+        private HallEffect hallEffect;
+        private GainEffect gainEffect;
+        private PitchEffect pitchEffect;
+        private VolumeLfo VolumeLfo;
 
         private int sampleRate;
         private IPianoStopKeyHandler[] stopKeyHandler; //Sagen, wie lange nach dem Release-Key-Signal noch der Ton weiter geht 
@@ -92,22 +97,23 @@
             this.AudioRecorder = new AudioRecorderPianoComponent(audioRecorder);
 
             //Switch between Oscilator, AudioFile and Microfon
-            this.SourceSwitch = new Switch(this.OscWithSubOscMixer, this.AudioFile, this.AudioRecorder);
+            this.sourceSwitch = new Switch(this.OscWithSubOscMixer, this.AudioFile, this.AudioRecorder);
 
             //Effects
-            this.LowPass = new Filter(this.SourceSwitch, FilterType.LowPass, sampleRate) { CutOffFrequence = 0.5f };
-            this.HighPass = new Filter(this.LowPass, FilterType.HighPass, sampleRate) { CutOffFrequence = 0.5f };
-            this.AdsrEnvelope = new AdsrEnvelope(this.HighPass, sampleRate);
-            this.DelayEffect = new DelayEffect(this.AdsrEnvelope, sampleRate);
-            this.HallEffect = new HallEffect(this.DelayEffect, sampleRate);
-            this.GainEffect = new GainEffect(this.HallEffect);
-            this.VolumeLfo = new VolumeLfo(this.GainEffect, sampleRate);
+            this.lowPass = new Filter(this.sourceSwitch, FilterType.LowPass, sampleRate) { CutOffFrequence = 0.5f };
+            this.highPass = new Filter(this.lowPass, FilterType.HighPass, sampleRate) { CutOffFrequence = 0.5f };
+            this.adsrEnvelope = new AdsrEnvelope(this.highPass, sampleRate);
+            this.delayEffect = new DelayEffect(this.adsrEnvelope, sampleRate);
+            this.hallEffect = new HallEffect(this.delayEffect, sampleRate);
+            this.gainEffect = new GainEffect(this.hallEffect);
+            this.pitchEffect = new PitchEffect(this.gainEffect, sampleRate);
+            this.VolumeLfo = new VolumeLfo(this.pitchEffect, sampleRate);
 
             this.stopKeyHandler = new IPianoStopKeyHandler[]
             {
-                this.AdsrEnvelope,
-                this.DelayEffect,
-                this.HallEffect
+                this.adsrEnvelope,
+                this.delayEffect,
+                this.hallEffect
             };
         }
 
@@ -134,7 +140,7 @@
             this.PulsewidthLfoFrequence = data.PulsewidthLfoFrequence;
             this.PulsewidthLfoAmplitude = data.PulsewidthLfoAmplitude;
             this.OsciType = data.OsciType;
-            this.UseAccordEffekt = data.UseAccordEffekt;
+            this.UseAccordEffect = data.UseAccordEffect;
             this.PusleWidth = data.PusleWidth;
             this.OsciCount = data.OsciCount;
             this.MultiOsciPitch = data.MultiOsciPitch;
@@ -164,10 +170,12 @@
             this.DecayTimeInMs = data.DecayTimeInMs;
             this.SustainVolume = data.SustainVolume;
             this.ReleaseTimeInMs = data.ReleaseTimeInMs;
-            this.UseDelayEffekt = data.UseDelayEffekt;
-            this.UseHallEffekt = data.UseHallEffekt;
-            this.UseGainEffekt = data.UseGainEffekt;
-            this.GainEffect.Gain = data.Gain;
+            this.UseDelayEffect = data.UseDelayEffect;
+            this.UseHallEffect = data.UseHallEffect;
+            this.UseGainEffect = data.UseGainEffect;
+            this.Gain = data.Gain;
+            this.UsePitchEffect = data.UsePitchEffect;
+            this.PitchEffect = data.PitchEffect;
             this.UseVolumeLfo = data.UseVolumeLfo;
             this.VolumeLfo.Frequency = data.VolumeLfoFrequency;
         }
@@ -186,7 +194,7 @@
                 PulsewidthLfoFrequence = this.PulsewidthLfoFrequence,
                 PulsewidthLfoAmplitude = this.PulsewidthLfoAmplitude,
                 OsciType = this.OsciType,
-                UseAccordEffekt = this.UseAccordEffekt,
+                UseAccordEffect = this.UseAccordEffect,
                 PusleWidth = this.PusleWidth,
                 OsciCount = this.OsciCount,
                 MultiOsciPitch = this.MultiOsciPitch,
@@ -211,10 +219,12 @@
                 DecayTimeInMs = this.DecayTimeInMs,
                 SustainVolume = this.SustainVolume,
                 ReleaseTimeInMs = this.ReleaseTimeInMs,
-                UseDelayEffekt = this.UseDelayEffekt,
-                UseHallEffekt = this.UseHallEffekt,
-                UseGainEffekt = this.GainEffect.IsEnabled,
-                Gain = this.GainEffect.Gain,
+                UseDelayEffect = this.UseDelayEffect,
+                UseHallEffect = this.UseHallEffect,
+                UseGainEffect = this.UseGainEffect,
+                Gain = this.Gain,
+                UsePitchEffect = this.UsePitchEffect,
+                PitchEffect = this.PitchEffect,
                 UseVolumeLfo = this.VolumeLfo.IsEnabled,
                 VolumeLfoFrequency = this.VolumeLfo.Frequency
             };
@@ -245,7 +255,7 @@
 
 
         public SignalType OsciType { get { return this.Oscilator.OsciType; } set { this.Oscilator.OsciType = value; } }
-        public bool UseAccordEffekt { get { return this.Oscilator.UseAccordEffekt; } set { this.Oscilator.UseAccordEffekt = value; } }
+        public bool UseAccordEffect { get { return this.Oscilator.UseAccordEffect; } set { this.Oscilator.UseAccordEffect = value; } }
         public float PusleWidth { get { return this.Oscilator.PusleWidth; } set { this.Oscilator.PusleWidth = value; } }
         public int OsciCount { get { return this.MultiOscillator.OsciCount; } set { this.MultiOscillator.OsciCount = value; } }
         public float MultiOsciPitch { get { return this.MultiOscillator.Pitch; } set { this.MultiOscillator.Pitch = value; } }
@@ -260,28 +270,30 @@
         public float[] AudioFileData { get { return this.AudioFile.SampleData; } set { this.AudioFile.SampleData = value; } }
         public float LeftAudioFilePosition { get { return this.AudioFile.LeftPositionInMilliseconds; } set { this.AudioFile.LeftPositionInMilliseconds = value; } }
         public float RightAudioFilePosition { get { return this.AudioFile.RightPositionInMilliseconds; } set { this.AudioFile.RightPositionInMilliseconds = value; } }
-        public SignalSource SignalSource { get => this.SourceSwitch.SignalSource; set => this.SourceSwitch.SignalSource = value; }
+        public SignalSource SignalSource { get => this.sourceSwitch.SignalSource; set => this.sourceSwitch.SignalSource = value; }
         public float AudioFilePitch { get { return this.AudioFile.Pitch; } set { this.AudioFile.Pitch = value; } }
         public float AudioFileSpeed { get { return this.AudioFile.Speed; } set { this.AudioFile.Speed = value; } }
 
-        public bool IsLowPassEnabled { get { return this.LowPass.IsEnabled; } set { this.LowPass.IsEnabled = value; } }
-        public float LowPassCutOffFrequence { get { return this.LowPass.CutOffFrequence; } set { this.LowPass.CutOffFrequence = value; } }
-        public float LowPassResonance { get { return this.LowPass.Resonance; } set { this.LowPass.Resonance = value; } }
-        public bool IsHighPassEnabled { get { return this.HighPass.IsEnabled; } set { this.HighPass.IsEnabled = value; } }
-        public float HighPassCutOffFrequence { get { return this.HighPass.CutOffFrequence; } set { this.HighPass.CutOffFrequence = value; } }
-        public float HighPassResonance { get { return this.HighPass.Resonance; } set { this.HighPass.Resonance = value; } }
+        public bool IsLowPassEnabled { get { return this.lowPass.IsEnabled; } set { this.lowPass.IsEnabled = value; } }
+        public float LowPassCutOffFrequence { get { return this.lowPass.CutOffFrequence; } set { this.lowPass.CutOffFrequence = value; } }
+        public float LowPassResonance { get { return this.lowPass.Resonance; } set { this.lowPass.Resonance = value; } }
+        public bool IsHighPassEnabled { get { return this.highPass.IsEnabled; } set { this.highPass.IsEnabled = value; } }
+        public float HighPassCutOffFrequence { get { return this.highPass.CutOffFrequence; } set { this.highPass.CutOffFrequence = value; } }
+        public float HighPassResonance { get { return this.highPass.Resonance; } set { this.highPass.Resonance = value; } }
 
 
-        public float AttackTimeInMs { get { return this.AdsrEnvelope.AttackTimeInMs; } set { this.AdsrEnvelope.AttackTimeInMs = value; } }
-        public float DecayTimeInMs { get { return this.AdsrEnvelope.DecayTimeInMs; } set { this.AdsrEnvelope.DecayTimeInMs = value; } }
-        public float SustainVolume { get { return this.AdsrEnvelope.SustainVolume; } set { this.AdsrEnvelope.SustainVolume = value; } }
-        public float ReleaseTimeInMs { get { return this.AdsrEnvelope.ReleaseTimeInMs; } set { this.AdsrEnvelope.ReleaseTimeInMs = value; } }
+        public float AttackTimeInMs { get { return this.adsrEnvelope.AttackTimeInMs; } set { this.adsrEnvelope.AttackTimeInMs = value; } }
+        public float DecayTimeInMs { get { return this.adsrEnvelope.DecayTimeInMs; } set { this.adsrEnvelope.DecayTimeInMs = value; } }
+        public float SustainVolume { get { return this.adsrEnvelope.SustainVolume; } set { this.adsrEnvelope.SustainVolume = value; } }
+        public float ReleaseTimeInMs { get { return this.adsrEnvelope.ReleaseTimeInMs; } set { this.adsrEnvelope.ReleaseTimeInMs = value; } }
         
 
-        public bool UseDelayEffekt { get { return this.DelayEffect.IsEnabled; } set { this.DelayEffect.IsEnabled = value; } }
-        public bool UseHallEffekt { get { return this.HallEffect.IsEnabled; } set { this.HallEffect.IsEnabled = value; } }
-        public bool UseGainEffekt { get { return this.GainEffect.IsEnabled; } set { this.GainEffect.IsEnabled = value; } }
-        public float Gain { get { return this.GainEffect.Gain; } set { this.GainEffect.Gain = value; } }
+        public bool UseDelayEffect { get { return this.delayEffect.IsEnabled; } set { this.delayEffect.IsEnabled = value; } }
+        public bool UseHallEffect { get { return this.hallEffect.IsEnabled; } set { this.hallEffect.IsEnabled = value; } }
+        public bool UseGainEffect { get { return this.gainEffect.IsEnabled; } set { this.gainEffect.IsEnabled = value; } }
+        public float Gain { get { return this.gainEffect.Gain; } set { this.gainEffect.Gain = value; } }
+        public bool UsePitchEffect { get { return this.pitchEffect.IsEnabled; } set { this.pitchEffect.IsEnabled = value; } }
+        public float PitchEffect { get { return this.pitchEffect.Pitch; } set { this.pitchEffect.Pitch = value; } }
         public bool UseVolumeLfo { get { return this.VolumeLfo.IsEnabled; } set { this.VolumeLfo.IsEnabled = value; } }
         public float VolumeLfoFrequency { get { return this.VolumeLfo.Frequency; } set { this.VolumeLfo.Frequency = value; } }
     }

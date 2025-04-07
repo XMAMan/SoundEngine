@@ -13,28 +13,40 @@ namespace MusicMachine.Controls.SynthesizerElements.SpezialEffects
             this.VolumeLfoFrequency = 20;
         }
 
-        public bool UseDelayEffekt
+        public bool UseDelayEffect
         {
-            get { return this.model.UseDelayEffekt; }
-            set { this.model.UseDelayEffekt = value; this.RaisePropertyChanged(nameof(UseDelayEffekt)); }
+            get { return this.model.UseDelayEffect; }
+            set { this.model.UseDelayEffect = value; this.RaisePropertyChanged(nameof(UseDelayEffect)); }
         }
 
-        public bool UseHallEffekt
+        public bool UseHallEffect
         {
-            get { return this.model.UseHallEffekt; }
-            set { this.model.UseHallEffekt = value; this.RaisePropertyChanged(nameof(UseHallEffekt)); }
+            get { return this.model.UseHallEffect; }
+            set { this.model.UseHallEffect = value; this.RaisePropertyChanged(nameof(UseHallEffect)); }
         }
 
-        public bool UseGainEffekt
+        public bool UseGainEffect
         {
-            get { return this.model.UseGainEffekt; }
-            set { this.model.UseGainEffekt = value; this.RaisePropertyChanged(nameof(UseGainEffekt)); }
+            get { return this.model.UseGainEffect; }
+            set { this.model.UseGainEffect = value; this.RaisePropertyChanged(nameof(UseGainEffect)); }
         }
 
         public float Gain
         {
             get { return this.model.Gain; }
             set { this.model.Gain = value; this.RaisePropertyChanged(nameof(Gain)); }
+        }
+
+        public bool UsePitchEffect
+        {
+            get { return this.model.UsePitchEffect; }
+            set { this.model.UsePitchEffect = value; this.RaisePropertyChanged(nameof(UsePitchEffect)); }
+        }
+
+        public float Pitch
+        {
+            get { return this.model.PitchEffect; }
+            set { this.model.PitchEffect = value; this.RaisePropertyChanged(nameof(Pitch)); }
         }
 
         public bool UseVolumeLfo
@@ -51,9 +63,9 @@ namespace MusicMachine.Controls.SynthesizerElements.SpezialEffects
 
         public void SetAllSettings(SynthesizerData data)
         {
-            this.UseDelayEffekt = data.UseDelayEffekt;
-            this.UseHallEffekt = data.UseHallEffekt;
-            this.UseGainEffekt = data.UseGainEffekt;
+            this.UseDelayEffect = data.UseDelayEffect;
+            this.UseHallEffect = data.UseHallEffect;
+            this.UseGainEffect = data.UseGainEffect;
             this.Gain = data.Gain;
             this.UseVolumeLfo = data.UseVolumeLfo;
             this.VolumeLfoFrequency = data.VolumeLfoFrequency;

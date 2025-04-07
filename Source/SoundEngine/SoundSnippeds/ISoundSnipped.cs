@@ -31,10 +31,12 @@ namespace SoundEngine.SoundSnippeds
 
     public interface IAudioEffects
     {
-        bool UseDelayEffekt { get; set; }
-        bool UseHallEffekt { get; set; }
-        bool UseGainEffekt { get; set; }
+        bool UseDelayEffect { get; set; }
+        bool UseHallEffect { get; set; }
+        bool UseGainEffect { get; set; }
         float Gain { get; set; }
+        bool UsePitchEffect { get; set; }
+        float PitchEffect { get; set; }
         bool UseVolumeLfo { get; set; }
         float VolumeLfoFrequency { get; set; }
     }

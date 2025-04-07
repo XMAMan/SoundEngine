@@ -20,7 +20,7 @@
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
         <OsciType>Rectangle</OsciType>
-        <UseAccordEffekt>false</UseAccordEffekt>
+        <UseAccordEffect>false</UseAccordEffect>
         <PusleWidth>0.0862069055</PusleWidth>
         <OsciCount>1</OsciCount>
         <MultiOsciPitch>3</MultiOsciPitch>
@@ -33,7 +33,7 @@
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.6272727</SustainVolume>
         <ReleaseTimeInMs>759.0909</ReleaseTimeInMs>
-        <UseDelayEffekt>true</UseDelayEffekt>
+        <UseDelayEffect>true</UseDelayEffect>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -48,7 +48,7 @@
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
         <OsciType>Triangle</OsciType>
-        <UseAccordEffekt>false</UseAccordEffekt>
+        <UseAccordEffect>false</UseAccordEffect>
         <PusleWidth>0.5</PusleWidth>
         <OsciCount>2</OsciCount>
         <MultiOsciPitch>3</MultiOsciPitch>
@@ -61,7 +61,7 @@
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
-        <UseDelayEffekt>false</UseDelayEffekt>
+        <UseDelayEffect>false</UseDelayEffect>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -76,7 +76,7 @@
         <FrequencyRampFactor>-0.3</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
         <OsciType>Triangle</OsciType>
-        <UseAccordEffekt>false</UseAccordEffekt>
+        <UseAccordEffect>false</UseAccordEffect>
         <PusleWidth>0.5</PusleWidth>
         <OsciCount>2</OsciCount>
         <MultiOsciPitch>2.482862</MultiOsciPitch>
@@ -89,7 +89,7 @@
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
-        <UseDelayEffekt>false</UseDelayEffekt>
+        <UseDelayEffect>false</UseDelayEffect>
       </SynthesizerData>
     </SequenzerData>
   </SynthesizerData>

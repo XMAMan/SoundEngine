@@ -9,7 +9,7 @@
   <FrequencyRampFactor>-6.92068958</FrequencyRampFactor>
   <RampStepFactor>69</RampStepFactor>
   <OsciType>Triangle</OsciType>
-  <UseAccordEffekt>true</UseAccordEffekt>
+  <UseAccordEffect>true</UseAccordEffect>
   <PusleWidth>0.01724138</PusleWidth>
   <OsciCount>7</OsciCount>
   <MultiOsciPitch>0.001</MultiOsciPitch>
@@ -22,5 +22,5 @@
   <DecayTimeInMs>814.4545</DecayTimeInMs>
   <SustainVolume>0.409090877</SustainVolume>
   <ReleaseTimeInMs>795.4545</ReleaseTimeInMs>
-  <UseDelayEffekt>true</UseDelayEffekt>
+  <UseDelayEffect>true</UseDelayEffect>
 </SynthesizerData>

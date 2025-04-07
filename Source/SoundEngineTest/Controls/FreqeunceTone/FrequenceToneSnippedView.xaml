@@ -18,19 +18,19 @@
             <Label Content="Frequency:" Margin="10 0 0 0"/>
             <Slider Minimum="1" Maximum="1000" Value="{Binding Frequency}" Width="50" Margin="0 3"/>
 
-            <Label Content="GainEffekt:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding Synthesizer.UseGainEffekt}" Margin="0 5 5 0"/>
+            <Label Content="GainEffect:" Margin="10 0 0 0"/>
+            <CheckBox IsChecked="{Binding Synthesizer.UseGainEffect}" Margin="0 5 5 0"/>
             <Slider Minimum="1" Maximum="1000" Value="{Binding Synthesizer.Gain}" Width="50" Margin="0 3"/>
 
             <Label Content="VolumeLfo:" Margin="10 0 0 0"/>
             <CheckBox IsChecked="{Binding Synthesizer.UseVolumeLfo}" Margin="0 5 5 0"/>
             <Slider Minimum="1" Maximum="1000" Value="{Binding Synthesizer.VolumeLfoFrequency}" Width="50" Margin="0 3"/>
 
-            <Label Content="DelayEffekt:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding Synthesizer.UseDelayEffekt}" Margin="0 5 5 0"/>
+            <Label Content="DelayEffect:" Margin="10 0 0 0"/>
+            <CheckBox IsChecked="{Binding Synthesizer.UseDelayEffect}" Margin="0 5 5 0"/>
 
-            <Label Content="HallEffekt:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding Synthesizer.UseHallEffekt}" Margin="0 5 5 0"/>
+            <Label Content="HallEffect:" Margin="10 0 0 0"/>
+            <CheckBox IsChecked="{Binding Synthesizer.UseHallEffect}" Margin="0 5 5 0"/>
         </StackPanel>
     </Grid>
 </UserControl>

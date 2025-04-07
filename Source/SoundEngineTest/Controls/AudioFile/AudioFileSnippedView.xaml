@@ -28,19 +28,23 @@
             <Label Content="Last Endtriggertime:"/>
             <TextBox Text="{Binding EndTriggerTime}"/>
 
-            <Label Content="GainEffekt:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UseGainEffekt}" Margin="0 5 5 0"/>
+            <Label Content="GainEffect:" Margin="10 0 0 0"/>
+            <CheckBox IsChecked="{Binding UseGainEffect}" Margin="0 5 5 0"/>
             <Slider Minimum="1" Maximum="10" Value="{Binding Gain}" Width="50" Margin="0 3"/>
+
+            <Label Content="PitchEffect:" Margin="10 0 0 0"/>
+            <CheckBox IsChecked="{Binding UsePitchEffect}" Margin="0 5 5 0"/>
+            <Slider Minimum="0" Maximum="2" Value="{Binding PitchEffect}" Width="50" Margin="0 3"/>
 
             <Label Content="VolumeLfo:" Margin="10 0 0 0"/>
             <CheckBox IsChecked="{Binding UseVolumeLfo}" Margin="0 5 5 0"/>
             <Slider Minimum="1" Maximum="1000" Value="{Binding VolumeLfoFrequency}" Width="50" Margin="0 3"/>
 
-            <Label Content="DelayEffekt:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UseDelayEffekt}" Margin="0 5 5 0"/>
+            <Label Content="DelayEffect:" Margin="10 0 0 0"/>
+            <CheckBox IsChecked="{Binding UseDelayEffect}" Margin="0 5 5 0"/>
 
-            <Label Content="HallEffekt:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UseHallEffekt}" Margin="0 5 5 0"/>
+            <Label Content="HallEffect:" Margin="10 0 0 0"/>
+            <CheckBox IsChecked="{Binding UseHallEffect}" Margin="0 5 5 0"/>
         </StackPanel>
     </Grid>
 </UserControl>

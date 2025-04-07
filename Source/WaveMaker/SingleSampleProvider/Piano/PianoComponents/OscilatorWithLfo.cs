@@ -33,7 +33,7 @@
         public float FrequencyRampFactor { get { return this.ramp.IncreasePerSecond; } set { this.ramp.IncreasePerSecond = value; } }
         public int RampStepFactor { get { return this.ramp.StepFactor; } set { this.ramp.StepFactor = value; } }
 
-        public bool UseAccordEffekt { get; set; } = false;
+        public bool UseAccordEffect { get; set; } = false;
 
         public override float GetSampleFromFrequence(int sampleIndex, float frequency, float pulseWidth)
         {
@@ -60,7 +60,7 @@
         private float GetSampleWithAccord(int sampleIndex, float frequency, float pulseWidth)
         {
             float sum = base.GetSample(sampleIndex, frequency, pulseWidth);
-            if (this.UseAccordEffekt)
+            if (this.UseAccordEffect)
             {
                 sum += base.GetSample(sampleIndex, frequency * (float)Math.Pow(2, 4 / 12f), pulseWidth);
                 sum += base.GetSample(sampleIndex, frequency / (float)Math.Pow(2, 5 / 12f), pulseWidth);

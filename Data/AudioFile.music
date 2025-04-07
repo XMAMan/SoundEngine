@@ -9,7 +9,7 @@
   <SynthesizerData>
     <SequenzerData>
       <InstrumentName>AcousticGrand</InstrumentName>
-      <Volume>1</Volume>
+      <Volume>0.5</Volume>
       <IsEnabled>true</IsEnabled>
       <TestToneFrequence>440</TestToneFrequence>
       <SynthesizerData>
@@ -32,25 +32,25 @@
         <AmplitudeLfoFrequenc>5</AmplitudeLfoFrequenc>
         <AmplitudeLfoAmplitude>1</AmplitudeLfoAmplitude>
         <AmplitudeLfoPulseWidth>1</AmplitudeLfoPulseWidth>
-        <AudioFileName>Load Audio-File</AudioFileName>
+        <AudioFileName>Soundsystem.mp3</AudioFileName>
         <LeftAudioFilePosition>0</LeftAudioFilePosition>
-        <RightAudioFilePosition>0</RightAudioFilePosition>
-        <SignalSource>Microphone</SignalSource>
+        <RightAudioFilePosition>902.3129</RightAudioFilePosition>
+        <SignalSource>AudioFile</SignalSource>
         <AudioFileGain>100</AudioFileGain>
         <AudioFilePitch>1</AudioFilePitch>
         <AudioFileSpeed>1</AudioFileSpeed>
         <IsLowPassEnabled>false</IsLowPassEnabled>
         <LowPassCutOffFrequence>0.5</LowPassCutOffFrequence>
-        <LowPassResonance>0.200000048</LowPassResonance>
+        <LowPassResonance>0.20000005</LowPassResonance>
         <IsHighPassEnabled>false</IsHighPassEnabled>
         <HighPassCutOffFrequence>0.5</HighPassCutOffFrequence>
-        <HighPassResonance>0.200000048</HighPassResonance>
+        <HighPassResonance>0.20000005</HighPassResonance>
         <AttackTimeInMs>50</AttackTimeInMs>
         <DecayTimeInMs>70</DecayTimeInMs>
         <SustainVolume>0.9</SustainVolume>
         <ReleaseTimeInMs>250</ReleaseTimeInMs>
         <UseDelayEffect>false</UseDelayEffect>
-        <UseHallEffect>true</UseHallEffect>
+        <UseHallEffect>false</UseHallEffect>
         <UseGainEffect>false</UseGainEffect>
         <Gain>7</Gain>
         <UseVolumeLfo>false</UseVolumeLfo>
@@ -59,4 +59,5 @@
     </SequenzerData>
   </SynthesizerData>
   <KeyStrokeSpeed>1</KeyStrokeSpeed>
+  <KeyShift>0</KeyShift>
 </MultiSequenzerData>

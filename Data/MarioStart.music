@@ -23,7 +23,7 @@
         <PulsewidthLfoFrequence>1.5517246</PulsewidthLfoFrequence>
         <PulsewidthLfoAmplitude>0.6827586</PulsewidthLfoAmplitude>
         <OsciType>Rectangle</OsciType>
-        <UseAccordEffekt>false</UseAccordEffekt>
+        <UseAccordEffect>false</UseAccordEffect>
         <PusleWidth>0.18965517</PusleWidth>
         <OsciCount>1</OsciCount>
         <MultiOsciPitch>3</MultiOsciPitch>
@@ -49,9 +49,9 @@
         <DecayTimeInMs>90.90909</DecayTimeInMs>
         <SustainVolume>0</SustainVolume>
         <ReleaseTimeInMs>268.18182</ReleaseTimeInMs>
-        <UseDelayEffekt>false</UseDelayEffekt>
-        <UseHallEffekt>false</UseHallEffekt>
-        <UseGainEffekt>false</UseGainEffekt>
+        <UseDelayEffect>false</UseDelayEffect>
+        <UseHallEffect>false</UseHallEffect>
+        <UseGainEffect>false</UseGainEffect>
         <Gain>7</Gain>
         <UseVolumeLfo>false</UseVolumeLfo>
         <VolumeLfoFrequency>5</VolumeLfoFrequency>

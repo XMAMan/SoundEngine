@@ -20,7 +20,7 @@
         <FrequencyRampFactor>1.3551724</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
         <OsciType>Triangle</OsciType>
-        <UseAccordEffekt>false</UseAccordEffekt>
+        <UseAccordEffect>false</UseAccordEffect>
         <PusleWidth>0.224137932</PusleWidth>
         <OsciCount>4</OsciCount>
         <MultiOsciPitch>3</MultiOsciPitch>
@@ -40,8 +40,8 @@
         <DecayTimeInMs>33.636364</DecayTimeInMs>
         <SustainVolume>0.281818181</SustainVolume>
         <ReleaseTimeInMs>381.818176</ReleaseTimeInMs>
-        <UseDelayEffekt>false</UseDelayEffekt>
-        <UseHallEffekt>false</UseHallEffekt>
+        <UseDelayEffect>false</UseDelayEffect>
+        <UseHallEffect>false</UseHallEffect>
       </SynthesizerData>
     </SequenzerData>
     <SequenzerData>
@@ -57,7 +57,7 @@
         <FrequencyRampFactor>-0.851724148</FrequencyRampFactor>
         <RampStepFactor>0</RampStepFactor>
         <OsciType>SawTooth</OsciType>
-        <UseAccordEffekt>false</UseAccordEffekt>
+        <UseAccordEffect>false</UseAccordEffect>
         <PusleWidth>0.5</PusleWidth>
         <OsciCount>3</OsciCount>
         <MultiOsciPitch>1.1038276</MultiOsciPitch>
@@ -77,8 +77,8 @@
         <DecayTimeInMs>197.27272</DecayTimeInMs>
         <SustainVolume>0.75454545</SustainVolume>
         <ReleaseTimeInMs>704.5455</ReleaseTimeInMs>
-        <UseDelayEffekt>false</UseDelayEffekt>
-        <UseHallEffekt>false</UseHallEffekt>
+        <UseDelayEffect>false</UseDelayEffect>
+        <UseHallEffect>false</UseHallEffect>
       </SynthesizerData>
     </SequenzerData>
   </SynthesizerData>

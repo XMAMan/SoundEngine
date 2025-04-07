@@ -7,20 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="94">
+        <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="118">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal" Margin="0 -2">
                     <Label Content="Delay"/>
-                    <CheckBox Margin="0 5" IsChecked="{Binding UseDelayEffekt}"/>
+                    <CheckBox Margin="0 5" IsChecked="{Binding UseDelayEffect}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 -2">
                     <Label Content="Hall"/>
-                    <CheckBox Margin="0 5" IsChecked="{Binding UseHallEffekt}"/>
+                    <CheckBox Margin="0 5" IsChecked="{Binding UseHallEffect}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 -1">
                     <Label Content="Gain"/>
-                    <CheckBox Margin="0 5" IsChecked="{Binding UseGainEffekt}"/>
+                    <CheckBox Margin="0 5" IsChecked="{Binding UseGainEffect}"/>
                     <Slider Width="50" Minimum="1" Maximum="20" Value="{Binding Gain}" Margin="37.5 3 0 0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 -1">
+                    <Label Content="Pitch"/>
+                    <CheckBox Margin="0 5" IsChecked="{Binding UsePitchEffect}"/>
+                    <Slider Width="50" Minimum="0" Maximum="2" Value="{Binding Pitch}" Margin="35.5 3 0 0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 -1">
                     <Label Content="VolumeLfo"/>
