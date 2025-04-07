@@ -172,6 +172,9 @@ namespace NAudioWaveMaker
                 endIndex--;
             }
 
+            //Man muss hinten noch ein paar Nullen dranlassen, da der Ton sonst so klingt, als ob das Ende fehlt
+            endIndex = Math.Min(endIndex + 5000, samples.Length - 1);
+
             float[] trimData = new float[endIndex - startIndex + 1];
             Array.Copy(samples, startIndex, trimData, 0, endIndex - startIndex + 1);
             return trimData;
