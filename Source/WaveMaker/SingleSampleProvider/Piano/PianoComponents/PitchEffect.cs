@@ -63,7 +63,9 @@ namespace WaveMaker.SingleSampleProvider.Piano.PianoComponents
 
             float outSample = this.modifiedSamples[this.ringPosition];
 
-            return outSample;
+            //Die Lautstärke muss anscheinend verdoppelt werden damit es beim Pitch-Effekt genau so laut wie beim Original klingt.
+            //Diesen Faktor habe ich durch probieren ermittelt
+            return outSample * 2; 
         }
     }
 }
