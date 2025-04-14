@@ -21,7 +21,7 @@
                             <Label Content="CUT"/>
                         </StackPanel>
                         <StackPanel>
-                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding LowPassResonance}"/>
+                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="50" Value="{Binding LowPassResonance}"/>
                             <Label Content="RES"/>
                         </StackPanel>
                     </StackPanel>
@@ -41,7 +41,7 @@
                             <Label Content="CUT"/>
                         </StackPanel>
                         <StackPanel>
-                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="1" Value="{Binding HighPassResonance}"/>
+                            <Slider HorizontalAlignment="Center" Margin="3,0,0,0" Height="40" Width="26" Orientation="Vertical" Minimum="0"  Maximum="20" Value="{Binding HighPassResonance}"/>
                             <Label Content="RES"/>
                         </StackPanel>
                     </StackPanel>
