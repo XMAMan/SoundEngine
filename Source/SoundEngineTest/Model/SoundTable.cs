@@ -1,5 +1,6 @@
 ﻿using SoundEngine.SoundSnippeds;
 using SoundEngine;
+using WaveMaker;
 
 namespace SoundEngineTest.Model
 {
@@ -27,7 +28,7 @@ namespace SoundEngineTest.Model
         public IAudioFileSnipped Soundsystem { get; private set; }
         public IAudioFileSnipped GlassBroke { get; private set; }
         public IFrequenceToneSnipped Hallo { get; private set; }
-        public IAudioRecorderSnipped AudioRecorder { get; private set; }
+        public ISoundGenerator SoundGenerator { get { return this.soundGenerator; } }
         public SoundTable()
         {
             this.soundGenerator = new SoundGenerator();
@@ -49,8 +50,6 @@ namespace SoundEngineTest.Model
             this.Soundsystem = this.soundGenerator.AddSoundFile(WorkingDirectory + "Soundsystem.mp3");
             this.GlassBroke = this.soundGenerator.AddSoundFile(WorkingDirectory + "GlassBroke.wav");
             this.Hallo = this.soundGenerator.AddFrequencyTone(WorkingDirectory + "Hallo.synt");
-
-            this.AudioRecorder = this.soundGenerator.AudioRecorder;
         }
 
         public void Dispose()

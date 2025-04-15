@@ -7,6 +7,7 @@ namespace SoundEngine
     {
         private IAudioPlayer audioPlayer;
         private IAudioRecorder audioRecorder;
+        
         private SoundSnippedCollection sampleProviderCollection;
 
         public SoundGenerator()
@@ -20,6 +21,7 @@ namespace SoundEngine
             this.audioPlayer.SelectedDevice = this.audioPlayer.GetAvailableDevices()[0]; //Nutze das erste gefundene Audio-Device zur Ausgabe
 
             this.AudioRecorder = audioRecorderSnipp;
+            this.AudioFileWriter = new NAudioWaveMaker.AudioFileHandler();
         }
 
         public float Volume { get { return this.sampleProviderCollection.Volume; } set { this.sampleProviderCollection.Volume = value; } }
@@ -29,6 +31,27 @@ namespace SoundEngine
         public int SampleRate { get { return 44100 / 2; } }
 
         public IAudioRecorderSnipped AudioRecorder { get; private set; }
+        public IAudioFileWriter AudioFileWriter { get; private set; }
+
+        //Wird zyklisch vom Timer gerufen, wenn er nach neuen Audiodaten fragt.
+        //Kann benutzt werden, um Audiodaten aufzuzeichnen oder sie zu visualisieren
+        public event EventHandler<float[]> AudioOutputCallback
+        {
+            add
+            {
+                if (this.audioPlayer != null)
+                {
+                    this.audioPlayer.AudioOutputCallback += value;
+                }
+            }
+            remove
+            {
+                if (this.audioPlayer != null)
+                {
+                    this.audioPlayer.AudioOutputCallback -= value;
+                }
+            }
+        }
 
         public void Dispose()
         {

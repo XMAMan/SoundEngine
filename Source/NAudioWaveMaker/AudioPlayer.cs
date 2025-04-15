@@ -13,7 +13,25 @@ namespace NAudioWaveMaker
 
         private WaveOutEvent driverOut;
         private ISampleProvider sampleProvider;
-        
+
+        public event EventHandler<float[]> AudioOutputCallback //Wird zyklisch vom Timer gerufen, wenn er nach neuen Audiodaten fragt
+        {
+            add
+            {
+                if (this.sampleProvider != null)
+                {
+                    ((SampleProviderFromSingleSampleProvider)this.sampleProvider).AudioOutputCallback += value;
+                }
+            }
+            remove
+            {
+                if (this.sampleProvider != null)
+                {
+                    ((SampleProviderFromSingleSampleProvider)this.sampleProvider).AudioOutputCallback -= value;
+                }
+            }
+        }
+
         public AudioPlayer(ISingleSampleProvider audioCallback)
         {
             this.sampleProvider = new SampleProviderFromSingleSampleProvider(audioCallback);            
@@ -138,6 +156,8 @@ namespace NAudioWaveMaker
 
         public WaveFormat WaveFormat { get; private set; }
 
+        public event EventHandler<float[]> AudioOutputCallback; //Wird zyklisch vom Timer gerufen, wenn er nach neuen Audiodaten fragt
+
         public SampleProviderFromSingleSampleProvider(ISingleSampleProvider audioCallback)
         {
             this.audioCallback = audioCallback;
@@ -145,10 +165,11 @@ namespace NAudioWaveMaker
             this.uiContext = TaskScheduler.FromCurrentSynchronizationContext();
         }
 
+        private List<float> outputSamples = new List<float>();
+
         public int Read(float[] buffer, int offset, int count)
         {
             int outIndex = offset;
-
 
             for (int sampleCount = 0; sampleCount < count / WaveFormat.Channels; sampleCount++)
             {
@@ -157,10 +178,13 @@ namespace NAudioWaveMaker
                     float sampleValue = this.audioCallback.GetNextSample();
                     if (sampleValue > 1) sampleValue = 1;
                     if (sampleValue < -1) sampleValue = -1;
+
+                    outputSamples.Add(sampleValue); //Wird für AudioOutputCallback benötigt
+
                     for (int i = 0; i < WaveFormat.Channels; i++)
                     {
                         buffer[outIndex++] = (float)(sampleValue);
-                    }
+                    }                    
                 }
                 catch (Exception ex)
                 {
@@ -172,6 +196,9 @@ namespace NAudioWaveMaker
                 
                 this.sampleIndex++;
             }
+
+            AudioOutputCallback?.Invoke(this, outputSamples.ToArray());
+            outputSamples.Clear();
 
             return count;
         }

@@ -53,7 +53,7 @@ namespace SoundEngineTest.ViewModel
             this.Soundsystem = new AudioFileSnippedViewModel(table.Soundsystem);
             this.Hallo = new FrequenceToneSnippedViewModel(table.Hallo);
 
-            this.AudioRecorder = new AudioRecorderSnippedViewModel(table.AudioRecorder);
+            this.AudioRecorder = new AudioRecorderSnippedViewModel(table.SoundGenerator);
 
 
             this.SoundEffects0Multi = new MultiFrequencyToneViewModel(table.SoundEffects0);

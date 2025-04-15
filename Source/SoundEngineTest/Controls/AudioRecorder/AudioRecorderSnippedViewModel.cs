@@ -2,15 +2,26 @@
 using ReactiveUI;
 using SoundEngine.SoundSnippeds;
 using System.Reactive;
+using WaveMaker;
+using System.Reactive.Linq;
+using SoundEngine;
 
 namespace SoundEngineTest.Controls.AudioRecorder
 {
     public class AudioRecorderSnippedViewModel : ReactiveObject
     {
         private IAudioRecorderSnipped snipp;
-        public AudioRecorderSnippedViewModel(IAudioRecorderSnipped snipp)
+        private IAudioFileWriter audioFileWriter;
+        private int sampleRate;
+
+        private List<float> recordData = new List<float>();
+
+        public AudioRecorderSnippedViewModel(ISoundGenerator soundGenerator)
         {
-            this.snipp = snipp;
+            this.snipp = soundGenerator.AudioRecorder;
+            this.audioFileWriter = soundGenerator.AudioFileWriter;
+            this.sampleRate = soundGenerator.SampleRate;
+            soundGenerator.AudioOutputCallback += SoundGenerator_AudioOutputCallback;
 
             this.snipp.IsRunningChanged = (isRunning) => { IsRunning = isRunning; };
 
@@ -26,6 +37,33 @@ namespace SoundEngineTest.Controls.AudioRecorder
             if (SignalSources.Any())
             {
                 SelectedSignalSource = SignalSources.First();
+            }
+
+            StartRecording = ReactiveCommand.Create(() =>
+            {
+                this.recordData.Clear();
+                this.IsRecording = true;
+            });
+
+            this.StopRecording = ReactiveCommand.CreateFromTask(async () =>
+            {
+                this.IsRecording = false;
+
+                string fileName = await this.SaveFileDialog.Handle("mp3 (*.mp3)|*.mp3|Wave Format(*.wav)|*.wav|All files (*.*)|*.*");
+                if (fileName != null)
+                {
+                    this.audioFileWriter.ExportAudioStreamToFile(this.recordData.ToArray(), this.sampleRate, fileName);
+                }
+
+                this.recordData.Clear();
+            });
+        }
+
+        private void SoundGenerator_AudioOutputCallback(object? sender, float[] buffer)
+        {
+            if (this.IsRecording)
+            {
+                this.recordData.AddRange(buffer);
             }
         }
 
@@ -46,8 +84,10 @@ namespace SoundEngineTest.Controls.AudioRecorder
                 this.RaisePropertyChanged(nameof(SelectedSignalSource));
             }
         }
-
+        
         [Reactive] public bool IsRunning { get; private set; } = false;
+
+        [Reactive] public bool IsRecording { get; private set; } = false;
         public ReactiveCommand<Unit, Unit> Play { get; private set; }
         public ReactiveCommand<Unit, Unit> Stop { get; private set; }
         public float Volume { get { return snipp.Volume; } set { snipp.Volume = value; } }
@@ -60,5 +100,9 @@ namespace SoundEngineTest.Controls.AudioRecorder
         public float PitchEffect { get { return snipp.PitchEffect; } set { snipp.PitchEffect = value; } }
         public bool UseVolumeLfo { get { return snipp.UseVolumeLfo; } set { snipp.UseVolumeLfo = value; } }
         public float VolumeLfoFrequency { get { return snipp.VolumeLfoFrequency; } set { snipp.VolumeLfoFrequency = value; } }
+
+        public ReactiveCommand<Unit, Unit> StartRecording { get; private set; }
+        public ReactiveCommand<Unit, Unit> StopRecording { get; private set; }
+        public Interaction<string, string> SaveFileDialog { get; private set; } = new Interaction<string, string>(); //Input: Filter (openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";); Output: Dateiname von der Datei, die erzeugt werden soll
     }
 }

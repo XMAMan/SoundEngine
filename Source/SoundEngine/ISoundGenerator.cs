@@ -1,4 +1,5 @@
 ﻿using SoundEngine.SoundSnippeds;
+using WaveMaker;
 
 namespace SoundEngine
 {
@@ -9,6 +10,8 @@ namespace SoundEngine
         string SelectedOutputDevice { get; set; }
         string[] GetAvailableOutputDevices();
         IAudioRecorderSnipped AudioRecorder { get; }
+        IAudioFileWriter AudioFileWriter { get; }
+        event EventHandler<float[]> AudioOutputCallback; //Wird zyklisch vom Timer gerufen, wenn er nach neuen Audiodaten fragt.
 
         IFrequenceToneSnipped AddFrequencyTone();
         IFrequenceToneSnipped AddFrequencyTone(string syntiFile);
