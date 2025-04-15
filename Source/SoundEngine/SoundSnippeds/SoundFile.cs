@@ -10,6 +10,8 @@ namespace SoundEngine.SoundSnippeds
         private Synthesizer synthesizer;
         private KeySampleData keySampleData = new KeySampleData(float.NaN);
 
+        public double SampleIndex { get; set; } = 0; //ist vom Typ double, damit man mit halber Geschwindigkeit arbeiten kann
+
         internal SoundFile(int sampmleRate, float[] samples)
         {
             this.SampleRate = sampmleRate;
@@ -65,16 +67,18 @@ namespace SoundEngine.SoundSnippeds
         }
 
         public int SampleRate { get; private set; }
+        public int SampleCount { get => this.audioFile.SampleData.Length; } //so viele Samples enthält die Audiodatei
         public float GetNextSample()
         {
             if (this.IsRunning == false) return 0;
 
-            this.keySampleData.SampleIndex++;
-            if (this.keySampleData.SampleIndex >= (int)(this.audioFile.SampleData.Length * this.Speed))
+            this.SampleIndex += Speed;
+
+            if (this.SampleIndex >= this.SampleCount)
             {
                 if (this.AutoLoop)
                 {
-                    this.keySampleData.SampleIndex = 0;
+                    this.SampleIndex = 0;
                 }
                 else
                 {
@@ -84,6 +88,7 @@ namespace SoundEngine.SoundSnippeds
                 if (this.EndTrigger != null) this.EndTrigger();
             }
 
+            this.keySampleData.SampleIndex = (int)this.SampleIndex;
             return this.synthesizer.GetSample(this.keySampleData) * this.Volume;
         }
         private bool isRunning = false;
@@ -114,13 +119,13 @@ namespace SoundEngine.SoundSnippeds
         }
         public void Reset() //Springe zum Anfang zurück
         {
-            this.keySampleData.SampleIndex = 0;
+            this.SampleIndex = 0;
         }
         public float Volume { get; set; } = 1;
         public bool AutoLoop { get; set; } = false;
 
         public float Pitch { get { return this.synthesizer.AudioFilePitch; } set { this.synthesizer.AudioFilePitch = value; } }
-        public float Speed { get { return this.synthesizer.AudioFileSpeed; } set { this.synthesizer.AudioFileSpeed = value; } }
+        public float Speed { get; set; } = 1;
         public bool UseDelayEffect { get { return this.synthesizer.UseDelayEffect; } set { this.synthesizer.UseDelayEffect = value; } }
         public bool UseHallEffect { get { return this.synthesizer.UseHallEffect; } set { this.synthesizer.UseHallEffect = value; } }
         public bool UseGainEffect { get { return this.synthesizer.UseGainEffect; } set { this.synthesizer.UseGainEffect = value; } }

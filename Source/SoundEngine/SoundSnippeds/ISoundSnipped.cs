@@ -44,6 +44,8 @@ namespace SoundEngine.SoundSnippeds
     //Menge von Samples (Aus mp3/wma/wav oder .music-Datei)
     public interface IAudioFileSnipped : ISoundSnippedWithEndTrigger, IAudioEffects
     {
+        double SampleIndex { get; set; } //Aktueller Sample-Index. Geht von 0 bis SampleCount
+        int SampleCount { get; } //So viele Samples enthält die Audiodatei
         float Pitch { get; set; } //Für Audio-File-Töne
         float Speed { get; set; } //Für Audio-File-Töne
         IAudioFileSnipped GetCopy();
