@@ -6,41 +6,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SoundEngineTest"
+             xmlns:local="clr-namespace:SoundEngineTest" 
+             xmlns:converter="clr-namespace:AudioWpfControls.Converter;assembly=AudioWpfControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1041.967">
-    <Grid Height="30">
-        <StackPanel Orientation="Horizontal">
-            <Label Content="IsRunning"/>
-            <CheckBox IsChecked="{Binding IsRunning, Mode=OneWay}" Margin="0 5 5 0"/>
-            <ComboBox HorizontalAlignment="Left" Margin="2" ItemsSource="{Binding SignalSources}" SelectedItem="{Binding SelectedSignalSource}"/>
-            <Button Content="Play" Command="{Binding Play}" Margin="5"/>
-            <Button Content="Stop" Command="{Binding Stop}" Margin="5"/>
-            <Label Content="Volume:" Margin="10 0 0 0"/>
-            <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
+    <Grid Height="60">
+        <Grid.Resources>
+            <converter:VolumeToColorConverter x:Key="VolumeToColorConverter" />
+        </Grid.Resources>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="IsRunning"/>
+                <CheckBox IsChecked="{Binding IsRunning, Mode=OneWay}" Margin="0 5 5 0"/>
+                <ComboBox HorizontalAlignment="Left" Margin="2" ItemsSource="{Binding SignalSources}" SelectedItem="{Binding SelectedSignalSource}"/>
+                <Button Content="Play" Command="{Binding Play}" Margin="5"/>
+                <Button Content="Stop" Command="{Binding Stop}" Margin="5"/>
+                <Label Content="Volume:" Margin="10 0 0 0"/>
+                <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
 
-            <Label Content="GainEffect:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UseGainEffect}" Margin="0 5 5 0"/>
-            <Slider Minimum="1" Maximum="10" Value="{Binding Gain}" Width="50" Margin="0 3"/>
+                <Label Content="GainEffect:" Margin="10 0 0 0"/>
+                <CheckBox IsChecked="{Binding UseGainEffect}" Margin="0 5 5 0"/>
+                <Slider Minimum="1" Maximum="10" Value="{Binding Gain}" Width="50" Margin="0 3"/>
 
-            <Label Content="PitchEffect:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UsePitchEffect}" Margin="0 5 5 0"/>
-            <Slider Minimum="0" Maximum="2" Value="{Binding PitchEffect}" Width="50" Margin="0 3"/>
+                <Label Content="PitchEffect:" Margin="10 0 0 0"/>
+                <CheckBox IsChecked="{Binding UsePitchEffect}" Margin="0 5 5 0"/>
+                <Slider Minimum="0" Maximum="2" Value="{Binding PitchEffect}" Width="50" Margin="0 3"/>
 
-            <Label Content="VolumeLfo:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UseVolumeLfo}" Margin="0 5 5 0"/>
-            <Slider Minimum="1" Maximum="100" Value="{Binding VolumeLfoFrequency}" Width="50" Margin="0 3"/>
+                <Label Content="VolumeLfo:" Margin="10 0 0 0"/>
+                <CheckBox IsChecked="{Binding UseVolumeLfo}" Margin="0 5 5 0"/>
+                <Slider Minimum="1" Maximum="100" Value="{Binding VolumeLfoFrequency}" Width="50" Margin="0 3"/>
 
-            <Label Content="DelayEffect:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UseDelayEffect}" Margin="0 5 5 0"/>
+                <Label Content="DelayEffect:" Margin="10 0 0 0"/>
+                <CheckBox IsChecked="{Binding UseDelayEffect}" Margin="0 5 5 0"/>
 
-            <Label Content="HallEffect:" Margin="10 0 0 0"/>
-            <CheckBox IsChecked="{Binding UseHallEffect}" Margin="0 5 5 0"/>
+                <Label Content="HallEffect:" Margin="10 0 0 0"/>
+                <CheckBox IsChecked="{Binding UseHallEffect}" Margin="0 5 5 0"/>                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Start Recording" Command="{Binding StartRecording}" Margin="5"/>
+                <Button Content="Stop Recording" Command="{Binding StopRecording}" Margin="5"/>
+                <Label Content="IsRecording: "/>
+                <Label Content="{Binding IsRecording}"/>
 
-            <Button Content="Start Recording" Command="{Binding StartRecording}" Margin="5"/>
-            <Button Content="Stop Recording" Command="{Binding StopRecording}" Margin="5"/>
-            <Label Content="IsRecording: "/>
-            <Label Content="{Binding IsRecording}"/>
+                <ProgressBar Width="100" Height="20" Minimum="0" Maximum="1" Value="{Binding OutputVolume}" Foreground="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Value, Converter={StaticResource VolumeToColorConverter}}"/>
+            </StackPanel>
         </StackPanel>
+        
     </Grid>
 </rxui:ReactiveUserControl>

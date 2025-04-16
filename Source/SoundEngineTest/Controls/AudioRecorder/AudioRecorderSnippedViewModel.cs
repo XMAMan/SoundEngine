@@ -65,6 +65,8 @@ namespace SoundEngineTest.Controls.AudioRecorder
             {
                 this.recordData.AddRange(buffer);
             }
+
+            this.OutputVolume = buffer.Sum(x => Math.Abs(x)) / buffer.Length;
         }
 
         public IEnumerable<string> SignalSources
@@ -88,6 +90,7 @@ namespace SoundEngineTest.Controls.AudioRecorder
         [Reactive] public bool IsRunning { get; private set; } = false;
 
         [Reactive] public bool IsRecording { get; private set; } = false;
+        [Reactive] public double OutputVolume { get; set; } = 0;
         public ReactiveCommand<Unit, Unit> Play { get; private set; }
         public ReactiveCommand<Unit, Unit> Stop { get; private set; }
         public float Volume { get { return snipp.Volume; } set { snipp.Volume = value; } }
