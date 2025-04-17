@@ -13,7 +13,6 @@ namespace SoundEngine
         IAudioFileWriter AudioFileWriter { get; }
         event EventHandler<float[]> AudioOutputCallback; //Wird zyklisch vom Timer gerufen, wenn er nach neuen Audiodaten fragt.
 
-        IFrequenceToneSnipped AddFrequencyTone();
         IFrequenceToneSnipped AddFrequencyTone(string syntiFile);
         IMusicFileSnipped AddMusicFile(string musicFile);
         IAudioFileSnipped AddSoundFile(string audioFile);

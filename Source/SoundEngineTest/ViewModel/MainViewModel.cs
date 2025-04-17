@@ -1,5 +1,6 @@
 ﻿using ReactiveUI;
 using SoundEngineTest.Controls.AudioFile;
+using SoundEngineTest.Controls.AudioPlayer;
 using SoundEngineTest.Controls.AudioRecorder;
 using SoundEngineTest.Controls.FreqeunceTone;
 using SoundEngineTest.Controls.MusicFile;
@@ -37,6 +38,9 @@ namespace SoundEngineTest.ViewModel
         public MultiMusicFileViewModel MultiMusicFileViewModel { get; private set; }
         public MultiAudioFileViewModel MultiAudioFile { get; private set; }
 
+        //Audioplayer / Audio-Visualisation
+        public AudioPlayerViewModel AudioPlayer { get; private set; }
+
         public MainViewModel()
         {
             this.SoundEffects0 = new FrequenceToneSnippedViewModel(table.SoundEffects0);
@@ -70,6 +74,8 @@ namespace SoundEngineTest.ViewModel
                         handler.HandleTimerTick();
                     }
                 });
+
+            this.AudioPlayer = new AudioPlayerViewModel(table.SoundGenerator);
         }
 
         public IEnumerable<string> Outputdevice

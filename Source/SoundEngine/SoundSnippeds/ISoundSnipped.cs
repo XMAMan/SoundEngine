@@ -5,10 +5,10 @@ namespace SoundEngine.SoundSnippeds
 {
     public interface ISoundSnipped : ISingleSampleProvider, IDisposable
     {
-        bool IsRunning { get; }
-        Action<bool> IsRunningChanged { get; set; }
         void Play();
-        void Stop(); //Bei ein FrequencyTone stoppt es alle laufenden Töne
+        void Stop();
+        bool IsRunning { get; }
+        Action<bool> IsRunningChanged { get; set; }        
         float Volume { get; set; }
         Action<ISoundSnipped> CopyWasCreated { get; set; }
         Action<ISoundSnipped> DisposeWasCalled { get; set; } //Wird aufgerufen, wenn Dispose aufgerufen wurde
@@ -46,8 +46,10 @@ namespace SoundEngine.SoundSnippeds
     {
         double SampleIndex { get; set; } //Aktueller Sample-Index. Geht von 0 bis SampleCount
         int SampleCount { get; } //So viele Samples enthält die Audiodatei
+        float[] AudioFileSamples { get; set; } //Die Samples der Audiodatei
         float Pitch { get; set; } //Für Audio-File-Töne
         float Speed { get; set; } //Für Audio-File-Töne
+        bool IsFinish { get; } //Ist der Sound zu Ende? (SampleIndex >= SampleCount)
         IAudioFileSnipped GetCopy();
     }
 
@@ -58,12 +60,16 @@ namespace SoundEngine.SoundSnippeds
         IFrequenceToneSnipped GetCopy();
     }
 
-    public interface IAudioRecorderSnipped : ISoundSnipped, IAudioEffects
+    public interface IAudioRecorderSnipped : IAudioEffects, ISingleSampleProvider
     {
+        void StartRecording();
+        void StopRecording();
         string[] GetAvailableDevices();
         string SelectedDevice { get; set; }
         void UseDefaultDevice();
-        IAudioRecorderSnipped GetCopy();
+        bool IsRunning { get; }
+        Action<bool> IsRunningChanged { get; set; }
+        float Volume { get; set; }
     }
 }
 

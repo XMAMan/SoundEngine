@@ -15,7 +15,7 @@
             <Slider Minimum="0" Maximum="2" Value="{Binding Pitch}" Width="50" Margin="0 3"/>
 
             <Label Content="Speed:" Margin="10 0 0 0"/>
-            <Slider Minimum="0.25" Maximum="3" FlowDirection="RightToLeft" Value="{Binding Speed}" Width="50" Margin="0 3"/>
+            <Slider Minimum="0.25" Maximum="3" Value="{Binding Speed}" Width="50" Margin="0 3"/>
 
             <Label Content="ActiveCounter:"/>
             <TextBox Text="{Binding ActiveCounter}"/>

@@ -14,7 +14,8 @@ namespace SoundEngine
         {
             this.audioRecorder = new NAudioWaveMaker.AudioRecorder(this.SampleRate);
             var audioRecorderSnipp = new AudioRecorderSnipped(this.SampleRate, this.audioRecorder);
-            this.sampleProviderCollection = new SoundSnippedCollection(new NAudioWaveMaker.AudioFileHandler(), this.SampleRate, this.audioRecorder, audioRecorderSnipp);
+            this.sampleProviderCollection = new SoundSnippedCollection(new NAudioWaveMaker.AudioFileHandler(), this.SampleRate, this.audioRecorder);
+            this.sampleProviderCollection.AddAudioRecorderSnipped(audioRecorderSnipp);
 
             this.audioPlayer = new NAudioWaveMaker.AudioPlayer(this.sampleProviderCollection);
             this.audioPlayer.StartPlaying();
@@ -88,12 +89,6 @@ namespace SoundEngine
         public IFrequenceToneSnipped AddFrequencyTone(string syntiFile)
         {
             return this.sampleProviderCollection.AddFrequencyTone(syntiFile);
-        }
-
-        //Ton, der über IFrequenceToneSnipped.Synthesizer und IFrequenceToneSnipped.Frequency dann gesteuert wird 
-        public IFrequenceToneSnipped AddFrequencyTone()
-        {
-            return this.sampleProviderCollection.AddFrequencyTone();
         }
     }
 }

@@ -107,10 +107,14 @@ namespace SoundEngine.SoundSnippeds
         }
         public Action<bool> IsRunningChanged { get; set; } = null;
         public Action EndTrigger { get; set; } = null;
+        public bool IsFinish { get { return this.SampleIndex >= this.SampleCount; } } //Ist der Sound zu Ende?
 
         public void Play()
         {
-            Reset();
+            if (this.IsFinish)
+            {
+                Reset();
+            }
             this.IsRunning = true;
         }
         public void Stop()
@@ -134,5 +138,6 @@ namespace SoundEngine.SoundSnippeds
         public float PitchEffect { get { return this.synthesizer.PitchEffect; } set { this.synthesizer.PitchEffect = value; } }
         public bool UseVolumeLfo { get { return this.synthesizer.UseVolumeLfo; } set { this.synthesizer.UseVolumeLfo = value; } }
         public float VolumeLfoFrequency { get { return this.synthesizer.VolumeLfoFrequency; } set { this.synthesizer.VolumeLfoFrequency = value; } }
+        public float[] AudioFileSamples { get { return this.audioFile.SampleData; } set { this.audioFile.SampleData = value; } }
     }
 }

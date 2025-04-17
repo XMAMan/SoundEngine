@@ -19,8 +19,8 @@
                 <Label Content="IsRunning"/>
                 <CheckBox IsChecked="{Binding IsRunning, Mode=OneWay}" Margin="0 5 5 0"/>
                 <ComboBox HorizontalAlignment="Left" Margin="2" ItemsSource="{Binding SignalSources}" SelectedItem="{Binding SelectedSignalSource}"/>
-                <Button Content="Play" Command="{Binding Play}" Margin="5"/>
-                <Button Content="Stop" Command="{Binding Stop}" Margin="5"/>
+                <Button Content="Start" Command="{Binding StartCommand}" Margin="5"/>
+                <Button Content="Stop" Command="{Binding StopCommand}" Margin="5"/>
                 <Label Content="Volume:" Margin="10 0 0 0"/>
                 <Slider Minimum="0" Maximum="1" Value="{Binding Volume}" Width="50" Margin="0 3"/>
 

@@ -9,13 +9,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controls\AudioPlayer\Break.png" />
+    <None Remove="Controls\AudioPlayer\OpenFile.PNG" />
+    <None Remove="Controls\AudioPlayer\Play.png" />
+    <None Remove="Controls\AudioPlayer\Stop.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ReactiveUI" Version="20.2.45" />
     <PackageReference Include="ReactiveUI.Fody" Version="19.5.41" />
     <PackageReference Include="ReactiveUI.WPF" Version="20.2.45" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AudioWpfControls\AudioWpfControls.csproj" />
+    <ProjectReference Include="..\SignalAnalyser\SignalAnalyser.csproj" />
     <ProjectReference Include="..\SoundEngine\SoundEngine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Controls\AudioPlayer\Break.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Controls\AudioPlayer\OpenFile.PNG">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Controls\AudioPlayer\Play.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Controls\AudioPlayer\Stop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

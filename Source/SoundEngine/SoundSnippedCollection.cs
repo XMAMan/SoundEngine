@@ -14,7 +14,7 @@ namespace SoundEngine
         private IAudioFileReader audioFileReader;
         private IAudioRecorder audioRecorder;
 
-        public SoundSnippedCollection(IAudioFileReader audioFileReader, int sampleRate, IAudioRecorder audioRecorder, ISingleSampleProvider audioRecorderSnipped)
+        public SoundSnippedCollection(IAudioFileReader audioFileReader, int sampleRate, IAudioRecorder audioRecorder)
         {
             this.SampleRate = sampleRate;
             this.audioFileReader = audioFileReader;
@@ -23,8 +23,6 @@ namespace SoundEngine
             this.frequenzTones = new MultiSequenzer(this.SampleRate, this.audioRecorder);
 
             this.frequenzTones.Volume = 1;
-
-            this.sampleProviders.Add(audioRecorderSnipped);
         }
 
         public float Volume { get; set; } = 1;
@@ -38,6 +36,12 @@ namespace SoundEngine
                 sum += prov.GetNextSample();
             }
             return sum * this.Volume;
+        }
+
+        //Wenn IAudioRecorderSnipped.StartRecording() gerufen wurde, dann werden die Daten vom Mikrofon zum aktuellen AudioOutputDevice geschickt
+        public void AddAudioRecorderSnipped(IAudioRecorderSnipped audioRecorderSnipped)
+        {
+            this.sampleProviders.Add(audioRecorderSnipped);
         }
 
         //wav,wma,mp3,... (Alles was NAudio untersützt)
@@ -80,14 +84,6 @@ namespace SoundEngine
             sequenzer.Synthesizer.SetAllSettings(data, this.audioFileReader, Path.GetDirectoryName(syntiFile), this.SampleRate);
             var tone = new FrequencyTone(sequenzer);
             AddSoundSnipped(tone);
-            return tone;
-        }
-
-        //Ton, der über IFrequenceToneSnipped.Synthesizer und IFrequenceToneSnipped.Frequency dann gesteuert wird 
-        public IFrequenceToneSnipped AddFrequencyTone()
-        {
-            PianoSequenzer sequenzer = this.frequenzTones.AddEmptySequenzer(new SequenzerSize(0, 127, 1));
-            var tone = new FrequencyTone(sequenzer);
             return tone;
         }
 

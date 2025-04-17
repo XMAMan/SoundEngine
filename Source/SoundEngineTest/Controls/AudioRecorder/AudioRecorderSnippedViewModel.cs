@@ -25,13 +25,13 @@ namespace SoundEngineTest.Controls.AudioRecorder
 
             this.snipp.IsRunningChanged = (isRunning) => { IsRunning = isRunning; };
 
-            Play = ReactiveCommand.Create(() =>
+            StartCommand = ReactiveCommand.Create(() =>
             {
-                this.snipp.Play();
+                this.snipp.StartRecording();
             });
-            Stop = ReactiveCommand.Create(() =>
+            StopCommand = ReactiveCommand.Create(() =>
             {
-                this.snipp.Stop();
+                this.snipp.StopRecording();
             });
 
             if (SignalSources.Any())
@@ -91,8 +91,8 @@ namespace SoundEngineTest.Controls.AudioRecorder
 
         [Reactive] public bool IsRecording { get; private set; } = false;
         [Reactive] public double OutputVolume { get; set; } = 0;
-        public ReactiveCommand<Unit, Unit> Play { get; private set; }
-        public ReactiveCommand<Unit, Unit> Stop { get; private set; }
+        public ReactiveCommand<Unit, Unit> StartCommand { get; private set; }
+        public ReactiveCommand<Unit, Unit> StopCommand { get; private set; }
         public float Volume { get { return snipp.Volume; } set { snipp.Volume = value; } }
 
         public bool UseDelayEffect { get { return snipp.UseDelayEffect; } set { snipp.UseDelayEffect = value; } }

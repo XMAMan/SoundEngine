@@ -28,14 +28,14 @@
         public static FrequenzeSpaceSignal CreateFromTimeSpace(float[] signal)
         {
             //Geht beides
-            return new FrequenzeSpaceSignal(DiskreteFouriertransformation.TransformFromTimeToFrequenceSpace(signal));
-            //return new FrequenzeSpaceSignal(FastDiskreteFourierTransform.TransformFromTimeToFrequenceSpace(signal));
+            //return new FrequenzeSpaceSignal(DiskreteFouriertransformation.TransformFromTimeToFrequenceSpace(signal));
+            return new FrequenzeSpaceSignal(FastDiskreteFourierTransform.TransformFromTimeToFrequenceSpace(signal));
         }
 
         public float[] ToTimeSpace()
         {
-            return DiskreteFouriertransformation.TransformFromFrequnceToTimeSpace(this.numbers);
-            //return FastDiskreteFourierTransform.TransformFromFrequnceToTimeSpace(this.numbers);
+            //return DiskreteFouriertransformation.TransformFromFrequnceToTimeSpace(this.numbers);
+            return FastDiskreteFourierTransform.TransformFromFrequnceToTimeSpace(this.numbers);
         }
     }
 }

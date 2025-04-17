@@ -21,19 +21,6 @@ namespace SoundEngine.SoundSnippeds
             };
         }
 
-        public IAudioRecorderSnipped GetCopy()
-        {
-            var copy = new AudioRecorderSnipped(this.SampleRate, this.audioRecorder);
-            this.CopyWasCreated?.Invoke(copy);
-            return copy;
-        }
-        public Action<ISoundSnipped> CopyWasCreated { get; set; } = null;
-        public Action<ISoundSnipped> DisposeWasCalled { get; set; } = null;
-        public void Dispose()
-        {
-            this.DisposeWasCalled?.Invoke(this);
-        }
-
         public int SampleRate { get; private set; }
 
         public float GetNextSample()
@@ -61,15 +48,15 @@ namespace SoundEngine.SoundSnippeds
         }
         public Action<bool> IsRunningChanged { get; set; } = null;
 
-        public void Play()
+        public void StartRecording()
         {
             this.audioRecorder.StartRecording();
             this.IsRunning = true;
         }
-        public void Stop()
+        public void StopRecording()
         {
             this.IsRunning = false;
-            this.audioRecorder.StopRecording();            
+            this.audioRecorder.StopRecording();
         }
 
         public float Volume { get; set; } = 1;
