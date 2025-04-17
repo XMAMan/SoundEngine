@@ -10,9 +10,10 @@ namespace NAudioWaveMaker
     public class AudioPlayer : IAudioPlayer, IDisposable
     {
         private const string DefaultDevice = "Default";
+        private const string NoOutputDevice = "NoOutput";
 
         private WaveOutEvent driverOut;
-        private ISampleProvider sampleProvider;
+        private SampleProviderFromSingleSampleProvider sampleProvider;
 
         public event EventHandler<float[]> AudioOutputCallback //Wird zyklisch vom Timer gerufen, wenn er nach neuen Audiodaten fragt
         {
@@ -66,6 +67,8 @@ namespace NAudioWaveMaker
                 deviceNames.Add(devName);
             }
 
+            deviceNames.Add(NoOutputDevice);
+
             return deviceNames.ToArray();
         }
 
@@ -78,7 +81,7 @@ namespace NAudioWaveMaker
         }
         private int GetDeviceNumber(string deviceName)
         {
-            if (deviceName == DefaultDevice) return -1;
+            if (deviceName == DefaultDevice || deviceName == NoOutputDevice) return -1;
 
             string[] devices = GetAvailableDevices();
             int index = devices.ToList().IndexOf(deviceName);
@@ -93,6 +96,8 @@ namespace NAudioWaveMaker
             StopPlaying();
 
             int deviceNumber = GetDeviceNumber(deviceName);
+
+            this.sampleProvider.WriteDataIntoBuffer = deviceName != NoOutputDevice;
 
             this.driverOut = new WaveOutEvent();
             this.driverOut.DeviceNumber = deviceNumber;
@@ -158,6 +163,8 @@ namespace NAudioWaveMaker
 
         public event EventHandler<float[]> AudioOutputCallback; //Wird zyklisch vom Timer gerufen, wenn er nach neuen Audiodaten fragt
 
+        public bool WriteDataIntoBuffer { get; set; } = true; //Wenn false, dann wird kein Buffer geschrieben. Wird benötigt, wenn ich bei der Microfonaufnahme meine eigene Stimme nicht hören will aber sie trotzdem aufzeichnen will.
+
         public SampleProviderFromSingleSampleProvider(ISingleSampleProvider audioCallback)
         {
             this.audioCallback = audioCallback;
@@ -180,6 +187,8 @@ namespace NAudioWaveMaker
                     if (sampleValue < -1) sampleValue = -1;
 
                     outputSamples.Add(sampleValue); //Wird für AudioOutputCallback benötigt
+
+                    if (WriteDataIntoBuffer == false) continue;
 
                     for (int i = 0; i < WaveFormat.Channels; i++)
                     {
