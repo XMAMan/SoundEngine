@@ -7,16 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="118">
+        <Border BorderBrush="CornflowerBlue" BorderThickness="1" VerticalAlignment="Top" HorizontalAlignment="Left" Height="94">
             <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal" Margin="0 -2">
-                    <Label Content="Delay"/>
-                    <CheckBox Margin="0 5" IsChecked="{Binding UseDelayEffect}"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="0 -2">
+                        <Label Content="Delay"/>
+                        <CheckBox Margin="0 5" IsChecked="{Binding UseDelayEffect}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="30 -2 0 -2">
+                        <Label Content="Hall"/>
+                        <CheckBox Margin="0 5" IsChecked="{Binding UseHallEffect}"/>
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 -2">
-                    <Label Content="Hall"/>
-                    <CheckBox Margin="0 5" IsChecked="{Binding UseHallEffect}"/>
-                </StackPanel>
+                
                 <StackPanel Orientation="Horizontal" Margin="0 -1">
                     <Label Content="Gain"/>
                     <CheckBox Margin="0 5" IsChecked="{Binding UseGainEffect}"/>
