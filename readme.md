@@ -77,6 +77,8 @@ Example for usage is in the SoundEngineTest-Project.
 
 The developer-documentation is shown here: [developer-documentation](./Documentation/documentation.md)
 
+The user-documentation is here: [user-documentation](https://github.com/XMAMan/SoundEngineExamples/blob/main/readme.md)
+
 License
 -------
 
