@@ -1,5 +1,7 @@
 cd ../Source/
 cd .vs && rmdir /S /Q . 2>nul & cd ..
+cd AudioWpfControls/bin && rmdir /S /Q . 2>nul & cd ../..
+cd AudioWpfControls/obj && rmdir /S /Q . 2>nul & cd ../..
 cd CmdTools/bin && rmdir /S /Q . 2>nul & cd ../..
 cd CmdTools/obj && rmdir /S /Q . 2>nul & cd ../..
 cd MidiParser/bin && rmdir /S /Q . 2>nul & cd ../..
